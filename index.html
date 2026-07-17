@@ -463,6 +463,21 @@
             color: #000;
         }
 
+        .explosion-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            animation: particleBlast 0.6s ease-out forwards;
+        }
+
+        @keyframes particleBlast {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
         @media (max-width: 600px) {
             .battle-deck { grid-template-columns: 1fr; }
             .card-slot { width: 90px; height: 130px; }
@@ -481,11 +496,11 @@
         <p style="font-size: 1.2rem; color: #00fff0; text-align: center; margin: 0;">Space Quiz Invaders - Written Challenge v3</p>
         
         <div class="intro-rules">
-            <strong>🚀 BẢN CẬP NHẬT 50 CÂU HỎI TỰ LUẬN ĐIỀN KHUYẾT CHẤT LƯỢNG CAO:</strong><br>
-            • ⭐ <b>Cơ chế nhận diện thông minh:</b> Các câu hỏi nghi vấn (như <i>Do you like</i> / <i>Do like</i>) đều được hệ thống chấp nhận linh hoạt!<br>
-            • ⭐ <b>25 câu Thì cơ bản:</b> Hiện tại đơn, Tiếp diễn, Quá khứ đơn, Tương lai đơn.<br>
+            <strong>🚀 BẢN CẬP NHẬT RÊNỚI LẠI TOÀN BỘ CÂU HỎI CHẤT LƯỢNG CAO (UNIT 1 & UNIT 2 GLOBAL SUCCESS 7):</strong><br>
+            • ⭐ <b>Cơ chế nhận diện thông minh:</b> Các tín hiệu thời gian được xử lý nổi bật giúp nhận diện thì siêu nhanh!<br>
+            • ⭐ <b>25 câu Thì cơ bản:</b> Hiện tại đơn, Tiếp diễn, Quá khứ đơn, Tương lai đơn với cụm từ chỉ thời gian **in đậm đứng đầu câu**.<br>
             • ⭐ <b>15 câu Động từ chỉ sở thích/ghét:</b> Nắm vững cấu trúc V-ing / Would like, Would love + To V.<br>
-            • ⭐ <b>10 câu Từ vựng tinh chọn (Unit 1 - Lớp 7):</b> Ôn tập nghĩa tiếng Việt, đoán ký tự ẩn rành mạch!<br>
+            • ⭐ <b>10 câu Từ vựng tinh chọn liên kết Unit 1 & Unit 2:</b> Ôn tập sức khỏe, lối sống và các sở thích lành mạnh!<br>
             • ⚡ <b>Bổ trợ Gợi Ý Từ Vựng (Word Hint):</b> Kích hoạt để hé lộ ký tự ngẫu nhiên ở giữa từ!
         </div>
         <div style="text-align: center;">
@@ -593,63 +608,63 @@
 </div>
 
 <script>
-    // BỘ 50 CÂU HỎI VIẾT TAY (ĐÃ XÓA PHẦN VÍ DỤ TRONG NGOẶC TRÁNH ĐỂ LỘ ĐÁP ÁN)
+    // BỘ 50 CÂU HỎI VIẾT TAY CẬP NHẬT MỚI TOÀN BỘ (PHẦN I CÓ TÍN HIỆU ĐƯỢC LÀM NỔI BẬT LÊN ĐẦU CÂU)
     const quizData = [
         // --- PHẦN I: THÌ CƠ BẢN (25 câu) ---
-        { type: "written", q: "My sister usually _________ (make) paper models in her free time.", correct: "makes", exp: "Chủ ngữ số ít 'My sister', chia hiện tại đơn thêm -s." },
-        { type: "written", q: "We _________ (not go) gymnastics on Saturdays.", correct: "don't go", altCorrect: "do not go", exp: "Câu phủ định hiện tại đơn với chủ ngữ số nhiều 'We' dùng 'don't go'." },
-        { type: "written", q: "_________ you _________ (like) doing outdoor activities?", correct: "Do like", pronounType: "you", exp: "Câu hỏi hiện tại đơn với 'you' dùng trợ động từ 'Do'." },
-        { type: "written", q: "Collecting dolls _________ (be) my cousin's favorite hobby.", correct: "is", exp: "Danh động từ 'Collecting dolls' làm chủ ngữ chính tính là số ít." },
-        { type: "written", q: "He _________ (not carve) wood because it is difficult.", correct: "doesn't carve", altCorrect: "does not carve", exp: "Câu phủ định hiện tại đơn với chủ ngữ 'He' dùng 'doesn't' + V nguyên mẫu." },
-        { type: "written", q: "_________ your mother _________ (enjoy) gardening every morning?", correct: "Does enjoy", pronounType: "your mother", exp: "Câu hỏi hiện tại đơn với chủ ngữ số ít 'your mother' mượn 'Does'." },
-        { type: "written", q: "Look! She _________ (paint) a beautiful picture of her garden.", correct: "is painting", exp: "Dấu hiệu 'Look!' báo hiệu thì hiện tại tiếp diễn (is painting)." },
-        { type: "written", q: "They _________ (not do) gymnastics at the moment.", correct: "aren't doing", altCorrect: "are not doing", exp: "Dấu hiệu 'at the moment' chỉ hành động đang diễn ra dạng phủ định." },
-        { type: "written", q: "_________ he _________ (ride) a horse over there right now?", correct: "Is riding", pronounType: "he", exp: "Dấu hiệu 'right now', câu hỏi hiện tại tiếp diễn dùng 'Is' và động từ đuôi -ing." },
-        { type: "written", q: "Listen! The children _________ (sing) a song about their hobbies.", correct: "are singing", exp: "Có 'Listen!' báo hiệu hành động đang diễn ra, 'children' là danh từ số nhiều." },
-        { type: "written", q: "I _________ (not watch) TV right now; I am reading books.", correct: "am not watching", altCorrect: "m not watching", exp: "Dấu hiệu 'right now', phủ định tiếp diễn của chủ ngữ 'I'." },
-        { type: "written", q: "Yesterday, they _________ (take) many photos of beautiful flowers.", correct: "took", exp: "Có 'Yesterday' chỉ thì quá khứ đơn, quá khứ của take là took." },
-        { type: "written", q: "My brother _________ (not play) sports last Sunday morning.", correct: "didn't play", altCorrect: "did not play", exp: "Phủ định quá khứ đơn mượn trợ động từ didn't + V nguyên thể." },
-        { type: "written", q: "_________ you _________ (join) the hobby club last week?", correct: "Did join", pronounType: "you", exp: "Câu hỏi quá khứ đơn mượn trợ động từ Did đứng đầu." },
-        { type: "written", q: "Two years ago, we _________ (start) our hobby of making models.", correct: "started", exp: "Có 'ago', quá khứ của động từ có quy tắc start là started." },
-        { type: "written", q: "She _________ (not carve) that wooden egg yesterday.", correct: "didn't carve", altCorrect: "did not carve", exp: "Câu phủ định thì quá khứ đơn dùng didn't." },
-        { type: "written", q: "_________ they _________ (buy) new dolls at the shop last night?", correct: "Did buy", pronounType: "they", exp: "Câu hỏi quá khứ đơn dùng trợ động từ Did." },
-        { type: "written", q: "I think she _________ (love) horse riding when she tries it.", correct: "will love", exp: "Sau 'I think' là một dự đoán tương lai đơn (will love)." },
-        { type: "written", q: "We _________ (not build) any more dollhouses next month.", correct: "won't build", altCorrect: "will not build", exp: "Dấu hiệu 'next month', phủ định tương lai đơn dùng won't + V." },
-        { type: "written", q: "_________ you _________ (go) camping with your classmates next week?", correct: "Will go", pronounType: "you", exp: "Câu hỏi tương lai đơn mượn Will đứng trước chủ ngữ." },
-        { type: "written", q: "My parents _________ (buy) some seeds for my gardening hobby tomorrow.", correct: "will buy", exp: "Dấu hiệu 'tomorrow' chia thì tương lai đơn (will buy)." },
-        { type: "written", q: "He _________ (not take) up gymnastics because he is busy tomorrow.", correct: "won't take", altCorrect: "will not take", exp: "Câu phủ định tương lai đơn dùng won't." },
-        { type: "written", q: "_________ they _________ (share) their toys with other kids in the future?", correct: "Will share", pronounType: "they", exp: "Dấu hiệu 'in the future' dùng tương lai đơn nghi vấn." },
-        { type: "written", q: "My grandfather _________ (like) gardening; he does it every afternoon.", correct: "likes", exp: "Thói quen hiện tại đơn với chủ ngữ số ít, chia động từ thêm -s." },
-        { type: "written", q: "We _________ (not watch) a movie last night because we were tired.", correct: "didn't watch", altCorrect: "did not watch", exp: "Có 'last night' và 'were' nên dùng quá khứ đơn phủ định." },
+        { type: "written", q: "<b>Every single morning</b>, she _________ (drink) tea.", correct: "drinks", exp: "Thói quen ở hiện tại đơn với chủ ngữ số ít (she) thêm -s." },
+        { type: "written", q: "<b>Right now</b>, my brother _________ (fix) his bike.", correct: "is fixing", exp: "Hành động đang diễn ra tại thời điểm nói (Right now) dùng Hiện tại tiếp diễn." },
+        { type: "written", q: "<b>Two days ago</b>, we _________ (go) to the cinema.", correct: "went", exp: "Hành động đã xảy ra và kết thúc hoàn toàn trong quá khứ (Two days ago) dùng Quá khứ đơn." },
+        { type: "written", q: "<b>Tomorrow</b>, I _________ (visit) my grandmother.", correct: "will visit", exp: "Hành động sẽ xảy ra trong tương lai (Tomorrow) dùng Tương lai đơn." },
+        { type: "written", q: "<b>Usually</b>, they _________ (play) soccer on Sundays.", correct: "play", exp: "Thói quen thường xuyên xảy ra ở hiện tại đơn với chủ ngữ số nhiều (they)." },
+        { type: "written", q: "<b>Listen!</b> Someone _________ (call) your name.", correct: "is calling", exp: "Hành động gây chú ý đang diễn ra ngay lúc nói (Listen!) dùng Hiện tại tiếp diễn." },
+        { type: "written", q: "<b>Last night</b>, I _________ (not watch) TV.", correct: "didn't watch", altCorrect: "did not watch", exp: "Câu phủ định thì Quá khứ đơn (Last night) mượn trợ động từ didn't + V nguyên thể." },
+        { type: "written", q: "<b>In the future</b>, robots _________ (do) the housework.", correct: "will do", exp: "Dự đoán hoặc hành động xảy ra trong tương lai xa (In the future) dùng Tương lai đơn." },
+        { type: "written", q: "<b>At this very moment</b>, he _________ (read) a book.", correct: "is reading", exp: "Hành động đang diễn ra chính xác ngay lúc này (At this very moment) dùng Hiện tại tiếp diễn." },
+        { type: "written", q: "<b>Always</b>, my mom _________ (cook) delicious meals.", correct: "cooks", exp: "Tần suất thường xuyên liên tục ở hiện tại, chủ ngữ số ít (my mom) thêm -s." },
+        { type: "written", q: "<b>Yesterday afternoon</b>, she _________ (buy) new shoes.", correct: "bought", exp: "Hành động đã hoàn thành trong quá khứ (Yesterday afternoon), động từ bất quy tắc buy -> bought." },
+        { type: "written", q: "<b>Next week</b>, we _________ (have) a final exam.", correct: "will have", exp: "Sự việc chắc chắn hoặc kế hoạch xảy ra ở tương lai (Next week) dùng Tương lai đơn." },
+        { type: "written", q: "<b>Look!</b> The bus _________ (come) now.", correct: "is coming", exp: "Có từ gây chú ý lệnh trực quan (Look!) kết hợp (now) chỉ hành động đang diễn ra." },
+        { type: "written", q: "<b>Sometimes</b>, they _________ (not go) to school by bus.", correct: "don't go", altCorrect: "do not go", exp: "Câu phủ định Hiện tại đơn với trạng từ tần suất (Sometimes) và chủ ngữ số nhiều." },
+        { type: "written", q: "<b>Three years ago</b>, we _________ (live) in a big city.", correct: "lived", exp: "Hành động đã diễn ra trong quá khứ có mốc khoảng thời gian (Three years ago)." },
+        { type: "written", q: "<b>Tonight</b>, I _________ (not finish) my work.", correct: "won't finish", altCorrect: "will not finish", exp: "Phủ định một hành động hoặc dự đoán xảy ra trong tương lai gần (Tonight)." },
+        { type: "written", q: "<b>At the moment</b>, she _________ (not study).", correct: "is not studying", altCorrect: "isn't studying", exp: "Câu phủ định của thì Hiện tại tiếp diễn diễn tả hành động đang không xảy ra lúc này." },
+        { type: "written", q: "<b>Every evening</b>, he _________ (do) his homework.", correct: "does", exp: "Hành động lặp đi lặp lại hàng tối, chủ ngữ số ít (he) đổi do thành does." },
+        { type: "written", q: "<b>Last year</b>, they _________ (travel) to Da Lat.", correct: "traveled", altCorrect: "travelled", exp: "Hành động đã diễn ra chấm dứt vào năm ngoái (Last year)." },
+        { type: "written", q: "<b>Soon</b>, we _________ (start) our summer holiday.", correct: "will start", exp: "Hành động sắp sửa diễn ra trong tương lai gần (Soon) sử dụng Tương lai đơn." },
+        { type: "written", q: "<b>Currently</b>, the children _________ (sleep).", correct: "are sleeping", exp: "Trạng thái hành động đang diễn ra ngay lúc nói với dấu hiệu nhận biết (Currently)." },
+        { type: "written", q: "<b>Usually</b>, my father _________ (not smoke).", correct: "doesn't smoke", altCorrect: "does not smoke", exp: "Phủ định thói quen ở Hiện tại đơn với chủ ngữ ngôi thứ 3 số ít (my father)." },
+        { type: "written", q: "<b>When I was a child</b>, I _________ (love) drawing.", correct: "loved", exp: "Diễn tả một sự thật hoặc sở thích lâu dài thuộc về quá khứ đã kết thúc." },
+        { type: "written", q: "<b>By tomorrow</b>, the project _________ (end).", correct: "will end", exp: "Dự đoán tiến trình sự kiện kết thúc vào ngày mai dùng Tương lai đơn." },
+        { type: "written", q: "<b>Quietly</b>, she _________ (work) on her painting <b>right now</b>.", correct: "is working", exp: "Dấu hiệu hành động đang diễn ra rõ ràng (right now) dùng Hiện tại tiếp diễn." },
 
         // --- PHẦN II: ĐỘNG TỪ SỞ THÍCH & GHÉT (15 câu) ---
-        { type: "written", q: "I love _________ (collect) beautiful glass bottles.", correct: "collecting", exp: "Sau love chia động từ dạng V-ing." },
-        { type: "written", q: "She dislikes _________ (do) gymnastics indoors.", correct: "doing", exp: "Sau động từ ghét 'dislike' là V-ing." },
-        { type: "written", q: "I would love _________ (join) your model-making club.", correct: "to join", exp: "Cấu trúc đặc biệt 'would love / 'd love' bắt buộc đi với to V." },
-        { type: "written", q: "They hate _________ (carve) wood because it hurts their hands.", correct: "carving", exp: "Sau động từ 'hate' là V-ing." },
-        { type: "written", q: "He prefers _________ (go) camping to staying at home.", correct: "going", exp: "Cấu trúc prefer + V-ing to V-ing." },
-        { type: "written", q: "I'd like _________ (try) horse riding this weekend.", correct: "to try", exp: "'I'd like' là viết tắt của 'I would like' + to V." },
-        { type: "written", q: "My grandmother likes _________ (grow) vegetables in her yard.", correct: "growing", exp: "Sau like chia động từ thêm đuôi -ing." },
-        { type: "written", q: "We don't mind _________ (share) our paper models with you.", correct: "sharing", exp: "Sau cụm 'don't mind' (không phiền) ta chia V-ing." },
-        { type: "written", q: "My brother would like _________ (learn) how to carve eggshells.", correct: "to learn", exp: "Cấu trúc 'would like' + to V." },
-        { type: "written", q: "Do you love _________ (go) horse riding in the countryside?", correct: "going", exp: "Sau động từ yêu thích 'love' là V-ing." },
-        { type: "written", q: "She prefers _________ (make) models in her bedroom.", correct: "making", exp: "Sở thích chung chung dùng prefer + V-ing." },
-        { type: "written", q: "I hate _________ (watch) horror movies alone.", correct: "watching", exp: "Sau động từ 'hate' dùng V-ing." },
-        { type: "written", q: "They'd love _________ (have) a small garden next year.", correct: "to have", exp: "'They'd love' bằng 'They would love' + to V." },
-        { type: "written", q: "My sister dislikes _________ (wash) the dishes after dinner.", correct: "washing", exp: "Sau dislike dùng V-ing." },
-        { type: "written", q: "We like _________ (take) photos of natural scenery.", correct: "taking", exp: "Sau động từ chỉ sở thích 'like' chia V-ing." },
+        { type: "written", q: "I love _________ (collect) beautiful glass bottles.", correct: "collecting", exp: "Theo sau động từ chỉ mức độ yêu thích cực độ 'love' ta chia động từ dạng V-ing." },
+        { type: "written", q: "My brother dislikes _________ (wash) the dishes.", correct: "washing", exp: "Theo sau động từ mang nghĩa không thích/ghét 'dislike' ta chia động từ dạng V-ing." },
+        { type: "written", q: "Would you like _________ (eat) some fruit?", correct: "to eat", exp: "Cấu trúc lời mời lịch sự 'Would you like' bắt buộc đi với động từ nguyên thể có To (to V)." },
+        { type: "written", q: "She hates _________ (get) up early on Sundays.", correct: "getting", exp: "Sau động từ ghét 'hate' là động từ dạng V-ing (gấp đôi phụ âm cuối thành getting)." },
+        { type: "written", q: "They enjoy _________ (swim) in the swimming pool.", correct: "swimming", exp: "Sau động từ tận hưởng sở thích 'enjoy' ta dùng V-ing (gấp đôi phụ âm m)." },
+        { type: "written", q: "I prefer _________ (read) books to watching TV.", correct: "reading", exp: "Cấu trúc ưu tiên/thích hơn: prefer + V-ing + to + V-ing." },
+        { type: "written", q: "We would love _________ (visit) the museum.", correct: "to visit", exp: "Cấu trúc ước muốn mạnh mẽ 'would love' bắt buộc đi kèm động từ dạng to V." },
+        { type: "written", q: "He doesn't mind _________ (do) the homework.", correct: "doing", exp: "Sau cấu trúc cụm động từ 'don't mind / doesn't mind' (không phiền làm gì) ta dùng V-ing." },
+        { type: "written", q: "Do you enjoy _________ (listen) to music?", correct: "listening", exp: "Mặc dù là câu hỏi đảo trợ động từ lên đầu, động từ chính theo sau enjoy vẫn chia V-ing." },
+        { type: "written", q: "My friend likes _________ (collect) stamps.", correct: "collecting", exp: "Sau động từ diễn đạt ý thích thông thường 'like' ta dùng V-ing." },
+        { type: "written", q: "She would like _________ (drink) orange juice.", correct: "to drink", exp: "Cấu trúc diễn đạt mong ước cụ thể 'would like' luôn đi kèm dạng to V." },
+        { type: "written", q: "They hate _________ (play) volleyball in the rain.", correct: "playing", exp: "Sau động từ ghét bỏ 'hate' ta sử dụng động từ thêm đuôi -ing." },
+        { type: "written", q: "I don't like _________ (watch) horror movies.", correct: "watching", exp: "Dạng phủ định của like (don't/doesn't like) vẫn đi kèm với động từ thêm -ing." },
+        { type: "written", q: "Would they love _________ (go) on a picnic?", correct: "to go", exp: "Cấu trúc nghi vấn lựa chọn 'Would you/they love' luôn đi với động từ dạng to V." },
+        { type: "written", q: "He prefers _________ (go) cycling to staying home.", correct: "going", exp: "Cấu trúc so sánh hành vi ưa chuộng thích làm gì hơn: prefer + V-ing + to + V-ing." },
 
-        // --- PHẦN III: KIỂM TRA TỪ VỰNG (10 câu - Đoán Ký Tự Ẩn) ---
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'môn thể dục dụng cụ'?", correct: "gymnastics", exp: "Môn thể dục dụng cụ tiếng Anh là gymnastics." },
-        { type: "vocab", q: "Cụm từ tiếng Anh nào có nghĩa là: 'chạm khắc gỗ'?", correct: "carving wood", exp: "Hoạt động điêu khắc gỗ là carving wood." },
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'hoạt động cắm trại dã ngoại'?", correct: "camping", exp: "Cắm trại dã ngoại ngoài trời là camping." },
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'lành mạnh, tốt cho sức khỏe'?", correct: "healthy", exp: "Lành mạnh, tốt cho sức khỏe là healthy." },
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'bộ sưu tập'?", correct: "collection", exp: "Bộ sưu tập, nhóm đồ sưu tầm là collection." },
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'sáng tạo, đầy óc thẩm mỹ'?", correct: "creative", exp: "Sáng tạo, phong phú ý tưởng là creative." },
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'các mô hình' (dạng số nhiều)?", correct: "models", exp: "Các mô hình (đồ chơi, lắp ghép) là models." },
-        { type: "vocab", q: "Từ tiếng Anh nào đi sau từ 'Horse' tạo thành cụm từ 'môn cưỡi ngựa'?", correct: "riding", exp: "Cưỡi ngựa là Horse riding, từ cần điền là riding." },
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'các kỹ năng' (dạng số nhiều)?", correct: "skills", exp: "Kỹ năng, tay nghề khéo léo là skills." },
-        { type: "vocab", q: "Từ tiếng Anh nào có nghĩa là: 'những con búp bê' (dạng số nhiều)?", correct: "dolls", exp: "Những con búp bê đồ chơi là dolls." }
+        // --- PHẦN III: KIỂM TRA TỪ VỰNG (10 câu - Ôn tập Unit 1 & Unit 2 Global Success 7) ---
+        { type: "vocab", q: "My hobby is __________ (growing plants and flowers in the yard).", correct: "gardening", exp: "Hoạt động làm vườn, trồng cây cối trong tiếng Anh là gardening (Từ vựng thuộc Unit 1)." },
+        { type: "vocab", q: "You need to burn __________ to stay in shape and lose weight.", correct: "calories", exp: "Đốt cháy năng lượng cơ thể giải phóng dư thừa là burn calories (Từ vựng thuộc Unit 2)." },
+        { type: "vocab", q: "We should eat __________ food filled with vitamins to be healthy.", correct: "nutritious", exp: "Thực phẩm giàu dinh dưỡng, có ích cho cơ thể tiếng Anh là nutritious (Từ vựng thuộc Unit 2)." },
+        { type: "vocab", q: "He is very active; he does physical __________ every single day.", correct: "exercise", exp: "Tập thể dục, vận động nâng cao sức khỏe là do exercise (Từ vựng thuộc Unit 2)." },
+        { type: "vocab", q: "My brother loves __________ wood to create art in his free time.", correct: "carving", exp: "Hoạt động điêu khắc, đục đẽo gỗ thành tác phẩm mỹ nghệ nghệ thuật là carving (Từ vựng thuộc Unit 1)." },
+        { type: "vocab", q: "I enjoy __________ my bike around the lake to get school.", correct: "cycling", exp: "Môn đi xe đạp hoặc hoạt động đạp xe rèn luyện đôi chân là cycling (Từ vựng thuộc Unit 1)." },
+        { type: "vocab", q: "A __________ diet includes lots of fresh vegetables and fruit.", correct: "balanced", exp: "Chế độ ăn uống đầy đủ các nhóm chất cân bằng hợp lý là a balanced diet (Từ vựng thuộc Unit 2)." },
+        { type: "vocab", q: "She feels very __________ and weak after a long day of hard work.", correct: "tired", exp: "Tình trạng trạng thái cơ thể cảm thấy mệt mỏi, kiệt sức là tired (Từ vựng thuộc Unit 2)." },
+        { type: "vocab", q: "We are __________ unique toys and dolls from many countries.", correct: "collecting", exp: "Hoạt động tích trữ, thu thập, sưu tầm đồ vật là collecting (Từ vựng thuộc Unit 1)." },
+        { type: "vocab", q: "Sleeping 8 hours per day helps your body have more __________.", correct: "energy", exp: "Nguồn năng lượng hoạt động dồi dào, sinh lực cho ngày mới khỏe khoắn là energy (Từ vựng thuộc Unit 2)." }
     ];
 
     let currentQuestionIndex = 0;
@@ -778,7 +793,9 @@
         let currentQuestion = quizData[currentQuestionIndex];
         currentQNum.innerText = currentQuestionIndex + 1;
         scoreDisplay.innerText = globalScore;
-        questionText.innerText = `Câu ${currentQuestionIndex + 1}: ${currentQuestion.q}`;
+        
+        // Đã đổi sang innerHTML để hiển thị chữ in đậm tín hiệu
+        questionText.innerHTML = `Câu ${currentQuestionIndex + 1}: ${currentQuestion.q}`;
 
         let maskOutput = "";
         if (currentQuestion.type === "vocab") {
@@ -933,33 +950,27 @@
         }
     }
 
-    // HÀM CHUẨN HÓA THÔNG MINH
     function normalizeAnswer(str) {
         if (!str) return "";
         return str.toLowerCase()
-                  .replace(/['’]/g, "") // Loại bỏ các dấu nháy đơn
-                  .replace(/\s+/g, " ") // Đưa khoảng trắng liên tiếp về đơn
+                  .replace(/['’]/g, "") 
+                  .replace(/\s+/g, " ") 
                   .trim();
     }
 
-    // KIỂM TRA ĐÁP ÁN LINH HOẠT (Chấp nhận cả "do like", "do you like"...)
     function evaluateFlexibleAnswers(userText, qItem) {
         const normUser = normalizeAnswer(userText);
         const normCorrect = normalizeAnswer(qItem.correct);
         const normAlt = qItem.altCorrect ? normalizeAnswer(qItem.altCorrect) : "";
 
-        // Kiểm tra trực tiếp các cụm từ cơ bản
         if (normUser === normCorrect || (normAlt !== "" && normUser === normAlt)) {
             return true;
         }
 
-        // Nếu là câu nghi vấn có đại từ (pronounType) đi kèm đề bài
         if (qItem.pronounType) {
             const pronoun = normalizeAnswer(qItem.pronounType);
             const [firstWord, ...restWords] = normCorrect.split(" ");
             const lastWords = restWords.join(" ");
-
-            // Tổ hợp đáp án lý thuyết: "trợ_động_từ + đại_từ + động_từ"
             const hybridCorrectOption = normalizeAnswer(`${firstWord} ${pronoun} ${lastWords}`);
 
             if (normUser === hybridCorrectOption) {
@@ -986,8 +997,6 @@
         document.body.classList.remove("panic-mode");
 
         let qItem = quizData[currentQuestionIndex];
-        
-        // Sử dụng thuật toán so khớp mềm dẻo mới
         let isCorrect = evaluateFlexibleAnswers(userText, qItem);
 
         fireArcadeLaser(inputField, isCorrect, () => {
@@ -1288,21 +1297,19 @@
         loadQuestion();
     }
 
-function testSkipToEnd() {
-    clearInterval(timerInterval);
-    // Giữ nguyên điểm thực tế của người chơi, không ghi đè số 4150 nữa!
-    
-    userAnswers = [];
-    for (let i = 0; i < quizData.length; i++) {
-        userAnswers.push({
-            qIndex: i,
-            userChoice: i % 2 === 0 ? quizData[i].correct : "Gõ sai rồi",
-            isCorrect: i % 2 === 0,
-            isTimeOut: false
-        });
+    function testSkipToEnd() {
+        clearInterval(timerInterval);
+        userAnswers = [];
+        for (let i = 0; i < quizData.length; i++) {
+            userAnswers.push({
+                qIndex: i,
+                userChoice: i % 2 === 0 ? quizData[i].correct : "Gõ sai rồi",
+                isCorrect: i % 2 === 0,
+                isTimeOut: false
+            });
+        }
+        showResults();
     }
-    showResults();
-}
 
     function restartGame() {
         currentQuestionIndex = 0;
