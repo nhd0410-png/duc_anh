@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đấu Trường Nhí - Space Quiz Invaders v3 (Written Special Edition)</title>
+    <title>Đấu Trường Nhí - Space Quiz Invaders v4 (Full Interrogative Edition)</title>
     <style>
         :root {
             --bg-color: #020010;
@@ -259,8 +259,8 @@
         }
 
         .written-input {
-            width: 80%;
-            max-width: 400px;
+            width: 90%;
+            max-width: 500px;
             padding: 12px 20px;
             font-size: 1.2rem;
             border: 2px solid var(--border-neon);
@@ -493,15 +493,14 @@
     
     <div id="intro-screen" class="screen active-screen">
         <div class="header-title">Đấu Trường Nhí</div>
-        <p style="font-size: 1.2rem; color: #00fff0; text-align: center; margin: 0;">Space Quiz Invaders - Written Challenge v3</p>
+        <p style="font-size: 1.2rem; color: #00fff0; text-align: center; margin: 0;">Space Quiz Invaders - Full Interrogative Edition v4</p>
         
         <div class="intro-rules">
-            <strong>🚀 BẢN CẬP NHẬT MỚI: TỪ VỰNG CHUYÊN SÂU & NGỮ PHÁP MỚI:</strong><br>
-            • ⭐ <b>Cơ chế nhận diện thông minh:</b> Các tín hiệu thời gian được xử lý nổi bật giúp nhận diện thì siêu nhanh!<br>
-            • ⭐ <b>25 câu Thì cơ bản MỚI:</b> Hiện tại đơn, Tiếp diễn, Quá khứ đơn, Tương lai đơn với cụm từ chỉ thời gian **in đậm đứng đầu câu**.<br>
-            • ⭐ <b>15 câu Động từ chỉ sở thích/ghét MỚI:</b> Nắm vững cấu trúc V-ing / Would like, Would love + To V.<br>
-            • ⭐ <b>22 câu Từ vựng tinh chọn:</b> Ôn tập sức khỏe, lối sống và các sở thích lành mạnh!<br>
-            • ⚡ <b>Bổ trợ Gợi Ý Từ Vựng (Word Hint):</b> Kích hoạt để hé lộ ký tự ngẫu nhiên ở giữa từ!
+            <strong>🚀 BẢN CẬP NHẬT MỚI V4: CẤU TRÚC CÂU HỎI ĐẦY ĐỦ & TỪ VỰNG MỞ RỘNG:</strong><br>
+            • ⭐ <b>Điền toàn bộ cấu trúc nghi vấn:</b> Học sinh điền đầy đủ Trợ động từ + Chủ ngữ + Động từ (Ví dụ: <i>did she go</i>).<br>
+            • ⭐ <b>Bỏ đếm số chữ cái cho Ngữ pháp:</b> Loại bỏ ô đếm ký tự ở câu ngữ pháp để học sinh tự do gõ câu hỏi.<br>
+            • ⭐ <b>Bổ sung Từ vựng mới:</b> Đã thêm 10 từ vựng cộng đồng & đời sống mới theo yêu cầu.<br>
+            • ⭐ <b>Tổng số câu hỏi:</b> Tròn 150 câu thử thách!
         </div>
         <div style="text-align: center;">
             <button class="start-game-btn" onclick="startGame()">Bắt Đầu Chơi Ngay</button>
@@ -562,8 +561,10 @@
             <div class="test-title">🛠️ BẢNG ĐIỀU KHIỂN THỬ NGHIỆM ĐỀ CHƠI</div>
             <div class="test-btn-group">
                 <button class="test-btn" onclick="skipToPart(0)">⏩ Phần I: Thì Cơ Bản (Câu 1)</button>
-                <button class="test-btn" onclick="skipToPart(25)">⏩ Phần II: Sở Thích (Câu 26)</button>
-                <button class="test-btn" onclick="skipToPart(40)">⏩ Phần III: Từ Vựng (Câu 41)</button>
+                <button class="test-btn" onclick="skipToPart(18)">⏩ Phần II: Sở Thích (Câu 19)</button>
+                <button class="test-btn" onclick="skipToPart(28)">⏩ Phần III: Từ Vựng Y Tế (Câu 29)</button>
+                <button class="test-btn" onclick="skipToPart(50)">⏩ Phần IV: Từ Vựng Mới (Câu 51)</button>
+                <button class="test-btn" onclick="skipToPart(60)">⏩ Phần V: Mở Rộng 150 (Câu 61)</button>
                 <button class="test-btn" style="border-color:#00ff87; color:#00ff87;" onclick="testSkipToEnd()">🏁 Bỏ qua đến cuối (Test Formspree)</button>
             </div>
         </div>
@@ -609,51 +610,39 @@
 
 <script>
     const quizData = [
-        // --- PHẦN I: THÌ CƠ BẢN (25 câu MỚI REFRESH) ---
-        { type: "written", q: "<b>Every evening</b>, my grandmother _________ (water) the colorful flowers in the garden.", correct: "waters", exp: "Thói quen lặp lại ở Hiện tại đơn (Every evening), chủ ngữ số ít (my grandmother) động từ thêm -s." },
-        { type: "written", q: "<b>At the moment</b>, the astronauts _________ (repair) their spaceship outside.", correct: "are repairing", exp: "Hành động đang diễn ra ngay lúc này (At the moment), chủ ngữ số nhiều (the astronauts) dùng are + V-ing." },
-        { type: "written", q: "<b>Last Saturday</b>, we _________ (visit) a huge science museum in the city.", correct: "visited", exp: "Sự việc đã hoàn thành trong quá khứ (Last Saturday), động từ hợp quy tắc thêm -ed." },
-        { type: "written", q: "<b>Next month</b>, our school _________ (organize) a big space quiz contest.", correct: "will organize", exp: "Sự việc sẽ diễn ra trong tương lai (Next month) dùng Tương lai đơn (will + V nguyên thể)." },
-        { type: "written", q: "<b>Usually</b>, Peter _________ (drink) warm cocoa before going to bed.", correct: "drinks", exp: "Trạng từ chỉ tần suất (Usually) đi với Hiện tại đơn, chủ ngữ số ít (Peter) thêm -s." },
-        { type: "written", q: "<b>Look!</b> A shooting star _________ (fly) across the dark night sky.", correct: "is flying", exp: "Tín hiệu chú ý (Look!) báo hiệu hành động đang diễn ra перед mắt, dùng Hiện tại tiếp diễn." },
-        { type: "written", q: "<b>Yesterday</b>, my sister _________ (not complete) her math project.", correct: "didn't complete", altCorrect: "did not complete", exp: "Câu phủ định thì Quá khứ đơn (Yesterday) mượn trợ động từ didn't + V nguyên thể." },
-        { type: "written", q: "<b>In 2050</b>, scientists _________ (build) new cities on Mars.", correct: "will build", exp: "Dự đoán về tương lai xa (In 2050) dùng Tương lai đơn (will + V nguyên thể)." },
-        { type: "written", q: "<b>Right now</b>, the robot _________ (clean) the living room floor.", correct: "is cleaning", exp: "Hành động diễn ra chính xác ngay lúc này (Right now) dùng Hiện tại tiếp diễn." },
-        { type: "written", q: "<b>Always</b>, our captain _________ (check) the space shuttle before takeoff.", correct: "checks", exp: "Thói quen luôn xảy ra ở hiện tại (Always), chủ ngữ số ít (our captain) thêm -s." },
-        { type: "written", q: "<b>Two days ago</b>, my father _________ (buy) a brand-new telescope.", correct: "bought", exp: "Mốc thời gian đã qua (Two days ago) dùng Quá khứ đơn, động từ bất quy tắc buy -> bought." },
-        { type: "written", q: "<b>Next week</b>, they _________ (launch) a new satellite into space.", correct: "will launch", exp: "Sự việc trong tương lai (Next week) dùng Tương lai đơn (will + V nguyên thể)." },
-        { type: "written", q: "<b>Listen!</b> The birds _________ (sing) sweetly on the trees.", correct: "are singing", exp: "Tín hiệu mệnh lệnh (Listen!) báo hiệu hành động đang diễn ra ngay lúc nói." },
-        { type: "written", q: "<b>Sometimes</b>, my brother _________ (not tidy) his bedroom on Sundays.", correct: "doesn't tidy", altCorrect: "does not tidy", exp: "Phủ định Hiện tại đơn với chủ ngữ số ít (my brother) dùng trợ động từ doesn't." },
-        { type: "written", q: "<b>Last summer</b>, we _________ (camp) near a beautiful blue lake.", correct: "camped", exp: "Hành động đã kết thúc trong quá khứ (Last summer), động từ thêm -ed." },
-        { type: "written", q: "<b>Tonight</b>, my parents _________ (not watch) television.", correct: "won't watch", altCorrect: "will not watch", exp: "Câu phủ định thì Tương lai đơn (Tonight) dùng won't + V nguyên thể." },
-        { type: "written", q: "<b>At present</b>, the students _________ (not do) their homework in class.", correct: "are not doing", altCorrect: "aren't doing", exp: "Phủ định của hành động đang diễn ra (At present) dùng to be + not + V-ing." },
-        { type: "written", q: "<b>Every morning</b>, I _________ (jog) around the park with my dog.", correct: "jog", exp: "Thói quen lặp lại hàng ngày, chủ ngữ 'I' giữ nguyên động từ." },
-        { type: "written", q: "<b>Yesterday morning</b>, she _________ (forget) her backpack at home.", correct: "forgot", exp: "Sự việc đã xảy ra sáng qua (Yesterday morning), động từ bất quy tắc forget -> forgot." },
-        { type: "written", q: "<b>Soon</b>, the solar bus _________ (arrive) at the station.", correct: "will arrive", exp: "Dấu hiệu chỉ sự việc sắp diễn ra trong tương lai (Soon) dùng Tương lai đơn." },
-        { type: "written", q: "<b>Currently</b>, the engineer _________ (test) the rocket engine.", correct: "is testing", exp: "Dấu hiệu 'Currently' (hiện tại) đi với thì Hiện tại tiếp diễn." },
-        { type: "written", q: "<b>Normally</b>, my cat _________ (not like) sleeping in the cold garage.", correct: "doesn't like", altCorrect: "does not like", exp: "Phủ định thói quen thông thường ở hiện tại với chủ ngữ số ít (my cat) dùng doesn't." },
-        { type: "written", q: "<b>When I was six</b>, I _________ (learn) how to ride a two-wheeled bike.", correct: "learned", altCorrect: "learnt", exp: "Kể về quá khứ đã kết thúc (When I was six), learn -> learned/learnt." },
-        { type: "written", q: "<b>By next year</b>, the team _________ (construct) a new space station.", correct: "will construct", exp: "Dự đoán sự việc tương lai (next year) dùng Tương lai đơn." },
-        { type: "written", q: "<b>Be quiet!</b> The baby _________ (sleep) peacefully in her cradle.", correct: "is sleeping", exp: "Mệnh lệnh (Be quiet!) báo hiệu hành động đang diễn ra dùng to be + V-ing." },
+        // --- PHẦN I: CẤU TRÚC CÂU HỎI THÌ CƠ BẢN (18 CÂU) ---
+        { type: "grammar", q: "<b>Every afternoon</b>, why ____________________ (the girl / play) tennis with her sister?", correct: "does the girl play", exp: "Hiện tại đơn câu hỏi nghi vấn: why + does + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>At present</b>, why ____________________ (the kids / play) in the garden?", correct: "are the kids playing", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: why + are + S + V-ing?" },
+        { type: "grammar", q: "<b>Last week</b>, ____________________ (my sister / paint) a picture of a cat?", correct: "did my sister paint", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Next Sunday</b>, ____________________ (we / paint) the bedroom walls white?", correct: "will we paint", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Usually</b>, why ____________________ (the teacher / explain) the lesson clearly?", correct: "does the teacher explain", exp: "Hiện tại đơn câu hỏi nghi vấn: why + does + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Look!</b> Why ____________________ (the cat / drink) fresh milk?", correct: "is the cat drinking", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: why + is + S + V-ing?" },
+        { type: "grammar", q: "<b>Yesterday</b>, ____________________ (she / drink) a glass of water?", correct: "did she drink", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Tomorrow</b>, ____________________ (he / drink) fruit juice at the party?", correct: "will he drink", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Every day</b>, why ____________________ (the worker / clean) the desk?", correct: "does the worker clean", exp: "Hiện tại đơn câu hỏi nghi vấn: why + does + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Right now</b>, ____________________ (my brother / sweep) the kitchen floor?", correct: "is my brother sweeping", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
+        { type: "grammar", q: "<b>Two days ago</b>, ____________________ (we / clean) the entire floor?", correct: "did we clean", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Next year</b>, ____________________ (they / clean) the entire beach?", correct: "will they clean", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Listen!</b> ____________________ (the mechanic / fix) the car engine?", correct: "is the mechanic fixing", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
+        { type: "grammar", q: "<b>Last night</b>, ____________________ (my dad / fix) the broken table?", correct: "did my dad fix", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Soon</b>, ____________________ (the team / fix) the computer line?", correct: "will the team fix", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>At the moment</b>, ____________________ (my friend / watch) the fish in the tank?", correct: "is my friend watching", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
+        { type: "grammar", q: "<b>Yesterday evening</b>, ____________________ (they / watch) a film?", correct: "did they watch", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
+        { type: "grammar", q: "<b>Be quiet!</b> ____________________ (mom / wash) the dishes in the kitchen?", correct: "is mom washing", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
 
-        // --- PHẦN II: ĐỘNG TỪ SỞ THÍCH & GHÉT (15 câu MỚI REFRESH) ---
-        { type: "written", q: "My younger brother loves _________ (build) plastic rocket models.", correct: "building", exp: "Sau động từ chỉ sở thích 'love', động từ đi kèm ở dạng V-ing." },
-        { type: "written", q: "She dislikes _________ (mop) the slippery kitchen floor.", correct: "mopping", exp: "Sau động từ không thích 'dislike', ta chia động từ ở dạng V-ing (mop -> mopping)." },
-        { type: "written", q: "Would you like _________ (explore) the new planetary museum with us?", correct: "to explore", exp: "Cấu trúc lời mời lịch sự 'Would you like' đi kèm với 'to V'." },
-        { type: "written", q: "All my classmates enjoy _________ (play) badminton in the playground.", correct: "playing", exp: "Sau động từ tận hưởng 'enjoy', động từ phải thêm đuôi -ing." },
-        { type: "written", q: "He hates _________ (do) boring repetitive homework on weekends.", correct: "doing", exp: "Sau động từ mang nghĩa ghét 'hate', động từ chính được chia V-ing." },
-        { type: "written", q: "We prefer _________ (read) science books to watching silly cartoons.", correct: "reading", exp: "Cấu trúc thích làm gì hơn: prefer + V-ing + to + V-ing." },
-        { type: "written", q: "My family would love _________ (travel) to the Moon one day.", correct: "to travel", exp: "Cấu trúc 'would love' thể hiện mong muốn bắt buộc đi với 'to V'." },
-        { type: "written", q: "Do you mind _________ (turn off) the bright neon light?", correct: "turning off", exp: "Cụm từ 'Do you mind' (bạn có phiền...) luôn theo sau bởi động từ V-ing." },
-        { type: "written", q: "Does your sister enjoy _________ (bake) chocolate chip cookies?", correct: "baking", exp: "Động từ đi sau 'enjoy' trong câu hỏi vẫn giữ dạng V-ing." },
-        { type: "written", q: "My best friend likes _________ (collect) shiny space stickers.", correct: "collecting", exp: "Sau động từ chỉ sở thích 'like', ta dùng động từ V-ing." },
-        { type: "written", q: "I would like _________ (order) a cup of warm hot chocolate, please.", correct: "to order", exp: "Cấu trúc 'would like' khi đưa ra yêu cầu lịch sự đi với 'to V'." },
-        { type: "written", q: "Jack hates _________ (wear) thick wool socks in hot weather.", correct: "wearing", exp: "Sau động từ ghét 'hate', động từ theo sau chia V-ing." },
-        { type: "written", q: "My little cousins don't like _________ (listen) to loud noise.", correct: "listening", exp: "Thể phủ định 'don't like' vẫn yêu cầu động từ đi kèm ở dạng V-ing." },
-        { type: "written", q: "Would she love _________ (adopt) a tiny kitten from the shelter?", correct: "to adopt", exp: "Cấu trúc câu hỏi 'Would... love' bắt buộc dùng động từ có 'to' (to V)." },
-        { type: "written", q: "They prefer _________ (skate) in the park to playing video games at home.", correct: "skating", exp: "Cấu trúc so sánh sở thích: prefer + V-ing + to + V-ing." },
+        // --- PHẦN II: CẤU TRÚC CÂU HỎI SỞ THÍCH (10 CÂU) ---
+        { type: "grammar", q: "____________________ (your sister / love / paint) colorful flowers?", correct: "does your sister love painting", exp: "Hỏi sở thích HTĐ: Does + S + love + V-ing?" },
+        { type: "grammar", q: "Why ____________________ (he / dislike / wash) dirty dishes after dinner?", correct: "does he dislike washing", exp: "Hỏi không thích HTĐ: why + does + S + dislike + V-ing?" },
+        { type: "grammar", q: "____________________ (you / like / fix) the old bicycle together?", correct: "would you like to fix", exp: "Cấu trúc hỏi / mời lịch sự: Would + S + like to + V(nguyên thể)?" },
+        { type: "grammar", q: "____________________ (they / enjoy / eat) fresh strawberries in summer?", correct: "do they enjoy eating", exp: "Hỏi sở thích HTĐ: Do + S + enjoy + V-ing?" },
+        { type: "grammar", q: "Why ____________________ (she / hate / sweep) the dusty floor?", correct: "does she hate sweeping", exp: "Hỏi ghét làm gì HTĐ: why + does + S + hate + V-ing?" },
+        { type: "grammar", q: "____________________ (you / prefer / draw) pictures to watching TV?", correct: "do you prefer drawing", exp: "Hỏi thích hơn HTĐ: Do + S + prefer + V-ing?" },
+        { type: "grammar", q: "____________________ (my friend / love / dance) at the school party?", correct: "would my friend love to dance", exp: "Cấu trúc mong muốn / hỏi lịch sự: Would + S + love to + V(nguyên thể)?" },
+        { type: "grammar", q: "____________________ (you / enjoy / swim) in the clear lake?", correct: "do you enjoy swimming", exp: "Hỏi sở thích HTĐ: Do + S + enjoy + V-ing (swim -> swimming)?" },
+        { type: "grammar", q: "____________________ (your aunt / like / write) short stories?", correct: "does your aunt like writing", exp: "Hỏi sở thích HTĐ: Does + S + like + V-ing?" },
+        { type: "grammar", q: "____________________ (she / like / sing) a song with us?", correct: "would she like to sing", exp: "Cấu trúc hỏi / mời lịch sự: Would + S + like to + V(nguyên thể)?" },
 
-        // --- PHẦN III: KIỂM TRA TỪ VỰNG (22 câu GIỮ NGUYÊN) ---
+        // --- PHẦN III: KIỂM TRA TỪ VỰNG BAN ĐẦU (22 CÂU) ---
         { type: "vocab", q: "If you have a lot of red spots on your face, you might have __________.", correct: "acne", exp: "Tình trạng da bị nổi mụn nhiều gọi là 'acne' (mụn trứng cá)." },
         { type: "vocab", q: "Lack of sleep can negatively __________ your brain and body.", correct: "affect", exp: "Động từ 'affect' có nghĩa là gây ảnh hưởng, tác động đến (điều gì đó)." },
         { type: "vocab", q: "To stay healthy, you should __________ eating too much sugar and fast food.", correct: "avoid", exp: "Động từ 'avoid' nghĩa là tránh, né tránh việc gì đó." },
@@ -675,7 +664,111 @@
         { type: "vocab", q: "If you stay in the sun too long without sunscreen, you will get a __________.", correct: "sunburn", exp: "Danh từ 'sunburn' là tình trạng da bị cháy nắng đỏ rát." },
         { type: "vocab", q: "__________ is a soft, white food made from soybeans, often eaten by vegetarians.", correct: "tofu", exp: "Danh từ 'tofu' là đậu phụ." },
         { type: "vocab", q: "The flu is an illness caused by a __________ that spreads through the air.", correct: "virus", exp: "Danh từ 'virus' là vi-rút gây bệnh." },
-        { type: "vocab", q: "Oranges, lemons, and grapefruits have a lot of __________ C.", correct: "vitamin", exp: "Danh từ 'vitamin' là sinh tố/dưỡng chất bồi bổ cơ thể." }
+        { type: "vocab", q: "Oranges, lemons, and grapefruits have a lot of __________ C.", correct: "vitamin", exp: "Danh từ 'vitamin' là sinh tố/dưỡng chất bồi bổ cơ thể." },
+
+        // --- PHẦN IV: TỪ VỰNG BỔ SUNG YÊU CẦU (10 CÂU THÊM MỚI) ---
+        { type: "vocab", q: "Many generous people __________ money and clothes to help poor children.", correct: "donate", exp: "Động từ 'donate' nghĩa là quyên góp, làm từ thiện." },
+        { type: "vocab", q: "Chess and Monopoly are popular types of __________ that we play together.", correct: "board game", exp: "Danh từ 'board game' là trò chơi cờ bàn." },
+        { type: "vocab", q: "My friends usually __________ at the local coffee shop on weekends.", correct: "meet up", exp: "Cụm động từ 'meet up' nghĩa là gặp gỡ." },
+        { type: "vocab", q: "Volunteering helps to build a better and cleaner __________ for everyone.", correct: "community", exp: "Danh từ 'community' nghĩa là cộng đồng." },
+        { type: "vocab", q: "Students gathered in the park to __________ and clean the environment.", correct: "pick up litter", exp: "Cụm động từ 'pick up litter' nghĩa là nhặt rác." },
+        { type: "vocab", q: "The musical performance last night was absolutely __________!", correct: "fantastic", exp: "Tính từ 'fantastic' nghĩa là tuyệt vời, xuất sắc." },
+        { type: "vocab", q: "Volunteers often visit the elderly at the local __________.", correct: "nursing home", exp: "Cụm danh từ 'nursing home' là viện dưỡng lão." },
+        { type: "vocab", q: "Children enjoy playing slides and swings in the school __________.", correct: "playground", exp: "Danh từ 'playground' là sân chơi." },
+        { type: "vocab", q: "We should __________ plastic bottles and paper to protect the earth.", correct: "recycle", exp: "Động từ 'recycle' nghĩa là tái chế." },
+        { type: "vocab", q: "At the end of the term, students __________ old books with each other.", correct: "exchange", exp: "Động từ 'exchange' nghĩa là trao đổi." },
+
+        // --- PHẦN V: TỪ VỰNG MỞ RỘNG CHO ĐỦ 150 CÂU (90 CÂU BỔ SUNG) ---
+        { type: "vocab", q: "They sent warm __________ to poor people during the cold winter.", correct: "blanket", exp: "Danh từ 'blanket' nghĩa là cái chăn, mền." },
+        { type: "vocab", q: "The charity organization provides free meals for __________ people.", correct: "homeless", exp: "Tính từ 'homeless' nghĩa là vô gia cư." },
+        { type: "vocab", q: "She works as a volunteer __________ to teach English to young children.", correct: "tutor", exp: "Danh từ 'tutor' nghĩa là gia sư, người dạy kèm." },
+        { type: "vocab", q: "Our class decided to __________ more trees in the school garden.", correct: "plant", exp: "Động từ 'plant' nghĩa là trồng cây." },
+        { type: "vocab", q: "Teachers always __________ students to practice speaking English daily.", correct: "encourage", exp: "Động từ 'encourage' nghĩa là khuyến khích, động viên." },
+        { type: "vocab", q: "The government will __________ fresh water and food to flood victims.", correct: "provide", exp: "Động từ 'provide' nghĩa là cung cấp." },
+        { type: "vocab", q: "Doing physical exercises brings many health __________ to your body.", correct: "benefit", exp: "Danh từ 'benefit' nghĩa là lợi ích." },
+        { type: "vocab", q: "We plan to __________ a clean-up day in our neighborhood this Saturday.", correct: "organize", exp: "Động từ 'organize' nghĩa là tổ chức." },
+        { type: "vocab", q: "Using reusable bags helps to __________ plastic waste.", correct: "reduce", exp: "Động từ 'reduce' nghĩa là giảm thiểu." },
+        { type: "vocab", q: "You can __________ empty glass jars to store small items.", correct: "reuse", exp: "Động từ 'reuse' nghĩa là tái sử dụng." },
+        { type: "vocab", q: "Throwing trash properly helps keep our __________ clean.", correct: "environment", exp: "Danh từ 'environment' nghĩa là môi trường." },
+        { type: "vocab", q: "Wearing helmets helps to __________ your head while riding a bike.", correct: "protect", exp: "Động từ 'protect' nghĩa là bảo vệ." },
+        { type: "vocab", q: "After the party, we helped to __________ the living room.", correct: "clean up", exp: "Cụm động từ 'clean up' nghĩa là dọn dẹp sạch sẽ." },
+        { type: "vocab", q: "My mother prefers buying __________ vegetables at the organic market.", correct: "organic", exp: "Tính từ 'organic' nghĩa là hữu cơ." },
+        { type: "vocab", q: "Avoid using too many single-use __________ products.", correct: "plastic", exp: "Danh từ/Tính từ 'plastic' nghĩa là nhựa." },
+        { type: "vocab", q: "Turning off lights when leaving saves electrical __________.", correct: "energy", exp: "Danh từ 'energy' nghĩa là năng lượng." },
+        { type: "vocab", q: "Turning off the tap while brushing teeth helps __________ water.", correct: "save", exp: "Động từ 'save' nghĩa là tiết kiệm, bảo vệ." },
+        { type: "vocab", q: "Washing hands before meals is a healthy __________.", correct: "habit", exp: "Danh từ 'habit' nghĩa là thói quen." },
+        { type: "vocab", q: "Playing sports keeps you __________ and energetic all day.", correct: "active", exp: "Tính từ 'active' nghĩa là năng động, hăng hái." },
+        { type: "vocab", q: "You should __________ regularly to stay healthy and fit.", correct: "exercise", exp: "Động từ 'exercise' nghĩa là tập thể dục." },
+        { type: "vocab", q: "A single slice of cake contains a high number of __________.", correct: "calorie", exp: "Danh từ 'calorie' là đơn vị calo." },
+        { type: "vocab", q: "Eating too much junk food can lead to gaining __________.", correct: "weight", exp: "Danh từ 'weight' nghĩa là cân nặng." },
+        { type: "vocab", q: "He has a seafood __________ so he cannot eat shrimp or crab.", correct: "allergy", exp: "Danh từ 'allergy' nghĩa là sự dị ứng." },
+        { type: "vocab", q: "Dusty air makes me __________ continuously.", correct: "sneeze", exp: "Động từ 'sneeze' nghĩa là hắt hơi." },
+        { type: "vocab", q: "Drink warm honey tea if you have a bad __________.", correct: "cough", exp: "Danh từ 'cough' nghĩa là cơn ho." },
+        { type: "vocab", q: "His body temperature is 39°C; he has a high __________.", correct: "fever", exp: "Danh từ 'fever' nghĩa là cơn sốt." },
+        { type: "vocab", q: "Working on the computer for hours gave her a severe __________.", correct: "headache", exp: "Danh từ 'headache' nghĩa là đau đầu." },
+        { type: "vocab", q: "I cannot talk loudly because I have a __________.", correct: "sore throat", exp: "Cụm danh từ 'sore throat' nghĩa là đau họng." },
+        { type: "vocab", q: "You should visit the dentist if you have a painful __________.", correct: "toothache", exp: "Danh từ 'toothache' nghĩa là đau răng." },
+        { type: "vocab", q: "Fresh fruits and vegetables are examples of __________.", correct: "healthy food", exp: "Cụm danh từ 'healthy food' là thực phẩm lành mạnh." },
+        { type: "vocab", q: "Potato chips and sodas are classified as __________.", correct: "junk food", exp: "Cụm danh từ 'junk food' là đồ ăn vặt không tốt cho sức khỏe." },
+        { type: "vocab", q: "Carrots and broccoli are my favorite types of __________.", correct: "vegetable", exp: "Danh từ 'vegetable' nghĩa là rau củ." },
+        { type: "vocab", q: "Apples and bananas are nutritious __________ that provide vitamins.", correct: "fruit", exp: "Danh từ 'fruit' nghĩa là trái cây." },
+        { type: "vocab", q: "Drinking enough __________ every day is essential for health.", correct: "water", exp: "Danh từ 'water' nghĩa là nước." },
+        { type: "vocab", q: "Getting 8 hours of __________ every night refreshes your mind.", correct: "sleep", exp: "Danh từ 'sleep' nghĩa là giấc ngủ." },
+        { type: "vocab", q: "After running 5 kilometers, he sat down to take a __________.", correct: "rest", exp: "Danh từ 'rest' nghĩa là sự nghỉ ngơi." },
+        { type: "vocab", q: "Listening to soft music helps to relieve daily __________.", correct: "stress", exp: "Danh từ 'stress' nghĩa là sự căng thẳng." },
+        { type: "vocab", q: "Yoga is a great activity to help your body __________.", correct: "relax", exp: "Động từ 'relax' nghĩa là thư giãn." },
+        { type: "vocab", q: "My favorite __________ is collecting stamps from different countries.", correct: "hobby", exp: "Danh từ 'hobby' nghĩa là sở thích." },
+        { type: "vocab", q: "She spent the afternoon __________ landscape pictures with oil colors.", correct: "painting", exp: "Danh từ/Động từ 'painting' nghĩa là việc vẽ tranh." },
+        { type: "vocab", q: "My grandmother enjoys __________ and watering her flowers.", correct: "gardening", exp: "Danh từ 'gardening' nghĩa là việc làm vườn." },
+        { type: "vocab", q: "He is learning __________ delicious Italian dishes.", correct: "cooking", exp: "Danh từ 'cooking' nghĩa là việc nấu ăn." },
+        { type: "vocab", q: "He bought a new camera to practice __________.", correct: "photography", exp: "Danh từ 'photography' nghĩa là nhiếp ảnh." },
+        { type: "vocab", q: "His brother loves __________ rare coins from around the world.", correct: "collecting", exp: "Danh từ 'collecting' nghĩa là việc sưu tầm." },
+        { type: "vocab", q: "__________ is the traditional Japanese art of paper folding.", correct: "origami", exp: "Danh từ 'origami' là nghệ thuật gấp giấy Nhật Bản." },
+        { type: "vocab", q: "He built a mini plastic __________ of an airplane.", correct: "model", exp: "Danh từ 'model' nghĩa là mô hình." },
+        { type: "vocab", q: "They go __________ around the lake every morning.", correct: "cycling", exp: "Danh từ 'cycling' nghĩa là việc đi xe đạp." },
+        { type: "vocab", q: "__________ in the cool water during summer is very enjoyable.", correct: "swimming", exp: "Danh từ 'swimming' nghĩa là bơi lội." },
+        { type: "vocab", q: "Morning __________ helps improve cardiovascular health.", correct: "jogging", exp: "Danh từ 'jogging' nghĩa là chạy bộ." },
+        { type: "vocab", q: "We went __________ on the frozen rink during winter vacation.", correct: "ice skating", exp: "Cụm danh từ 'ice skating' nghĩa là trượt băng." },
+        { type: "vocab", q: "__________ requires strong physical strength and good equipment.", correct: "mountain climbing", exp: "Cụm danh từ 'mountain climbing' nghĩa là leo núi." },
+        { type: "vocab", q: "We set up tents and built a campfire while __________ in the forest.", correct: "camping", exp: "Danh từ 'camping' nghĩa là cắm trại." },
+        { type: "vocab", q: "He brought his fishing rod to go __________ by the river.", correct: "fishing", exp: "Danh từ 'fishing' nghĩa là câu cá." },
+        { type: "vocab", q: "Using binoculars makes __________ much easier in the forest.", correct: "bird watching", exp: "Cụm danh từ 'bird watching' nghĩa là ngắm chim." },
+        { type: "vocab", q: "Making handmade paper flowers is a fun __________ activity.", correct: "craft", exp: "Danh từ 'craft' nghĩa là đồ thủ công." },
+        { type: "vocab", q: "Her mother taught her __________ and making clothes for her dolls.", correct: "sewing", exp: "Danh từ 'sewing' nghĩa là việc khâu vá." },
+        { type: "vocab", q: "My grandmother is __________ a warm wool sweater for me.", correct: "knitting", exp: "Danh từ 'knitting' nghĩa là việc đan len." },
+        { type: "vocab", q: "The little girl loves playing with her favorite barbie __________.", correct: "doll", exp: "Danh từ 'doll' nghĩa là búp bê." },
+        { type: "vocab", q: "Stick a postage __________ on the envelope before mailing it.", correct: "stamp", exp: "Danh từ 'stamp' nghĩa là con tem." },
+        { type: "vocab", q: "He dropped a silver __________ into the wishing well.", correct: "coin", exp: "Danh từ 'coin' nghĩa là đồng xu." },
+        { type: "vocab", q: "Doraemon is a famous Japanese __________ that kids love.", correct: "comic book", exp: "Cụm danh từ 'comic book' nghĩa là truyện tranh." },
+        { type: "vocab", q: "Listening to classical __________ helps me relax before bedtime.", correct: "music", exp: "Danh từ 'music' nghĩa là âm nhạc." },
+        { type: "vocab", q: "He plays acoustic __________ and sings songs around the campfire.", correct: "guitar", exp: "Danh từ 'guitar' nghĩa là đàn ghi-ta." },
+        { type: "vocab", q: "She practices playing the grand __________ every afternoon.", correct: "piano", exp: "Danh từ 'piano' nghĩa là đàn pi-a-nô." },
+        { type: "vocab", q: "The musician played a beautiful melody on his __________.", correct: "violin", exp: "Danh từ 'violin' nghĩa là đàn vi-ô-lông." },
+        { type: "vocab", q: "The drummer beat the big __________ loudly during the parade.", correct: "drum", exp: "Danh từ 'drum' nghĩa là cái trống." },
+        { type: "vocab", q: "They love to __________ songs together in the music club.", correct: "sing", exp: "Động từ 'sing' nghĩa là hát." },
+        { type: "vocab", q: "The dancers will __________ gracefully on the stage.", correct: "dance", exp: "Động từ 'dance' nghĩa là nhảy múa." },
+        { type: "vocab", q: "We went to the movie __________ to watch the latest blockbuster.", correct: "cinema", exp: "Danh từ 'cinema' nghĩa là rạp chiếu phim." },
+        { type: "vocab", q: "We bought tickets to watch a live play at the town __________.", correct: "theater", exp: "Danh từ 'theater' nghĩa là nhà hát." },
+        { type: "vocab", q: "Thousands of fans attended the live rock __________.", correct: "concert", exp: "Danh từ 'concert' nghĩa là buổi hòa nhạc." },
+        { type: "vocab", q: "The history __________ displays ancient artifacts from long ago.", correct: "museum", exp: "Danh từ 'museum' nghĩa là bảo tàng." },
+        { type: "vocab", q: "We visited an art __________ featuring famous paintings.", correct: "exhibition", exp: "Danh từ 'exhibition' nghĩa là cuộc triển lãm." },
+        { type: "vocab", q: "The art __________ presents modern sculptures and photographs.", correct: "gallery", exp: "Danh từ 'gallery' nghĩa là phòng trưng bày nghệ thuật." },
+        { type: "vocab", q: "Students go to the school __________ to borrow research books.", correct: "library", exp: "Danh từ 'library' nghĩa là thư viện." },
+        { type: "vocab", q: "I bought a new English dictionary at the local __________.", correct: "bookshop", exp: "Danh từ 'bookshop' nghĩa là hiệu sách." },
+        { type: "vocab", q: "J.K. Rowling is the famous __________ who wrote Harry Potter.", correct: "author", exp: "Danh từ 'author' nghĩa là tác giả." },
+        { type: "vocab", q: "He is reading an exciting adventure __________ about treasure hunting.", correct: "novel", exp: "Danh từ 'novel' nghĩa là tiểu thuyết." },
+        { type: "vocab", q: "The teacher asked us to memorize a short English __________.", correct: "poem", exp: "Danh từ 'poem' nghĩa là bài thơ." },
+        { type: "vocab", q: "Sherlock Holmes is a famous detective __________ in literature.", correct: "character", exp: "Danh từ 'character' nghĩa là nhân vật." },
+        { type: "vocab", q: "The story has an unpredictable and thrilling __________.", correct: "plot", exp: "Danh từ 'plot' nghĩa là cốt truyện." },
+        { type: "vocab", q: "The brave __________ saved the city from dangerous monsters.", correct: "hero", exp: "Danh từ 'hero' nghĩa là anh hùng." },
+        { type: "vocab", q: "The main __________ in the movie was defeated at the end.", correct: "villain", exp: "Danh từ 'villain' nghĩa là nhân vật phản diện." },
+        { type: "vocab", q: "Traveling across the Amazon jungle was a thrilling __________.", correct: "adventure", exp: "Danh từ 'adventure' nghĩa là cuộc phiêu lưu." },
+        { type: "vocab", q: "The detective solved the dark __________ after discovering a key clue.", correct: "mystery", exp: "Danh từ 'mystery' nghĩa là điều bí ẩn." },
+        { type: "vocab", q: "Lord of the Rings is a popular epic __________ novel series.", correct: "fantasy", exp: "Danh từ/Tính từ 'fantasy' nghĩa là kỳ ảo, ảo tưởng." },
+        { type: "vocab", q: "Movies about space exploration belong to the __________ genre.", correct: "science fiction", exp: "Cụm danh từ 'science fiction' nghĩa là khoa học viễn tưởng." },
+        { type: "vocab", q: "Look up the meaning of new words in your English __________.", correct: "dictionary", exp: "Danh từ 'dictionary' nghĩa là từ điển." },
+        { type: "vocab", q: "Learning correct __________ rules helps you write better English sentences.", correct: "grammar", exp: "Danh từ 'grammar' nghĩa là ngữ pháp." },
+        { type: "vocab", q: "Reviewing your __________ list every day expands your language skills.", correct: "vocabulary", exp: "Danh từ 'vocabulary' nghĩa là từ vựng." }
     ];
 
     let currentQuestionIndex = 0;
@@ -807,23 +900,30 @@
         
         questionText.innerHTML = `Câu ${currentQuestionIndex + 1}: ${currentQuestion.q}`;
 
-        let maskOutput = "";
         if (currentQuestion.type === "vocab") {
-            maskOutput = generateMaskedWord(currentQuestion.correct);
-        } else {
-            maskOutput = "_ ".repeat(currentQuestion.correct.length).trim();
-        }
-
-        answersZone.innerHTML = `
-            <div class="written-container">
-                <div id="word-mask-display" style="font-size: 1.5rem; color: #60efff; letter-spacing: 5px; margin-bottom: 20px; font-weight: bold;">
-                    Cấu trúc từ: ${maskOutput}
+            let maskOutput = generateMaskedWord(currentQuestion.correct);
+            answersZone.innerHTML = `
+                <div class="written-container">
+                    <div id="word-mask-display" style="font-size: 1.4rem; color: #60efff; letter-spacing: 4px; margin-bottom: 20px; font-weight: bold;">
+                        Cấu trúc từ: ${maskOutput}
+                    </div>
+                    <input type="text" id="written-answer-field" class="written-input" placeholder="Nhập từ vựng..." autocomplete="off" onkeyup="checkEnterKey(event)">
+                    <br><br>
+                    <button class="control-btn blue" onclick="submitWrittenAnswer()">Bắn Đáp Án 🚀</button>
                 </div>
-                <input type="text" id="written-answer-field" class="written-input" placeholder="Nhập câu trả lời..." autocomplete="off" onkeyup="checkEnterKey(event)">
-                <br><br>
-                <button class="control-btn blue" onclick="submitWrittenAnswer()">Bắn Đáp Án 🚀</button>
-            </div>
-        `;
+            `;
+        } else {
+            answersZone.innerHTML = `
+                <div class="written-container">
+                    <div id="word-mask-display" style="font-size: 1.1rem; color: #ffeb3b; margin-bottom: 15px; font-weight: bold;">
+                        ✏️ Điền toàn bộ cấu trúc nghi vấn (Ví dụ: <i>did she go</i>)
+                    </div>
+                    <input type="text" id="written-answer-field" class="written-input" placeholder="Ví dụ: did she go..." autocomplete="off" onkeyup="checkEnterKey(event)">
+                    <br><br>
+                    <button class="control-btn blue" onclick="submitWrittenAnswer()">Bắn Đáp Án 🚀</button>
+                </div>
+            `;
+        }
 
         setTimeout(() => {
             let inputField = document.getElementById("written-answer-field");
@@ -846,37 +946,43 @@
         updateLifelineUI();
 
         let currentQ = quizData[currentQuestionIndex];
-        let wordTarget = currentQ.correct;
-        let len = wordTarget.length;
         
-        let lettersOnlyIndices = [];
-        for (let i = 0; i < len; i++) {
-            if (wordTarget[i] !== " " && i !== 0 && i !== len - 1) {
-                lettersOnlyIndices.push(i);
+        if (currentQ.type === "vocab") {
+            let wordTarget = currentQ.correct;
+            let len = wordTarget.length;
+            
+            let lettersOnlyIndices = [];
+            for (let i = 0; i < len; i++) {
+                if (wordTarget[i] !== " " && i !== 0 && i !== len - 1) {
+                    lettersOnlyIndices.push(i);
+                }
             }
-        }
 
-        let revealCount = (len <= 5) ? 1 : 2;
-        lettersOnlyIndices.sort(() => Math.random() - 0.5);
-        let chosenIndices = lettersOnlyIndices.slice(0, revealCount);
+            let revealCount = (len <= 5) ? 1 : 2;
+            lettersOnlyIndices.sort(() => Math.random() - 0.5);
+            let chosenIndices = lettersOnlyIndices.slice(0, revealCount);
 
-        let maskedWord = [];
-        for (let i = 0; i < len; i++) {
-            if (wordTarget[i] === " ") {
-                maskedWord.push("&nbsp;&nbsp;");
-            } else if (i === 0) {
-                maskedWord.push(wordTarget[0].toUpperCase());
-            } else if (i === len - 1) {
-                maskedWord.push(wordTarget[len - 1].toUpperCase());
-            } else if (chosenIndices.includes(i)) {
-                maskedWord.push(`<span style="color: var(--accent-color)">${wordTarget[i].toUpperCase()}</span>`);
-            } else {
-                maskedWord.push("_");
+            let maskedWord = [];
+            for (let i = 0; i < len; i++) {
+                if (wordTarget[i] === " ") {
+                    maskedWord.push("&nbsp;&nbsp;");
+                } else if (i === 0) {
+                    maskedWord.push(wordTarget[0].toUpperCase());
+                } else if (i === len - 1) {
+                    maskedWord.push(wordTarget[len - 1].toUpperCase());
+                } else if (chosenIndices.includes(i)) {
+                    maskedWord.push(`<span style="color: var(--accent-color)">${wordTarget[i].toUpperCase()}</span>`);
+                } else {
+                    maskedWord.push("_");
+                }
             }
-        }
 
-        document.getElementById("word-mask-display").innerHTML = "Cấu trúc từ: " + maskedWord.join(" ");
-        statusMessage.innerHTML = `<span style='color: var(--accent-color)'>💡 ĐÃ TIẾT LỘ KÝ TỰ GỢI Ý Ở GIỮA!</span>`;
+            document.getElementById("word-mask-display").innerHTML = "Cấu trúc từ: " + maskedWord.join(" ");
+            statusMessage.innerHTML = `<span style='color: var(--accent-color)'>💡 ĐÃ TIẾT LỘ KÝ TỰ GỢI Ý Ở GIỮA!</span>`;
+        } else {
+            let firstWord = currentQ.correct.split(" ")[0];
+            statusMessage.innerHTML = `<span style='color: var(--accent-color)'>💡 GỢI Ý: Cụm từ bắt đầu bằng "<b>${firstWord}</b>"</span>`;
+        }
     }
 
     function useDoubleScore() {
@@ -971,24 +1077,8 @@
     function evaluateFlexibleAnswers(userText, qItem) {
         const normUser = normalizeAnswer(userText);
         const normCorrect = normalizeAnswer(qItem.correct);
-        const normAlt = qItem.altCorrect ? normalizeAnswer(qItem.altCorrect) : "";
 
-        if (normUser === normCorrect || (normAlt !== "" && normUser === normAlt)) {
-            return true;
-        }
-
-        if (qItem.pronounType) {
-            const pronoun = normalizeAnswer(qItem.pronounType);
-            const [firstWord, ...restWords] = normCorrect.split(" ");
-            const lastWords = restWords.join(" ");
-            const hybridCorrectOption = normalizeAnswer(`${firstWord} ${pronoun} ${lastWords}`);
-
-            if (normUser === hybridCorrectOption) {
-                return true;
-            }
-        }
-
-        return false;
+        return normUser === normCorrect;
     }
 
     function submitWrittenAnswer() {
@@ -998,7 +1088,7 @@
         
         let userText = inputField.value.trim();
         if (userText === "") {
-            alert("Con hãy điền từ vào ô trống trước khi bắn!");
+            alert("Con hãy điền câu trả lời vào ô trống trước khi bắn!");
             return;
         }
 
@@ -1021,7 +1111,7 @@
                 statusMessage.innerHTML = `<span style='color: var(--correct-color)'>BẮN TRÚNG MỤC TIÊU! +${gainedPoints} điểm. 🎉</span>`;
             } else {
                 inputField.style.borderColor = "var(--wrong-color)";
-                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>SAI TỌA ĐỘ! Từ đúng là: "${qItem.correct}".</span>`;
+                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>SAI TỌA ĐỘ! Đáp án đúng: "${qItem.correct}".</span>`;
             }
 
             activeDoubleScore = false;
@@ -1194,9 +1284,9 @@
         gameScreen.classList.remove("active-screen");
         resultScreen.classList.add("active-screen");
 
-        if (globalScore >= 5500) {
+        if (globalScore >= 12000) {
             rewardLevel.innerText = "XẾP HẠNG: THỦ KHOA TIẾNG ANH XUẤT SẮC! 🏆";
-        } else if (globalScore >= 3500) {
+        } else if (globalScore >= 8000) {
             rewardLevel.innerText = "XẾP HẠNG: CHIẾN SĨ TIẾNG ANH THÔNG THÁI! 🏅";
         } else {
             rewardLevel.innerText = "XẾP HẠNG: HỌC VIÊN CHĂM CHỈ! 📝";
