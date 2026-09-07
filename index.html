@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đấu Trường Nhí - Space Quiz Invaders v4 (Full Interrogative Edition)</title>
+    <title>Space Quiz Invaders - Present Simple & Past Simple Questions</title>
     <style>
         :root {
             --bg-color: #020010;
@@ -119,11 +119,59 @@
             border: 2px solid #fff;
             border-radius: 12px;
             padding: 20px;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             line-height: 1.5;
             margin-bottom: 15px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            color: #fff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .option-btn {
+            background: rgba(13, 27, 62, 0.8);
+            border: 2px solid var(--border-neon);
+            border-radius: 8px;
+            padding: 14px 20px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(0, 255, 240, 0.2);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 0 12px var(--border-neon);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .option-btn.correct-choice {
+            background: rgba(0, 255, 135, 0.3) !important;
+            border-color: var(--correct-color) !important;
+            color: var(--correct-color) !important;
+            box-shadow: 0 0 15px var(--correct-color) !important;
+        }
+
+        .option-btn.wrong-choice {
+            background: rgba(255, 75, 92, 0.3) !important;
+            border-color: var(--wrong-color) !important;
+            color: var(--wrong-color) !important;
+            box-shadow: 0 0 15px var(--wrong-color) !important;
         }
 
         .battle-deck {
@@ -131,7 +179,7 @@
             grid-template-columns: 1fr 180px;
             gap: 15px;
             margin-top: 20px;
-            min-height: 180px;
+            min-height: 160px;
             align-items: stretch;
         }
 
@@ -250,34 +298,8 @@
             font-weight: 900;
         }
 
-        .written-container {
-            background: rgba(13, 17, 43, 0.8);
-            border: 2px dashed var(--border-neon);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .written-input {
-            width: 90%;
-            max-width: 500px;
-            padding: 12px 20px;
-            font-size: 1.2rem;
-            border: 2px solid var(--border-neon);
-            border-radius: 4px;
-            background: #020215;
-            color: #fff;
-            text-align: center;
-            outline: none;
-            box-shadow: 0 0 10px rgba(0, 255, 240, 0.2);
-        }
-
-        .written-input:focus {
-            box-shadow: 0 0 15px #00fff0;
-        }
-
         #status-message {
-            height: 45px;
+            height: 35px;
             margin-top: 10px;
             font-size: 1.1rem;
             font-weight: bold;
@@ -294,7 +316,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin: 15px auto 0 auto;
+            margin: 10px auto 0 auto;
             display: none;
             box-shadow: 0 0 15px rgba(0, 180, 219, 0.4);
         }
@@ -340,129 +362,6 @@
         .history-item.history-correct { border-left-color: var(--correct-color); }
         .history-item.history-wrong { border-left-color: var(--wrong-color); }
 
-        .cards-board-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 25px;
-            min-height: 340px;
-            position: relative;
-        }
-
-        .cards-row {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            width: 100%;
-        }
-
-        .card-slot {
-            width: 120px;
-            height: 160px;
-            perspective: 1000px;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .card-inner {
-            width: 100%; height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            transform: rotateY(180deg);
-        }
-
-        .card-slot.face-down .card-inner { transform: rotateY(0deg); }
-        .card-slot.face-up .card-inner { transform: rotateY(180deg); }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%; height: 100%;
-            backface-visibility: hidden;
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            box-sizing: border-box;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-        }
-
-        .card-front {
-            background: linear-gradient(135deg, #1f4068, #162447);
-            border: 2px solid var(--border-neon);
-        }
-
-        .card-front-pattern {
-            width: 100%; height: 100%;
-            border: 1px dashed rgba(0, 255, 240, 0.4);
-            border-radius: 4px;
-        }
-
-        .card-back {
-            background: linear-gradient(135deg, #111, #1a1a2e);
-            color: #fff;
-            transform: rotateY(180deg);
-            font-weight: bold;
-            font-size: 0.85rem;
-            text-align: center;
-            border: 2px solid var(--accent-color);
-        }
-
-        .card-slot.zoomed-winner {
-            transform: scale(1.15);
-            box-shadow: 0 0 25px gold;
-            z-index: 10;
-        }
-        
-        .card-slot.disabled {
-            cursor: not-allowed;
-        }
-
-        .test-panel {
-            background: rgba(255, 0, 50, 0.15);
-            border: 2px dashed #ff4b5c;
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 25px;
-            text-align: center;
-        }
-
-        .test-title {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #ff4b5c;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .test-btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        .test-btn {
-            background: #111;
-            border: 1px solid #ff4b5c;
-            color: #fff;
-            font-size: 0.8rem;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
-
-        .test-btn:hover {
-            background: #ff4b5c;
-            color: #000;
-        }
-
         .explosion-particle {
             position: absolute;
             width: 6px;
@@ -479,9 +378,8 @@
         }
 
         @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
             .battle-deck { grid-template-columns: 1fr; }
-            .card-slot { width: 90px; height: 130px; }
-            .test-btn-group { flex-direction: column; }
         }
     </style>
 </head>
@@ -492,26 +390,26 @@
 <div id="quiz-container">
     
     <div id="intro-screen" class="screen active-screen">
-        <div class="header-title">Đấu Trường Nhí</div>
-        <p style="font-size: 1.2rem; color: #00fff0; text-align: center; margin: 0;">Space Quiz Invaders - Full Interrogative Edition v4</p>
+        <div class="header-title">Present & Past Simple Questions</div>
+        <p style="font-size: 1.2rem; color: #00fff0; text-align: center; margin: 0;">Space Quiz Invaders</p>
         
         <div class="intro-rules">
-            <strong>🚀 BẢN CẬP NHẬT MỚI V4: CẤU TRÚC CÂU HỎI ĐẦY ĐỦ & TỪ VỰNG MỞ RỘNG:</strong><br>
-            • ⭐ <b>Điền toàn bộ cấu trúc nghi vấn:</b> Học sinh điền đầy đủ Trợ động từ + Chủ ngữ + Động từ (Ví dụ: <i>did she go</i>).<br>
-            • ⭐ <b>Bỏ đếm số chữ cái cho Ngữ pháp:</b> Loại bỏ ô đếm ký tự ở câu ngữ pháp để học sinh tự do gõ câu hỏi.<br>
-            • ⭐ <b>Bổ sung Từ vựng mới:</b> Đã thêm 10 từ vựng cộng đồng & đời sống mới theo yêu cầu.<br>
-            • ⭐ <b>Tổng số câu hỏi:</b> Tròn 150 câu thử thách!
+            <strong>🚀 HOW TO PLAY:</strong><br>
+            • Choose the correct auxiliary and verb forms for present and past simple questions.<br>
+            • You have 30 seconds for each question.<br>
+            • Use special power-ups on the right side if you need help!<br>
+            • Complete all <b>35 questions</b> to earn your space pilot score!
         </div>
         <div style="text-align: center;">
-            <button class="start-game-btn" onclick="startGame()">Bắt Đầu Chơi Ngay</button>
+            <button class="start-game-btn" onclick="startGame()">Start Quiz</button>
         </div>
     </div>
 
     <div id="game-screen" class="screen">
         <div class="progress-info">
-            <div>Câu hỏi: <span id="current-q-num">1</span> / <span id="total-q-num">--</span></div>
-            <div style="color: var(--accent-color);">Điểm: <span id="score-display">0</span></div>
-            <div>Giờ còn: <span id="countdown-text">50s</span></div>
+            <div>Question: <span id="current-q-num">1</span> / <span id="total-q-num">35</span></div>
+            <div style="color: var(--accent-color);">Score: <span id="score-display">0</span></div>
+            <div>Time: <span id="countdown-text">30s</span></div>
         </div>
 
         <div class="question-box">
@@ -524,11 +422,11 @@
             </div>
         </div>
 
-        <div id="answers-zone"></div>
+        <div id="answers-zone" class="options-grid"></div>
 
         <div id="status-message"></div>
         <div style="text-align: center;">
-            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Câu Tiếp Theo ➜</button>
+            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Next Question ➜</button>
         </div>
 
         <div class="battle-deck">
@@ -544,231 +442,78 @@
             </div>
 
             <div class="powerup-cockpit" id="lifelines-zone">
-                <div class="cockpit-label">Hệ Bổ Trợ</div>
-                <button id="ll-hint" class="lifeline-btn" onclick="useWordHint()">
-                    <span>Gợi Ý Từ</span> <span id="count-hint" class="lifeline-count">1</span>
+                <div class="cockpit-label">Power-Ups</div>
+                <button id="ll-5050" class="lifeline-btn" onclick="use5050()">
+                    <span>50:50</span> <span id="count-5050" class="lifeline-count">1</span>
                 </button>
                 <button id="ll-double" class="lifeline-btn" onclick="useDoubleScore()">
-                    <span>x2 Điểm</span> <span id="count-double" class="lifeline-count">1</span>
+                    <span>2x Points</span> <span id="count-double" class="lifeline-count">1</span>
                 </button>
-                <button id="ll-notimer" class="lifeline-btn" onclick="useNoTimer()">
-                    <span>Chậm Giờ</span> <span id="count-notimer" class="lifeline-count">1</span>
+                <button id="ll-notimer" class="lifeline-btn" onclick="useSlowTimer()">
+                    <span>Slow Time</span> <span id="count-notimer" class="lifeline-count">1</span>
                 </button>
             </div>
         </div>
-
-        <div class="test-panel">
-            <div class="test-title">🛠️ BẢNG ĐIỀU KHIỂN THỬ NGHIỆM ĐỀ CHƠI</div>
-            <div class="test-btn-group">
-                <button class="test-btn" onclick="skipToPart(0)">⏩ Phần I: Thì Cơ Bản (Câu 1)</button>
-                <button class="test-btn" onclick="skipToPart(18)">⏩ Phần II: Sở Thích (Câu 19)</button>
-                <button class="test-btn" onclick="skipToPart(28)">⏩ Phần III: Từ Vựng Y Tế (Câu 29)</button>
-                <button class="test-btn" onclick="skipToPart(50)">⏩ Phần IV: Từ Vựng Mới (Câu 51)</button>
-                <button class="test-btn" onclick="skipToPart(60)">⏩ Phần V: Mở Rộng 150 (Câu 61)</button>
-                <button class="test-btn" style="border-color:#00ff87; color:#00ff87;" onclick="testSkipToEnd()">🏁 Bỏ qua đến cuối (Test Formspree)</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="bonus-screen" class="screen">
-        <div class="header-title" style="color: #ffeb3b;">🎁 HỘP QUÀ BÍ ẨN 🎁</div>
-        <p id="bonus-instructions" style="font-size: 1.2rem; color: #00fff0; font-weight: bold; text-align: center;">Chuẩn bị...</p>
-
-        <div class="cards-board-container" id="cards-board-element">
-            <div class="cards-row" id="row-top">
-                <div id="card-0" class="card-slot face-down" onclick="flipCard(0, this)"><div class="card-inner"><div class="card-front"><div class="card-front-pattern"></div></div><div class="card-back" id="cb-0">?</div></div></div>
-                <div id="card-1" class="card-slot face-down" onclick="flipCard(1, this)"><div class="card-inner"><div class="card-front"><div class="card-front-pattern"></div></div><div class="card-back" id="cb-1">?</div></div></div>
-                <div id="card-2" class="card-slot face-down" onclick="flipCard(2, this)"><div class="card-inner"><div class="card-front"><div class="card-front-pattern"></div></div><div class="card-back" id="cb-2">?</div></div></div>
-            </div>
-            <div class="cards-row" id="row-bottom">
-                <div id="card-3" class="card-slot face-down" onclick="flipCard(3, this)"><div class="card-inner"><div class="card-front"><div class="card-front-pattern"></div></div><div class="card-back" id="cb-3">?</div></div></div>
-                <div id="card-4" class="card-slot face-down" onclick="flipCard(4, this)"><div class="card-inner"><div class="card-front"><div class="card-front-pattern"></div></div><div class="card-back" id="cb-4">?</div></div></div>
-            </div>
-        </div>
-
-        <div id="bonus-status" style="height: 30px; font-weight: bold; color: #00ff87; font-size: 1.2rem; margin-top: 15px; text-align: center;"></div>
     </div>
 
     <div id="result-screen" class="screen" style="text-align: center;">
-        <h2>Chúc Mừng Con Đã Hoàn Thành!</h2>
-        
+        <h2>Quiz Completed!</h2>
+        <div style="font-size: 1.8rem; color: var(--accent-color); font-weight: bold; margin: 15px 0;">
+            Final Score: <span id="final-score">0</span>
+        </div>
         <div style="font-size: 1.3rem; color: var(--correct-color); font-weight: bold; margin-bottom: 15px;" id="reward-level"></div>
         
         <div class="btn-group">
-            <button class="control-btn" onclick="restartGame()">Chơi Lại</button>
-            <button class="control-btn blue" onclick="showHistoryScreen()">Xem Lịch Sử Câu Làm</button>
+            <button class="control-btn" onclick="restartGame()">Play Again</button>
+            <button class="control-btn blue" onclick="showHistoryScreen()">Review Answers</button>
         </div>
     </div>
 
     <div id="history-screen" class="screen" style="text-align: center;">
-        <h2 style="color: #00fff0;">Bảng Xem Lại Kết Quả</h2>
+        <h2 style="color: #00fff0;">Answer Review</h2>
         <div class="history-container" id="history-list"></div>
-        <button class="control-btn" style="margin-top:20px;" onclick="backToResultScreen()">Quay Lại Bảng Điểm</button>
+        <button class="control-btn" style="margin-top:20px;" onclick="backToResultScreen()">Back to Score</button>
     </div>
 
 </div>
 
 <script>
     const quizData = [
-        // --- PHẦN I: CẤU TRÚC CÂU HỎI THÌ CƠ BẢN (18 CÂU) ---
-        { type: "grammar", q: "<b>Every afternoon</b>, why ____________________ (the girl / play) tennis with her sister?", correct: "does the girl play", exp: "Hiện tại đơn câu hỏi nghi vấn: why + does + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>At present</b>, why ____________________ (the kids / play) in the garden?", correct: "are the kids playing", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: why + are + S + V-ing?" },
-        { type: "grammar", q: "<b>Last week</b>, ____________________ (my sister / paint) a picture of a cat?", correct: "did my sister paint", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Next Sunday</b>, ____________________ (we / paint) the bedroom walls white?", correct: "will we paint", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Usually</b>, why ____________________ (the teacher / explain) the lesson clearly?", correct: "does the teacher explain", exp: "Hiện tại đơn câu hỏi nghi vấn: why + does + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Look!</b> Why ____________________ (the cat / drink) fresh milk?", correct: "is the cat drinking", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: why + is + S + V-ing?" },
-        { type: "grammar", q: "<b>Yesterday</b>, ____________________ (she / drink) a glass of water?", correct: "did she drink", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Tomorrow</b>, ____________________ (he / drink) fruit juice at the party?", correct: "will he drink", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Every day</b>, why ____________________ (the worker / clean) the desk?", correct: "does the worker clean", exp: "Hiện tại đơn câu hỏi nghi vấn: why + does + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Right now</b>, ____________________ (my brother / sweep) the kitchen floor?", correct: "is my brother sweeping", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
-        { type: "grammar", q: "<b>Two days ago</b>, ____________________ (we / clean) the entire floor?", correct: "did we clean", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Next year</b>, ____________________ (they / clean) the entire beach?", correct: "will they clean", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Listen!</b> ____________________ (the mechanic / fix) the car engine?", correct: "is the mechanic fixing", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
-        { type: "grammar", q: "<b>Last night</b>, ____________________ (my dad / fix) the broken table?", correct: "did my dad fix", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Soon</b>, ____________________ (the team / fix) the computer line?", correct: "will the team fix", exp: "Tương lai đơn câu hỏi nghi vấn: Will + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>At the moment</b>, ____________________ (my friend / watch) the fish in the tank?", correct: "is my friend watching", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
-        { type: "grammar", q: "<b>Yesterday evening</b>, ____________________ (they / watch) a film?", correct: "did they watch", exp: "Quá khứ đơn câu hỏi nghi vấn: Did + S + V(nguyên thể)?" },
-        { type: "grammar", q: "<b>Be quiet!</b> ____________________ (mom / wash) the dishes in the kitchen?", correct: "is mom washing", exp: "Hiện tại tiếp diễn câu hỏi nghi vấn: Is + S + V-ing?" },
-
-        // --- PHẦN II: CẤU TRÚC CÂU HỎI SỞ THÍCH (10 CÂU) ---
-        { type: "grammar", q: "____________________ (your sister / love / paint) colorful flowers?", correct: "does your sister love painting", exp: "Hỏi sở thích HTĐ: Does + S + love + V-ing?" },
-        { type: "grammar", q: "Why ____________________ (he / dislike / wash) dirty dishes after dinner?", correct: "does he dislike washing", exp: "Hỏi không thích HTĐ: why + does + S + dislike + V-ing?" },
-        { type: "grammar", q: "____________________ (you / like / fix) the old bicycle together?", correct: "would you like to fix", exp: "Cấu trúc hỏi / mời lịch sự: Would + S + like to + V(nguyên thể)?" },
-        { type: "grammar", q: "____________________ (they / enjoy / eat) fresh strawberries in summer?", correct: "do they enjoy eating", exp: "Hỏi sở thích HTĐ: Do + S + enjoy + V-ing?" },
-        { type: "grammar", q: "Why ____________________ (she / hate / sweep) the dusty floor?", correct: "does she hate sweeping", exp: "Hỏi ghét làm gì HTĐ: why + does + S + hate + V-ing?" },
-        { type: "grammar", q: "____________________ (you / prefer / draw) pictures to watching TV?", correct: "do you prefer drawing", exp: "Hỏi thích hơn HTĐ: Do + S + prefer + V-ing?" },
-        { type: "grammar", q: "____________________ (my friend / love / dance) at the school party?", correct: "would my friend love to dance", exp: "Cấu trúc mong muốn / hỏi lịch sự: Would + S + love to + V(nguyên thể)?" },
-        { type: "grammar", q: "____________________ (you / enjoy / swim) in the clear lake?", correct: "do you enjoy swimming", exp: "Hỏi sở thích HTĐ: Do + S + enjoy + V-ing (swim -> swimming)?" },
-        { type: "grammar", q: "____________________ (your aunt / like / write) short stories?", correct: "does your aunt like writing", exp: "Hỏi sở thích HTĐ: Does + S + like + V-ing?" },
-        { type: "grammar", q: "____________________ (she / like / sing) a song with us?", correct: "would she like to sing", exp: "Cấu trúc hỏi / mời lịch sự: Would + S + like to + V(nguyên thể)?" },
-
-        // --- PHẦN III: KIỂM TRA TỪ VỰNG BAN ĐẦU (22 CÂU) ---
-        { type: "vocab", q: "If you have a lot of red spots on your face, you might have __________.", correct: "acne", exp: "Tình trạng da bị nổi mụn nhiều gọi là 'acne' (mụn trứng cá)." },
-        { type: "vocab", q: "Lack of sleep can negatively __________ your brain and body.", correct: "affect", exp: "Động từ 'affect' có nghĩa là gây ảnh hưởng, tác động đến (điều gì đó)." },
-        { type: "vocab", q: "To stay healthy, you should __________ eating too much sugar and fast food.", correct: "avoid", exp: "Động từ 'avoid' nghĩa là tránh, né tránh việc gì đó." },
-        { type: "vocab", q: "In cold and dry winter, people often get __________ lips.", correct: "chapped", exp: "Tình trạng môi bị khô, nứt nẻ gọi là 'chapped lips'." },
-        { type: "vocab", q: "Reading books in __________ light can be very bad for your eyes.", correct: "dim", exp: "Tính từ 'dim' chỉ ánh sáng mờ, yếu, không đủ sáng." },
-        { type: "vocab", q: "Heart __________ is dangerous, so you should eat well and exercise daily.", correct: "disease", exp: "Danh từ 'disease' có nghĩa là căn bệnh, bệnh tật." },
-        { type: "vocab", q: "When your eyes are dry and tired, you can use some __________.", correct: "eye drops", exp: "Cụm danh từ 'eye drops' là thuốc nhỏ mắt." },
-        { type: "vocab", q: "Avocados and nuts contain healthy _________ which is very good for your body.", correct: "fat", exp: "Danh từ 'fat' mang nghĩa là chất béo." },
-        { type: "vocab", q: "My brother exercises every morning to keep __________ and active.", correct: "fit", exp: "Cụm từ 'keep fit' nghĩa là giữ cho cơ thể cân đối, khỏe mạnh." },
-        { type: "vocab", q: "Eating lots of vegetables is very good for your __________.", correct: "health", exp: "Danh từ 'health' chỉ sức khỏe nói chung." },
-        { type: "vocab", q: "A salad with fresh vegetables and fish is a very __________ meal.", correct: "healthy", exp: "Tính từ 'healthy' nghĩa là lành mạnh, tốt cho sức khỏe." },
-        { type: "vocab", q: "When it's raining heavily outside, it is better to stay __________.", correct: "indoors", exp: "Trạng từ 'indoors' chỉ việc ở trong nhà." },
-        { type: "vocab", q: "She always uses __________ to protect her lips from getting dry.", correct: "lip balm", exp: "Cụm từ 'lip balm' có nghĩa là son dưỡng môi." },
-        { type: "vocab", q: "Oh no! I have a big red __________ on my nose right before the party.", correct: "pimple", exp: "Danh từ 'pimple' là cái mụn nhọt." },
-        { type: "vocab", q: "You should never __________ a pimple on your face because it can cause an infection.", correct: "pop", exp: "Động từ 'pop' (a pimple) nghĩa là nặn mụn." },
-        { type: "vocab", q: "Meat, eggs, and beans are foods that are very rich in __________.", correct: "protein", exp: "Danh từ 'protein' là chất đạm, rất cần thiết cho cơ thể." },
-        { type: "vocab", q: "Acne is a very common __________ among teenagers.", correct: "skin condition", exp: "Cụm 'skin condition' chỉ tình trạng, bệnh lý về da." },
-        { type: "vocab", q: "__________ milk is a popular and healthy plant-based drink.", correct: "soybean", exp: "Danh từ 'soybean' là hạt đậu nành. (Soybean milk = sữa đậu nành)." },
-        { type: "vocab", q: "If you stay in the sun too long without sunscreen, you will get a __________.", correct: "sunburn", exp: "Danh từ 'sunburn' là tình trạng da bị cháy nắng đỏ rát." },
-        { type: "vocab", q: "__________ is a soft, white food made from soybeans, often eaten by vegetarians.", correct: "tofu", exp: "Danh từ 'tofu' là đậu phụ." },
-        { type: "vocab", q: "The flu is an illness caused by a __________ that spreads through the air.", correct: "virus", exp: "Danh từ 'virus' là vi-rút gây bệnh." },
-        { type: "vocab", q: "Oranges, lemons, and grapefruits have a lot of __________ C.", correct: "vitamin", exp: "Danh từ 'vitamin' là sinh tố/dưỡng chất bồi bổ cơ thể." },
-
-        // --- PHẦN IV: TỪ VỰNG BỔ SUNG YÊU CẦU (10 CÂU THÊM MỚI) ---
-        { type: "vocab", q: "Many generous people __________ money and clothes to help poor children.", correct: "donate", exp: "Động từ 'donate' nghĩa là quyên góp, làm từ thiện." },
-        { type: "vocab", q: "Chess and Monopoly are popular types of __________ that we play together.", correct: "board game", exp: "Danh từ 'board game' là trò chơi cờ bàn." },
-        { type: "vocab", q: "My friends usually __________ at the local coffee shop on weekends.", correct: "meet up", exp: "Cụm động từ 'meet up' nghĩa là gặp gỡ." },
-        { type: "vocab", q: "Volunteering helps to build a better and cleaner __________ for everyone.", correct: "community", exp: "Danh từ 'community' nghĩa là cộng đồng." },
-        { type: "vocab", q: "Students gathered in the park to __________ and clean the environment.", correct: "pick up litter", exp: "Cụm động từ 'pick up litter' nghĩa là nhặt rác." },
-        { type: "vocab", q: "The musical performance last night was absolutely __________!", correct: "fantastic", exp: "Tính từ 'fantastic' nghĩa là tuyệt vời, xuất sắc." },
-        { type: "vocab", q: "Volunteers often visit the elderly at the local __________.", correct: "nursing home", exp: "Cụm danh từ 'nursing home' là viện dưỡng lão." },
-        { type: "vocab", q: "Children enjoy playing slides and swings in the school __________.", correct: "playground", exp: "Danh từ 'playground' là sân chơi." },
-        { type: "vocab", q: "We should __________ plastic bottles and paper to protect the earth.", correct: "recycle", exp: "Động từ 'recycle' nghĩa là tái chế." },
-        { type: "vocab", q: "At the end of the term, students __________ old books with each other.", correct: "exchange", exp: "Động từ 'exchange' nghĩa là trao đổi." },
-
-        // --- PHẦN V: TỪ VỰNG MỞ RỘNG CHO ĐỦ 150 CÂU (90 CÂU BỔ SUNG) ---
-        { type: "vocab", q: "They sent warm __________ to poor people during the cold winter.", correct: "blanket", exp: "Danh từ 'blanket' nghĩa là cái chăn, mền." },
-        { type: "vocab", q: "The charity organization provides free meals for __________ people.", correct: "homeless", exp: "Tính từ 'homeless' nghĩa là vô gia cư." },
-        { type: "vocab", q: "She works as a volunteer __________ to teach English to young children.", correct: "tutor", exp: "Danh từ 'tutor' nghĩa là gia sư, người dạy kèm." },
-        { type: "vocab", q: "Our class decided to __________ more trees in the school garden.", correct: "plant", exp: "Động từ 'plant' nghĩa là trồng cây." },
-        { type: "vocab", q: "Teachers always __________ students to practice speaking English daily.", correct: "encourage", exp: "Động từ 'encourage' nghĩa là khuyến khích, động viên." },
-        { type: "vocab", q: "The government will __________ fresh water and food to flood victims.", correct: "provide", exp: "Động từ 'provide' nghĩa là cung cấp." },
-        { type: "vocab", q: "Doing physical exercises brings many health __________ to your body.", correct: "benefit", exp: "Danh từ 'benefit' nghĩa là lợi ích." },
-        { type: "vocab", q: "We plan to __________ a clean-up day in our neighborhood this Saturday.", correct: "organize", exp: "Động từ 'organize' nghĩa là tổ chức." },
-        { type: "vocab", q: "Using reusable bags helps to __________ plastic waste.", correct: "reduce", exp: "Động từ 'reduce' nghĩa là giảm thiểu." },
-        { type: "vocab", q: "You can __________ empty glass jars to store small items.", correct: "reuse", exp: "Động từ 'reuse' nghĩa là tái sử dụng." },
-        { type: "vocab", q: "Throwing trash properly helps keep our __________ clean.", correct: "environment", exp: "Danh từ 'environment' nghĩa là môi trường." },
-        { type: "vocab", q: "Wearing helmets helps to __________ your head while riding a bike.", correct: "protect", exp: "Động từ 'protect' nghĩa là bảo vệ." },
-        { type: "vocab", q: "After the party, we helped to __________ the living room.", correct: "clean up", exp: "Cụm động từ 'clean up' nghĩa là dọn dẹp sạch sẽ." },
-        { type: "vocab", q: "My mother prefers buying __________ vegetables at the organic market.", correct: "organic", exp: "Tính từ 'organic' nghĩa là hữu cơ." },
-        { type: "vocab", q: "Avoid using too many single-use __________ products.", correct: "plastic", exp: "Danh từ/Tính từ 'plastic' nghĩa là nhựa." },
-        { type: "vocab", q: "Turning off lights when leaving saves electrical __________.", correct: "energy", exp: "Danh từ 'energy' nghĩa là năng lượng." },
-        { type: "vocab", q: "Turning off the tap while brushing teeth helps __________ water.", correct: "save", exp: "Động từ 'save' nghĩa là tiết kiệm, bảo vệ." },
-        { type: "vocab", q: "Washing hands before meals is a healthy __________.", correct: "habit", exp: "Danh từ 'habit' nghĩa là thói quen." },
-        { type: "vocab", q: "Playing sports keeps you __________ and energetic all day.", correct: "active", exp: "Tính từ 'active' nghĩa là năng động, hăng hái." },
-        { type: "vocab", q: "You should __________ regularly to stay healthy and fit.", correct: "exercise", exp: "Động từ 'exercise' nghĩa là tập thể dục." },
-        { type: "vocab", q: "A single slice of cake contains a high number of __________.", correct: "calorie", exp: "Danh từ 'calorie' là đơn vị calo." },
-        { type: "vocab", q: "Eating too much junk food can lead to gaining __________.", correct: "weight", exp: "Danh từ 'weight' nghĩa là cân nặng." },
-        { type: "vocab", q: "He has a seafood __________ so he cannot eat shrimp or crab.", correct: "allergy", exp: "Danh từ 'allergy' nghĩa là sự dị ứng." },
-        { type: "vocab", q: "Dusty air makes me __________ continuously.", correct: "sneeze", exp: "Động từ 'sneeze' nghĩa là hắt hơi." },
-        { type: "vocab", q: "Drink warm honey tea if you have a bad __________.", correct: "cough", exp: "Danh từ 'cough' nghĩa là cơn ho." },
-        { type: "vocab", q: "His body temperature is 39°C; he has a high __________.", correct: "fever", exp: "Danh từ 'fever' nghĩa là cơn sốt." },
-        { type: "vocab", q: "Working on the computer for hours gave her a severe __________.", correct: "headache", exp: "Danh từ 'headache' nghĩa là đau đầu." },
-        { type: "vocab", q: "I cannot talk loudly because I have a __________.", correct: "sore throat", exp: "Cụm danh từ 'sore throat' nghĩa là đau họng." },
-        { type: "vocab", q: "You should visit the dentist if you have a painful __________.", correct: "toothache", exp: "Danh từ 'toothache' nghĩa là đau răng." },
-        { type: "vocab", q: "Fresh fruits and vegetables are examples of __________.", correct: "healthy food", exp: "Cụm danh từ 'healthy food' là thực phẩm lành mạnh." },
-        { type: "vocab", q: "Potato chips and sodas are classified as __________.", correct: "junk food", exp: "Cụm danh từ 'junk food' là đồ ăn vặt không tốt cho sức khỏe." },
-        { type: "vocab", q: "Carrots and broccoli are my favorite types of __________.", correct: "vegetable", exp: "Danh từ 'vegetable' nghĩa là rau củ." },
-        { type: "vocab", q: "Apples and bananas are nutritious __________ that provide vitamins.", correct: "fruit", exp: "Danh từ 'fruit' nghĩa là trái cây." },
-        { type: "vocab", q: "Drinking enough __________ every day is essential for health.", correct: "water", exp: "Danh từ 'water' nghĩa là nước." },
-        { type: "vocab", q: "Getting 8 hours of __________ every night refreshes your mind.", correct: "sleep", exp: "Danh từ 'sleep' nghĩa là giấc ngủ." },
-        { type: "vocab", q: "After running 5 kilometers, he sat down to take a __________.", correct: "rest", exp: "Danh từ 'rest' nghĩa là sự nghỉ ngơi." },
-        { type: "vocab", q: "Listening to soft music helps to relieve daily __________.", correct: "stress", exp: "Danh từ 'stress' nghĩa là sự căng thẳng." },
-        { type: "vocab", q: "Yoga is a great activity to help your body __________.", correct: "relax", exp: "Động từ 'relax' nghĩa là thư giãn." },
-        { type: "vocab", q: "My favorite __________ is collecting stamps from different countries.", correct: "hobby", exp: "Danh từ 'hobby' nghĩa là sở thích." },
-        { type: "vocab", q: "She spent the afternoon __________ landscape pictures with oil colors.", correct: "painting", exp: "Danh từ/Động từ 'painting' nghĩa là việc vẽ tranh." },
-        { type: "vocab", q: "My grandmother enjoys __________ and watering her flowers.", correct: "gardening", exp: "Danh từ 'gardening' nghĩa là việc làm vườn." },
-        { type: "vocab", q: "He is learning __________ delicious Italian dishes.", correct: "cooking", exp: "Danh từ 'cooking' nghĩa là việc nấu ăn." },
-        { type: "vocab", q: "He bought a new camera to practice __________.", correct: "photography", exp: "Danh từ 'photography' nghĩa là nhiếp ảnh." },
-        { type: "vocab", q: "His brother loves __________ rare coins from around the world.", correct: "collecting", exp: "Danh từ 'collecting' nghĩa là việc sưu tầm." },
-        { type: "vocab", q: "__________ is the traditional Japanese art of paper folding.", correct: "origami", exp: "Danh từ 'origami' là nghệ thuật gấp giấy Nhật Bản." },
-        { type: "vocab", q: "He built a mini plastic __________ of an airplane.", correct: "model", exp: "Danh từ 'model' nghĩa là mô hình." },
-        { type: "vocab", q: "They go __________ around the lake every morning.", correct: "cycling", exp: "Danh từ 'cycling' nghĩa là việc đi xe đạp." },
-        { type: "vocab", q: "__________ in the cool water during summer is very enjoyable.", correct: "swimming", exp: "Danh từ 'swimming' nghĩa là bơi lội." },
-        { type: "vocab", q: "Morning __________ helps improve cardiovascular health.", correct: "jogging", exp: "Danh từ 'jogging' nghĩa là chạy bộ." },
-        { type: "vocab", q: "We went __________ on the frozen rink during winter vacation.", correct: "ice skating", exp: "Cụm danh từ 'ice skating' nghĩa là trượt băng." },
-        { type: "vocab", q: "__________ requires strong physical strength and good equipment.", correct: "mountain climbing", exp: "Cụm danh từ 'mountain climbing' nghĩa là leo núi." },
-        { type: "vocab", q: "We set up tents and built a campfire while __________ in the forest.", correct: "camping", exp: "Danh từ 'camping' nghĩa là cắm trại." },
-        { type: "vocab", q: "He brought his fishing rod to go __________ by the river.", correct: "fishing", exp: "Danh từ 'fishing' nghĩa là câu cá." },
-        { type: "vocab", q: "Using binoculars makes __________ much easier in the forest.", correct: "bird watching", exp: "Cụm danh từ 'bird watching' nghĩa là ngắm chim." },
-        { type: "vocab", q: "Making handmade paper flowers is a fun __________ activity.", correct: "craft", exp: "Danh từ 'craft' nghĩa là đồ thủ công." },
-        { type: "vocab", q: "Her mother taught her __________ and making clothes for her dolls.", correct: "sewing", exp: "Danh từ 'sewing' nghĩa là việc khâu vá." },
-        { type: "vocab", q: "My grandmother is __________ a warm wool sweater for me.", correct: "knitting", exp: "Danh từ 'knitting' nghĩa là việc đan len." },
-        { type: "vocab", q: "The little girl loves playing with her favorite barbie __________.", correct: "doll", exp: "Danh từ 'doll' nghĩa là búp bê." },
-        { type: "vocab", q: "Stick a postage __________ on the envelope before mailing it.", correct: "stamp", exp: "Danh từ 'stamp' nghĩa là con tem." },
-        { type: "vocab", q: "He dropped a silver __________ into the wishing well.", correct: "coin", exp: "Danh từ 'coin' nghĩa là đồng xu." },
-        { type: "vocab", q: "Doraemon is a famous Japanese __________ that kids love.", correct: "comic book", exp: "Cụm danh từ 'comic book' nghĩa là truyện tranh." },
-        { type: "vocab", q: "Listening to classical __________ helps me relax before bedtime.", correct: "music", exp: "Danh từ 'music' nghĩa là âm nhạc." },
-        { type: "vocab", q: "He plays acoustic __________ and sings songs around the campfire.", correct: "guitar", exp: "Danh từ 'guitar' nghĩa là đàn ghi-ta." },
-        { type: "vocab", q: "She practices playing the grand __________ every afternoon.", correct: "piano", exp: "Danh từ 'piano' nghĩa là đàn pi-a-nô." },
-        { type: "vocab", q: "The musician played a beautiful melody on his __________.", correct: "violin", exp: "Danh từ 'violin' nghĩa là đàn vi-ô-lông." },
-        { type: "vocab", q: "The drummer beat the big __________ loudly during the parade.", correct: "drum", exp: "Danh từ 'drum' nghĩa là cái trống." },
-        { type: "vocab", q: "They love to __________ songs together in the music club.", correct: "sing", exp: "Động từ 'sing' nghĩa là hát." },
-        { type: "vocab", q: "The dancers will __________ gracefully on the stage.", correct: "dance", exp: "Động từ 'dance' nghĩa là nhảy múa." },
-        { type: "vocab", q: "We went to the movie __________ to watch the latest blockbuster.", correct: "cinema", exp: "Danh từ 'cinema' nghĩa là rạp chiếu phim." },
-        { type: "vocab", q: "We bought tickets to watch a live play at the town __________.", correct: "theater", exp: "Danh từ 'theater' nghĩa là nhà hát." },
-        { type: "vocab", q: "Thousands of fans attended the live rock __________.", correct: "concert", exp: "Danh từ 'concert' nghĩa là buổi hòa nhạc." },
-        { type: "vocab", q: "The history __________ displays ancient artifacts from long ago.", correct: "museum", exp: "Danh từ 'museum' nghĩa là bảo tàng." },
-        { type: "vocab", q: "We visited an art __________ featuring famous paintings.", correct: "exhibition", exp: "Danh từ 'exhibition' nghĩa là cuộc triển lãm." },
-        { type: "vocab", q: "The art __________ presents modern sculptures and photographs.", correct: "gallery", exp: "Danh từ 'gallery' nghĩa là phòng trưng bày nghệ thuật." },
-        { type: "vocab", q: "Students go to the school __________ to borrow research books.", correct: "library", exp: "Danh từ 'library' nghĩa là thư viện." },
-        { type: "vocab", q: "I bought a new English dictionary at the local __________.", correct: "bookshop", exp: "Danh từ 'bookshop' nghĩa là hiệu sách." },
-        { type: "vocab", q: "J.K. Rowling is the famous __________ who wrote Harry Potter.", correct: "author", exp: "Danh từ 'author' nghĩa là tác giả." },
-        { type: "vocab", q: "He is reading an exciting adventure __________ about treasure hunting.", correct: "novel", exp: "Danh từ 'novel' nghĩa là tiểu thuyết." },
-        { type: "vocab", q: "The teacher asked us to memorize a short English __________.", correct: "poem", exp: "Danh từ 'poem' nghĩa là bài thơ." },
-        { type: "vocab", q: "Sherlock Holmes is a famous detective __________ in literature.", correct: "character", exp: "Danh từ 'character' nghĩa là nhân vật." },
-        { type: "vocab", q: "The story has an unpredictable and thrilling __________.", correct: "plot", exp: "Danh từ 'plot' nghĩa là cốt truyện." },
-        { type: "vocab", q: "The brave __________ saved the city from dangerous monsters.", correct: "hero", exp: "Danh từ 'hero' nghĩa là anh hùng." },
-        { type: "vocab", q: "The main __________ in the movie was defeated at the end.", correct: "villain", exp: "Danh từ 'villain' nghĩa là nhân vật phản diện." },
-        { type: "vocab", q: "Traveling across the Amazon jungle was a thrilling __________.", correct: "adventure", exp: "Danh từ 'adventure' nghĩa là cuộc phiêu lưu." },
-        { type: "vocab", q: "The detective solved the dark __________ after discovering a key clue.", correct: "mystery", exp: "Danh từ 'mystery' nghĩa là điều bí ẩn." },
-        { type: "vocab", q: "Lord of the Rings is a popular epic __________ novel series.", correct: "fantasy", exp: "Danh từ/Tính từ 'fantasy' nghĩa là kỳ ảo, ảo tưởng." },
-        { type: "vocab", q: "Movies about space exploration belong to the __________ genre.", correct: "science fiction", exp: "Cụm danh từ 'science fiction' nghĩa là khoa học viễn tưởng." },
-        { type: "vocab", q: "Look up the meaning of new words in your English __________.", correct: "dictionary", exp: "Danh từ 'dictionary' nghĩa là từ điển." },
-        { type: "vocab", q: "Learning correct __________ rules helps you write better English sentences.", correct: "grammar", exp: "Danh từ 'grammar' nghĩa là ngữ pháp." },
-        { type: "vocab", q: "Reviewing your __________ list every day expands your language skills.", correct: "vocabulary", exp: "Danh từ 'vocabulary' nghĩa là từ vựng." }
+        { q: "_____ you _____ (live) in New York?", options: ["Do / live", "Does / live", "Did / lived", "Are / live"], correct: 0 },
+        { q: "_____ she _____ (visit) her grandmother last weekend?", options: ["Does / visit", "Did / visited", "Did / visit", "Was / visit"], correct: 2 },
+        { q: "Where _____ he _____ (work) on weekdays?", options: ["does / work", "do / work", "did / worked", "is / work"], correct: 0 },
+        { q: "Why _____ they _____ (leave) the party early yesterday?", options: ["do / leave", "did / left", "did / leave", "are / leaving"], correct: 2 },
+        { q: "_____ it _____ (rain) a lot here in winter?", options: ["Do / rain", "Does / rain", "Did / rained", "Is / rains"], correct: 1 },
+        { q: "_____ you _____ (see) that new movie last night?", options: ["Did / see", "Did / saw", "Do / see", "Have / saw"], correct: 0 },
+        { q: "What time _____ the bus _____ (arrive) every morning?", options: ["do / arrive", "does / arrive", "did / arrived", "is / arrive"], correct: 1 },
+        { q: "How _____ she _____ (feel) after the exam yesterday?", options: ["does / feel", "did / felt", "did / feel", "was / feel"], correct: 2 },
+        { q: "_____ your parents _____ (speak) French?", options: ["Do / speak", "Does / speak", "Did / spoke", "Are / speak"], correct: 0 },
+        { q: "Where _____ you _____ (buy) that coat two days ago?", options: ["do / buy", "did / bought", "did / buy", "were / buy"], correct: 2 },
+        { q: "_____ Sarah _____ (play) tennis on Saturdays?", options: ["Do / play", "Does / play", "Did / played", "Is / play"], correct: 1 },
+        { q: "_____ they _____ (finish) their homework last night?", options: ["Did / finish", "Did / finished", "Do / finish", "Were / finish"], correct: 0 },
+        { q: "Why _____ you _____ (want) to learn English?", options: ["does / want", "do / want", "did / wanted", "are / want"], correct: 1 },
+        { q: "When _____ he _____ (call) you yesterday afternoon?", options: ["does / call", "did / called", "did / call", "was / call"], correct: 2 },
+        { q: "_____ your dog _____ (bark) at strangers?", options: ["Do / bark", "Does / bark", "Did / barked", "Is / bark"], correct: 1 },
+        { q: "_____ you _____ (eat) breakfast this morning?", options: ["Did / eat", "Did / ate", "Do / eat", "Have / ate"], correct: 0 },
+        { q: "How often _____ they _____ (go) to the gym?", options: ["does / go", "do / go", "did / went", "are / go"], correct: 1 },
+        { q: "What _____ she _____ (say) to you last night?", options: ["does / say", "did / said", "did / say", "was / say"], correct: 2 },
+        { q: "_____ Mark _____ (drive) to work every day?", options: ["Do / drive", "Does / drive", "Did / drove", "Is / drive"], correct: 1 },
+        { q: "Where _____ we _____ (park) the car an hour ago?", options: ["do / park", "did / parked", "did / park", "were / park"], correct: 2 },
+        { q: "_____ you _____ (know) the answer to this question?", options: ["Do / know", "Does / know", "Did / knew", "Are / know"], correct: 0 },
+        { q: "_____ it _____ (snow) here last winter?", options: ["Does / snow", "Did / snowed", "Did / snow", "Was / snow"], correct: 2 },
+        { q: "What _____ he _____ (do) on Sunday afternoons?", options: ["do / do", "does / do", "did / did", "is / do"], correct: 1 },
+        { q: "Why _____ they _____ (cancel) the meeting yesterday?", options: ["do / cancel", "did / cancelled", "did / cancel", "are / cancel"], correct: 2 },
+        { q: "_____ your sister _____ (like) chocolate cake?", options: ["Do / like", "Does / like", "Did / liked", "Is / like"], correct: 1 },
+        { q: "How much _____ that phone _____ (cost) last year?", options: ["does / cost", "did / costed", "did / cost", "was / cost"], correct: 2 },
+        { q: "_____ they _____ (understand) the lesson?", options: ["Do / understand", "Does / understand", "Did / understood", "Are / understand"], correct: 0 },
+        { q: "_____ you _____ (sleep) well last night?", options: ["Did / sleep", "Did / slept", "Do / sleep", "Were / sleep"], correct: 0 },
+        { q: "Where _____ she _____ (keep) her keys?", options: ["do / keep", "does / keep", "did / kept", "is / keep"], correct: 1 },
+        { q: "When _____ the show _____ (start) last night?", options: ["does / start", "did / started", "did / start", "was / start"], correct: 2 },
+        { q: "_____ he _____ (read) books in his free time?", options: ["Do / read", "Does / read", "Did / readed", "Is / read"], correct: 1 },
+        { q: "Why _____ you _____ (choose) this university?", options: ["do / choose", "did / chose", "did / choose", "were / choose"], correct: 2 },
+        { q: "_____ we _____ (have) class tomorrow morning?", options: ["Do / have", "Does / have", "Did / had", "Are / have"], correct: 0 },
+        { q: "_____ she _____ (drink) all the milk yesterday?", options: ["Does / drink", "Did / drank", "Did / drink", "Was / drink"], correct: 2 },
+        { q: "What time _____ you usually _____ (wake up)?", options: ["does / wake up", "do / wake up", "did / woke up", "are / wake up"], correct: 1 }
     ];
 
     let currentQuestionIndex = 0;
@@ -777,16 +522,12 @@
     let userAnswers = [];
     
     let timerInterval = null;
-    let timeLeft = 50; 
-    let timeLimitBase = 50; 
+    let timeLeft = 30; 
+    let timeLimitBase = 30; 
 
-    let lifelines = { wordHint: 1, doubleScore: 1, noTimer: 1 };
+    let lifelines = { fiftyFifty: 1, doubleScore: 1, slowTimer: 1 };
     let activeDoubleScore = false;
-    let activeNoTimer = false; 
-    
-    let bonusRoundCount = 0; 
-    let bonusPool = [];
-    let hasPickedBonus = false;
+    let activeSlowTimer = false; 
 
     const canvas = document.getElementById("laser-canvas");
     const ctx = canvas.getContext("2d");
@@ -803,7 +544,6 @@
     
     const introScreen = document.getElementById("intro-screen");
     const gameScreen = document.getElementById("game-screen");
-    const bonusScreen = document.getElementById("bonus-screen");
     const resultScreen = document.getElementById("result-screen");
     const historyScreen = document.getElementById("history-screen");
     
@@ -828,13 +568,13 @@
     }
 
     function updateLifelineUI() {
-        document.getElementById("count-hint").innerText = lifelines.wordHint;
+        document.getElementById("count-5050").innerText = lifelines.fiftyFifty;
         document.getElementById("count-double").innerText = lifelines.doubleScore;
-        document.getElementById("count-notimer").innerText = lifelines.noTimer;
+        document.getElementById("count-notimer").innerText = lifelines.slowTimer;
 
-        document.getElementById("ll-hint").disabled = lifelines.wordHint <= 0 || isAnswering;
+        document.getElementById("ll-5050").disabled = lifelines.fiftyFifty <= 0 || isAnswering;
         document.getElementById("ll-double").disabled = lifelines.doubleScore <= 0 || isAnswering || activeDoubleScore;
-        document.getElementById("ll-notimer").disabled = lifelines.noTimer <= 0 || isAnswering || activeNoTimer;
+        document.getElementById("ll-notimer").disabled = lifelines.slowTimer <= 0 || isAnswering || activeSlowTimer;
     }
 
     function startTimer() {
@@ -846,7 +586,7 @@
         timerBar.style.width = "100%";
         timerBar.style.background = "linear-gradient(to right, #00ff87, #00fff0)";
 
-        let intervalSpeed = activeNoTimer ? 1500 : 1000;
+        let intervalSpeed = activeSlowTimer ? 1500 : 1000;
 
         timerInterval = setInterval(() => {
             timeLeft--;
@@ -854,11 +594,11 @@
             let percentage = (timeLeft / timeLimitBase) * 100;
             timerBar.style.width = percentage + "%";
 
-            if (timeLeft <= 20 && timeLeft > 8) {
+            if (timeLeft <= 10 && timeLeft > 5) {
                 timerBar.style.background = "#ffaa00";
                 countdownText.className = "warning";
             }
-            if (timeLeft <= 8) {
+            if (timeLeft <= 5) {
                 document.body.classList.add("panic-mode");
                 countdownText.className = "panic";
             }
@@ -867,24 +607,6 @@
                 handleTimeOut();
             }
         }, intervalSpeed);
-    }
-
-    function generateMaskedWord(word) {
-        let masked = [];
-        let len = word.length;
-        
-        for (let i = 0; i < len; i++) {
-            if (word[i] === " ") {
-                masked.push("&nbsp;&nbsp;");
-            } else if (i === 0) {
-                masked.push(word[0].toUpperCase());
-            } else if (i === len - 1) {
-                masked.push(word[len - 1].toUpperCase());
-            } else {
-                masked.push("_");
-            }
-        }
-        return masked.join(" ");
     }
 
     function loadQuestion() {
@@ -898,91 +620,40 @@
         currentQNum.innerText = currentQuestionIndex + 1;
         scoreDisplay.innerText = globalScore;
         
-        questionText.innerHTML = `Câu ${currentQuestionIndex + 1}: ${currentQuestion.q}`;
+        questionText.innerHTML = `${currentQuestionIndex + 1}. ${currentQuestion.q}`;
 
-        if (currentQuestion.type === "vocab") {
-            let maskOutput = generateMaskedWord(currentQuestion.correct);
-            answersZone.innerHTML = `
-                <div class="written-container">
-                    <div id="word-mask-display" style="font-size: 1.4rem; color: #60efff; letter-spacing: 4px; margin-bottom: 20px; font-weight: bold;">
-                        Cấu trúc từ: ${maskOutput}
-                    </div>
-                    <input type="text" id="written-answer-field" class="written-input" placeholder="Nhập từ vựng..." autocomplete="off" onkeyup="checkEnterKey(event)">
-                    <br><br>
-                    <button class="control-btn blue" onclick="submitWrittenAnswer()">Bắn Đáp Án 🚀</button>
-                </div>
-            `;
-        } else {
-            answersZone.innerHTML = `
-                <div class="written-container">
-                    <div id="word-mask-display" style="font-size: 1.1rem; color: #ffeb3b; margin-bottom: 15px; font-weight: bold;">
-                        ✏️ Điền toàn bộ cấu trúc nghi vấn (Ví dụ: <i>did she go</i>)
-                    </div>
-                    <input type="text" id="written-answer-field" class="written-input" placeholder="Ví dụ: did she go..." autocomplete="off" onkeyup="checkEnterKey(event)">
-                    <br><br>
-                    <button class="control-btn blue" onclick="submitWrittenAnswer()">Bắn Đáp Án 🚀</button>
-                </div>
-            `;
-        }
-
-        setTimeout(() => {
-            let inputField = document.getElementById("written-answer-field");
-            if(inputField) inputField.focus();
-        }, 200);
+        answersZone.innerHTML = "";
+        currentQuestion.options.forEach((optionText, idx) => {
+            let btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerHTML = optionText;
+            btn.onclick = () => selectOption(idx, btn);
+            answersZone.appendChild(btn);
+        });
 
         updateLifelineUI();
         startTimer();
     }
 
-    function checkEnterKey(event) {
-        if (event.key === "Enter") {
-            submitWrittenAnswer();
-        }
-    }
-
-    function useWordHint() {
-        if (lifelines.wordHint <= 0 || isAnswering) return;
-        lifelines.wordHint--;
+    function use5050() {
+        if (lifelines.fiftyFifty <= 0 || isAnswering) return;
+        lifelines.fiftyFifty--;
         updateLifelineUI();
 
         let currentQ = quizData[currentQuestionIndex];
-        
-        if (currentQ.type === "vocab") {
-            let wordTarget = currentQ.correct;
-            let len = wordTarget.length;
-            
-            let lettersOnlyIndices = [];
-            for (let i = 0; i < len; i++) {
-                if (wordTarget[i] !== " " && i !== 0 && i !== len - 1) {
-                    lettersOnlyIndices.push(i);
-                }
-            }
+        let correctIdx = currentQ.correct;
+        let btns = Array.from(answersZone.children);
 
-            let revealCount = (len <= 5) ? 1 : 2;
-            lettersOnlyIndices.sort(() => Math.random() - 0.5);
-            let chosenIndices = lettersOnlyIndices.slice(0, revealCount);
+        let wrongIndices = [0, 1, 2, 3].filter(i => i !== correctIdx);
+        wrongIndices.sort(() => Math.random() - 0.5);
+        let toRemove = wrongIndices.slice(0, 2);
 
-            let maskedWord = [];
-            for (let i = 0; i < len; i++) {
-                if (wordTarget[i] === " ") {
-                    maskedWord.push("&nbsp;&nbsp;");
-                } else if (i === 0) {
-                    maskedWord.push(wordTarget[0].toUpperCase());
-                } else if (i === len - 1) {
-                    maskedWord.push(wordTarget[len - 1].toUpperCase());
-                } else if (chosenIndices.includes(i)) {
-                    maskedWord.push(`<span style="color: var(--accent-color)">${wordTarget[i].toUpperCase()}</span>`);
-                } else {
-                    maskedWord.push("_");
-                }
-            }
+        toRemove.forEach(idx => {
+            btns[idx].style.visibility = "hidden";
+            btns[idx].disabled = true;
+        });
 
-            document.getElementById("word-mask-display").innerHTML = "Cấu trúc từ: " + maskedWord.join(" ");
-            statusMessage.innerHTML = `<span style='color: var(--accent-color)'>💡 ĐÃ TIẾT LỘ KÝ TỰ GỢI Ý Ở GIỮA!</span>`;
-        } else {
-            let firstWord = currentQ.correct.split(" ")[0];
-            statusMessage.innerHTML = `<span style='color: var(--accent-color)'>💡 GỢI Ý: Cụm từ bắt đầu bằng "<b>${firstWord}</b>"</span>`;
-        }
+        statusMessage.innerHTML = `<span style='color: var(--accent-color)'>⚡ 50:50 Activated! Two wrong options removed.</span>`;
     }
 
     function useDoubleScore() {
@@ -990,15 +661,15 @@
         lifelines.doubleScore--;
         activeDoubleScore = true;
         updateLifelineUI();
-        statusMessage.innerText = "🔥 Kích hoạt x2 điểm cho phát bắn này!";
+        statusMessage.innerText = "🔥 2x Points active for this shot!";
     }
 
-    function useNoTimer() {
-        if (lifelines.noTimer <= 0 || isAnswering || activeNoTimer) return;
-        lifelines.noTimer--;
-        activeNoTimer = true;
+    function useSlowTimer() {
+        if (lifelines.slowTimer <= 0 || isAnswering || activeSlowTimer) return;
+        lifelines.slowTimer--;
+        activeSlowTimer = true;
         updateLifelineUI();
-        statusMessage.innerText = "⏳ Phép thuật không gian! Thời gian trôi chậm lại!";
+        statusMessage.innerText = "⏳ Time slowed down!";
         startTimer(); 
     }
 
@@ -1049,7 +720,7 @@
     }
 
     function createExplosionBurst(x, y, color) {
-        for (let i = 0; i < 24; i++) {
+        for (let i = 0; i < 20; i++) {
             let p = document.createElement("div");
             p.className = "explosion-particle";
             p.style.backgroundColor = color;
@@ -1057,7 +728,7 @@
             p.style.top = (y - window.scrollY) + "px";
             
             let angle = Math.random() * Math.PI * 2;
-            let speed = Math.random() * 80 + 40;
+            let speed = Math.random() * 80 + 30;
             p.style.setProperty('--x', Math.cos(angle) * speed + "px");
             p.style.setProperty('--y', Math.sin(angle) * speed + "px");
 
@@ -1066,57 +737,42 @@
         }
     }
 
-    function normalizeAnswer(str) {
-        if (!str) return "";
-        return str.toLowerCase()
-                  .replace(/['’]/g, "") 
-                  .replace(/\s+/g, " ") 
-                  .trim();
-    }
-
-    function evaluateFlexibleAnswers(userText, qItem) {
-        const normUser = normalizeAnswer(userText);
-        const normCorrect = normalizeAnswer(qItem.correct);
-
-        return normUser === normCorrect;
-    }
-
-    function submitWrittenAnswer() {
+    function selectOption(selectedIndex, btnElement) {
         if (isAnswering) return;
-        let inputField = document.getElementById("written-answer-field");
-        if (!inputField) return;
-        
-        let userText = inputField.value.trim();
-        if (userText === "") {
-            alert("Con hãy điền câu trả lời vào ô trống trước khi bắn!");
-            return;
-        }
-
         isAnswering = true;
         clearInterval(timerInterval);
         document.body.classList.remove("panic-mode");
 
         let qItem = quizData[currentQuestionIndex];
-        let isCorrect = evaluateFlexibleAnswers(userText, qItem);
+        let isCorrect = (selectedIndex === qItem.correct);
 
-        fireArcadeLaser(inputField, isCorrect, () => {
-            userAnswers.push({ qIndex: currentQuestionIndex, userChoice: inputField.value.trim(), isCorrect: isCorrect, isTimeOut: false });
+        let allBtns = answersZone.querySelectorAll(".option-btn");
+        allBtns.forEach(b => b.disabled = true);
+
+        fireArcadeLaser(btnElement, isCorrect, () => {
+            userAnswers.push({ 
+                qIndex: currentQuestionIndex, 
+                userChoice: qItem.options[selectedIndex], 
+                isCorrect: isCorrect, 
+                isTimeOut: false 
+            });
 
             if (isCorrect) {
-                inputField.style.borderColor = "var(--correct-color)";
-                let gainedPoints = 100 + Math.max(0, timeLeft);
+                btnElement.classList.add("correct-choice");
+                let gainedPoints = 100 + (timeLeft * 10);
                 if (activeDoubleScore) gainedPoints *= 2;
                 globalScore += gainedPoints;
                 scoreDisplay.innerText = globalScore;
-                statusMessage.innerHTML = `<span style='color: var(--correct-color)'>BẮN TRÚNG MỤC TIÊU! +${gainedPoints} điểm. 🎉</span>`;
+                statusMessage.innerHTML = `<span style='color: var(--correct-color)'>TARGET HIT! +${gainedPoints} points! 🎉</span>`;
             } else {
-                inputField.style.borderColor = "var(--wrong-color)";
-                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>SAI TỌA ĐỘ! Đáp án đúng: "${qItem.correct}".</span>`;
+                btnElement.classList.add("wrong-choice");
+                allBtns[qItem.correct].classList.add("correct-choice");
+                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>MISSED! Correct answer: "${qItem.options[qItem.correct]}"</span>`;
             }
 
             activeDoubleScore = false;
-            activeNoTimer = false; 
-            timeLimitBase = 50;
+            activeSlowTimer = false; 
+            timeLimitBase = 30;
             nextBtn.style.display = "inline-block";
         });
     }
@@ -1126,33 +782,30 @@
         document.body.classList.remove("panic-mode");
         
         let currentQuestion = quizData[currentQuestionIndex];
-        userAnswers.push({ qIndex: currentQuestionIndex, userChoice: "Hết giờ ⏰", isCorrect: false, isTimeOut: true });
+        userAnswers.push({ 
+            qIndex: currentQuestionIndex, 
+            userChoice: "Time Out ⏰", 
+            isCorrect: false, 
+            isTimeOut: true 
+        });
+
+        let allBtns = answersZone.querySelectorAll(".option-btn");
+        allBtns.forEach(b => b.disabled = true);
+        allBtns[currentQuestion.correct].classList.add("correct-choice");
         
         playerShip.classList.add("exploded");
         const shipRect = playerShip.getBoundingClientRect();
         createExplosionBurst(shipRect.left + shipRect.width/2, shipRect.top + shipRect.height/2, "#ff4b5c");
 
-        statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>HẾT GIỜ! Hệ thống tự hủy. Đáp án đúng: "${currentQuestion.correct}".</span>`;
-
-        let inputField = document.getElementById("written-answer-field");
-        if (inputField) inputField.disabled = true;
+        statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>TIME OUT! Correct answer: "${currentQuestion.options[currentQuestion.correct]}".</span>`;
 
         activeDoubleScore = false;
-        activeNoTimer = false; 
-        timeLimitBase = 50;
+        activeSlowTimer = false; 
+        timeLimitBase = 30;
         nextBtn.style.display = "inline-block";
     }
 
     function nextQuestion() {
-        let naturalQuestionNumber = currentQuestionIndex + 1;
-        if (naturalQuestionNumber % 5 === 0) {
-            setupBonusRound();
-        } else {
-            proceedToNextQuestionLogic();
-        }
-    }
-
-    function proceedToNextQuestionLogic() {
         currentQuestionIndex++;
         if (currentQuestionIndex < quizData.length) {
             loadQuestion();
@@ -1161,207 +814,21 @@
         }
     }
 
-    function setupBonusRound() {
-        bonusRoundCount++;
-        gameScreen.classList.remove("active-screen");
-        bonusScreen.classList.add("active-screen");
-        
-        hasPickedBonus = false;
-        document.getElementById("bonus-status").innerText = "";
-        document.getElementById("bonus-instructions").innerText = "🎁 Đang truyền tải các hòm tiếp tế năng lượng...";
-
-        const rewardsOptions = [
-            { text: "⭐ Cộng 200 Điểm", action: () => { globalScore += 200; } },
-            { text: "⭐ Cộng 100 Điểm", action: () => { globalScore += 100; } },
-            { text: "🎁 Thêm 1 lượt Chậm Giờ", action: () => { lifelines.noTimer++; } },
-            { text: "🎁 Thêm 1 lượt Gợi Ý", action: () => { lifelines.wordHint++; } },
-            { text: "🎁 Thêm 1 lượt x2 Điểm", action: () => { lifelines.doubleScore++; } }
-        ];
-
-        rewardsOptions.sort(() => Math.random() - 0.5);
-        bonusPool = rewardsOptions;
-
-        const slots = document.querySelectorAll(".card-slot");
-        slots.forEach((slot, idx) => {
-            slot.className = "card-slot disabled face-up"; 
-            slot.style.transform = "translate(0px, 0px)"; 
-            document.getElementById(`cb-${idx}`).innerText = bonusPool[idx].text;
-        });
-
-        setTimeout(() => {
-            document.getElementById("bonus-instructions").innerText = "🔒 KHÓA TRẬN ĐỊA! ĐANG XÁO VỊ TRÍ HỘP QUÀ...";
-            slots.forEach(slot => {
-                slot.classList.remove("face-up");
-                slot.classList.add("face-down"); 
-            });
-
-            setTimeout(() => {
-                executeAdvancedPositionShuffle();
-            }, 600);
-        }, 3000);
-    }
-
-    function executeAdvancedPositionShuffle() {
-        const slots = Array.from(document.querySelectorAll(".card-slot"));
-        const coords = slots.map(slot => {
-            const rect = slot.getBoundingClientRect();
-            return { x: rect.left, y: rect.top };
-        });
-
-        let currentOrder = [0, 1, 2, 3, 4];
-        let steps = 0;
-        let baseSpeed = 400; 
-        let totalShuffles = 8;
-
-        let shuffleTimer = setInterval(() => {
-            let i = Math.floor(Math.random() * 5);
-            let j = Math.floor(Math.random() * 5);
-            while (i === j) { j = Math.floor(Math.random() * 5); }
-
-            let temp = currentOrder[i];
-            currentOrder[i] = currentOrder[j];
-            currentOrder[j] = temp;
-
-            slots.forEach((slot, index) => {
-                let targetSlotIndex = currentOrder.indexOf(index);
-                let dx = coords[targetSlotIndex].x - coords[index].x;
-                let dy = coords[targetSlotIndex].y - coords[index].y;
-                slot.style.transform = `translate(${dx}px, ${dy}px)`;
-            });
-
-            steps++;
-            if (steps >= totalShuffles) {
-                clearInterval(shuffleTimer);
-                setTimeout(() => {
-                    slots.forEach(slot => slot.classList.remove("disabled"));
-                    document.getElementById("bonus-instructions").innerText = "🎯 XÁO BÀI XONG! Hãy chọn một hộp quà may mắn!";
-                }, 300);
-            }
-        }, baseSpeed);
-    }
-
-    function flipCard(index, element) {
-        if (hasPickedBonus || element.classList.contains("disabled")) return;
-        hasPickedBonus = true;
-
-        const slots = document.querySelectorAll(".card-slot");
-        slots.forEach(slot => slot.classList.add("disabled")); 
-
-        const reward = bonusPool[index];
-        reward.action();
-
-        document.getElementById(`cb-${index}`).innerText = reward.text;
-        element.classList.remove("face-down");
-        element.classList.add("face-up");
-        element.classList.add("zoomed-winner");
-        
-        document.getElementById("bonus-instructions").innerText = "🎉 PHẦN THƯỞNG TUYỆT VỜI CỦA CON!";
-        document.getElementById("bonus-status").innerText = `Con nhận được: [ ${reward.text} ]`;
-
-        slots.forEach((slot, idx) => {
-            if (idx !== index) {
-                document.getElementById(`cb-${idx}`).innerText = bonusPool[idx].text;
-                slot.classList.remove("face-down");
-                slot.classList.add("face-up");
-            }
-        });
-
-        setTimeout(() => {
-            element.classList.remove("zoomed-winner");
-            closeBonusRound();
-        }, 2500);
-    }
-
-    function closeBonusRound() {
-        bonusScreen.classList.remove("active-screen");
-        gameScreen.classList.add("active-screen");
-        proceedToNextQuestionLogic();
-    }
-
     function showResults() {
         clearInterval(timerInterval);
         document.body.classList.remove("panic-mode");
         gameScreen.classList.remove("active-screen");
         resultScreen.classList.add("active-screen");
 
-        if (globalScore >= 12000) {
-            rewardLevel.innerText = "XẾP HẠNG: THỦ KHOA TIẾNG ANH XUẤT SẮC! 🏆";
-        } else if (globalScore >= 8000) {
-            rewardLevel.innerText = "XẾP HẠNG: CHIẾN SĨ TIẾNG ANH THÔNG THÁI! 🏅";
+        document.getElementById("final-score").innerText = globalScore;
+
+        if (globalScore >= 9500) {
+            rewardLevel.innerText = "RANK: SPACE COMMANDER! 🏆";
+        } else if (globalScore >= 6000) {
+            rewardLevel.innerText = "RANK: STAR PILOT! 🏅";
         } else {
-            rewardLevel.innerText = "XẾP HẠNG: HỌC VIÊN CHĂM CHỈ! 📝";
+            rewardLevel.innerText = "RANK: SPACE CADET! 📝";
         }
-
-        const formContainerId = "formspree-submit-zone";
-        let existingForm = document.getElementById(formContainerId);
-        if (existingForm) existingForm.remove();
-
-        const formZone = document.createElement("div");
-        formZone.id = formContainerId;
-        formZone.style.cssText = "margin-top: 25px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border: 2px dashed #00fff0;";
-        
-        formZone.innerHTML = `
-            <h3 style="color: #ffeb3b; margin-top: 0;">NỘP KẾT QUẢ CHO THẦY CÔ</h3>
-            <form id="formspree-form" style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
-                
-                <div style="width: 100%; max-width: 400px; text-align: left;">
-                    <label style="display: block; margin-bottom: 5px; color: #00fff0; font-weight: bold;">Họ và tên của con:</label>
-                    <input type="text" name="student_name" id="student-name-field" required placeholder="Nhập tên đầy đủ..." style="width: 100%; padding: 10px; border-radius: 4px; border: 2px solid #fff; box-sizing: border-box; font-size: 1.1rem; background:#000; color:#fff;">
-                </div>
-
-                <div style="width: 100%; max-width: 400px; text-align: left;">
-                    <label style="display: block; margin-bottom: 5px; color: #ffeb3b; font-weight: bold;">Tổng điểm số của con (Tự động điền):</label>
-                    <input type="text" id="student-score-field" readonly value="${globalScore} điểm" style="width: 100%; padding: 10px; border-radius: 4px; border: 2px solid #ffeb3b; box-sizing: border-box; font-size: 1.1rem; background:#111; color:#ffeb3b; font-weight: bold; text-align: center; cursor: not-allowed;">
-                </div>
-
-                <button type="submit" id="form-submit-btn" class="control-btn blue" style="padding: 10px 40px; font-size:1.1rem; width:100%; max-width: 400px;">Bấm Để Gửi Điểm Lên Hệ Thống 🚀</button>
-            </form>
-        `;
-
-        resultScreen.insertBefore(formZone, resultScreen.querySelector('.btn-group'));
-
-        document.getElementById("formspree-form").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById("form-submit-btn");
-            submitBtn.innerText = "Đang gửi... ⏳";
-            submitBtn.disabled = true;
-
-            const nameInput = document.getElementById("student-name-field").value;
-            let historyLog = {};
-            
-            userAnswers.forEach((ans, index) => {
-                let qData = quizData[ans.qIndex];
-                let keyName = `Câu ${index + 1} (${ans.isCorrect ? 'ĐÚNG' : 'SAI'})`;
-                historyLog[keyName] = `Đề: ${qData.q} | Học sinh viết: ${ans.userChoice} | Đúng: ${qData.correct}`;
-            });
-
-            const payload = {
-                "Tên học sinh": nameInput,
-                "Tổng điểm": `${globalScore} điểm`,
-                "Chi tiết lịch sử": historyLog
-            };
-
-            fetch("https://formspree.io/f/mvznjpeg", { 
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                body: JSON.stringify(payload)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Điểm số của con đã nộp lên hệ thống thành công! 🎉");
-                    formZone.innerHTML = `<h3 style="color: var(--correct-color); margin: 10px 0;">✅ Điểm số và Lịch sử làm đã gửi về hòm thư của Thầy Cô!</h3>`;
-                } else {
-                    alert("Gặp lỗi nộp điểm! Con hãy chụp lại màn hình điểm số nhé!");
-                    submitBtn.innerText = "Thử gửi lại";
-                    submitBtn.disabled = false;
-                }
-            })
-            .catch(error => {
-                alert("Lỗi kết nối mạng khi gửi!");
-                submitBtn.innerText = "Thử gửi lại";
-                submitBtn.disabled = false;
-            });
-        });
     }
 
     function showHistoryScreen() {
@@ -1375,12 +842,11 @@
             itemDiv.className = `history-item ${ans.isCorrect ? "history-correct" : "history-wrong"}`;
 
             itemDiv.innerHTML = `
-                <div style="font-weight:bold; color:#fff;">Câu ${ans.qIndex + 1}: ${itemData.q}</div>
+                <div style="font-weight:bold; color:#fff;">Q${ans.qIndex + 1}: ${itemData.q}</div>
                 <div style="margin: 5px 0;">
-                    • Con đã viết: <strong style="color:${ans.isCorrect ? 'var(--correct-color)' : 'var(--wrong-color)'}">${ans.userChoice}</strong> 
-                    ${ans.isCorrect ? '✔' : `| Đáp án đúng: <strong style="color:var(--correct-color)">${itemData.correct}</strong> ✘`}
+                    • Your choice: <strong style="color:${ans.isCorrect ? 'var(--correct-color)' : 'var(--wrong-color)'}">${ans.userChoice}</strong> 
+                    ${ans.isCorrect ? '✔' : `| Correct answer: <strong style="color:var(--correct-color)">${itemData.options[itemData.correct]}</strong> ✘`}
                 </div>
-                <div style="color:#ffeb3b; font-size:0.95rem; font-style:italic;">💡 Giải thích: ${itemData.exp}</div>
             `;
             historyList.appendChild(itemDiv);
         });
@@ -1391,35 +857,14 @@
         resultScreen.classList.add("active-screen");
     }
 
-    function skipToPart(index) {
-        clearInterval(timerInterval);
-        currentQuestionIndex = index;
-        loadQuestion();
-    }
-
-    function testSkipToEnd() {
-        clearInterval(timerInterval);
-        userAnswers = [];
-        for (let i = 0; i < quizData.length; i++) {
-            userAnswers.push({
-                qIndex: i,
-                userChoice: i % 2 === 0 ? quizData[i].correct : "Gõ sai rồi",
-                isCorrect: i % 2 === 0,
-                isTimeOut: false
-            });
-        }
-        showResults();
-    }
-
     function restartGame() {
         currentQuestionIndex = 0;
         globalScore = 0;
         userAnswers = [];
-        timeLimitBase = 50;
-        bonusRoundCount = 0;
+        timeLimitBase = 30;
         activeDoubleScore = false;
-        activeNoTimer = false; 
-        lifelines = { wordHint: 1, doubleScore: 1, noTimer: 1 };
+        activeSlowTimer = false; 
+        lifelines = { fiftyFifty: 1, doubleScore: 1, slowTimer: 1 };
         
         historyScreen.classList.remove("active-screen");
         resultScreen.classList.remove("active-screen");
