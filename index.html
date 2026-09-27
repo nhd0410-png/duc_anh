@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Quiz Invaders - Present Simple & Past Simple Questions</title>
+    <title>Đấu Trường Nhí - Comparative Adjectives Challenge</title>
     <style>
         :root {
             --bg-color: #020010;
@@ -21,7 +21,7 @@
             background: var(--bg-color);
             background-image: 
                 radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 30px),
                 radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
             background-size: 550px 550px, 350px 350px, 250px 250px;
             background-position: 0 0, 40px 60px, 130px 270px;
@@ -35,13 +35,14 @@
             overflow-x: hidden;
         }
 
-        body.panic-mode {
-            animation: spacePanic 0.5s infinite alternate;
-        }
-
-        @keyframes spacePanic {
-            from { background-color: #020010; }
-            to { background-color: #20000a; }
+        #laser-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 100;
         }
 
         #quiz-container {
@@ -55,6 +56,9 @@
             position: relative;
             backdrop-filter: blur(8px);
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
         }
 
         .header-title {
@@ -76,102 +80,20 @@
             color: #00fff0;
             margin-bottom: 10px;
             font-weight: bold;
-        }
-
-        .timer-zone-wrapper {
-            margin: 15px 0;
-            text-align: center;
-        }
-
-        .timer-container {
-            width: 100%;
-            height: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid rgba(0, 255, 240, 0.4);
-            box-shadow: inset 0 0 10px rgba(0, 255, 240, 0.2);
-        }
-
-        .timer-bar {
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(to right, #00ff87, #00fff0);
-            transition: width 1s linear, background 0.5s;
-        }
-
-        #countdown-text {
-            color: #00ff87;
-            font-size: 1.3rem;
-            font-weight: 900;
-            text-shadow: 0 0 8px currentColor;
-        }
-        #countdown-text.warning { color: #ffaa00; }
-        #countdown-text.panic { color: #ff4b5c; animation: textBlink 0.4s infinite alternate; }
-
-        @keyframes textBlink {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0.5; transform: scale(1.05); }
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .question-box {
             background: rgba(13, 17, 43, 0.9);
             border: 2px solid #fff;
             border-radius: 12px;
-            padding: 20px;
-            font-size: 1.5rem;
-            line-height: 1.5;
+            padding: 25px;
+            font-size: 1.4rem;
+            line-height: 1.8;
             margin-bottom: 15px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            color: #fff;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .option-btn {
-            background: rgba(13, 27, 62, 0.8);
-            border: 2px solid var(--border-neon);
-            border-radius: 8px;
-            padding: 14px 20px;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            background: rgba(0, 255, 240, 0.2);
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 0 12px var(--border-neon);
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.8;
-        }
-
-        .option-btn.correct-choice {
-            background: rgba(0, 255, 135, 0.3) !important;
-            border-color: var(--correct-color) !important;
-            color: var(--correct-color) !important;
-            box-shadow: 0 0 15px var(--correct-color) !important;
-        }
-
-        .option-btn.wrong-choice {
-            background: rgba(255, 75, 92, 0.3) !important;
-            border-color: var(--wrong-color) !important;
-            color: var(--wrong-color) !important;
-            box-shadow: 0 0 15px var(--wrong-color) !important;
         }
 
         .battle-deck {
@@ -179,7 +101,7 @@
             grid-template-columns: 1fr 180px;
             gap: 15px;
             margin-top: 20px;
-            min-height: 160px;
+            min-height: 180px;
             align-items: stretch;
         }
 
@@ -206,35 +128,6 @@
             width: 100%;
             height: 100%;
             filter: drop-shadow(0 0 8px rgba(0, 255, 240, 0.6));
-            transition: opacity 0.1s;
-        }
-
-        .spaceship-container.shooting {
-            animation: recoil 0.1s ease-out;
-        }
-
-        .spaceship-container.exploded {
-            animation: shipBlowUp 0.5s ease-out forwards;
-        }
-
-        @keyframes recoil {
-            0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(8px) scale(0.95); }
-            100% { transform: translateY(0) scale(1); }
-        }
-
-        @keyframes shipBlowUp {
-            0% { transform: scale(1) rotate(0); opacity: 1; filter: hue-rotate(0deg) brightness(3); }
-            50% { transform: scale(1.4) rotate(45deg); opacity: 0.6; filter: hue-rotate(90deg) brightness(5); }
-            100% { transform: scale(0) rotate(180deg); opacity: 0; }
-        }
-
-        #laser-canvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 4;
         }
 
         .powerup-cockpit {
@@ -263,7 +156,7 @@
             background: linear-gradient(135deg, #0d1b3e, #162a65);
             border: 1px solid #00fff0;
             color: white;
-            padding: 8px 5px;
+            padding: 10px 5px;
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
@@ -286,7 +179,6 @@
             border-color: #333 !important;
             color: #555 !important;
             cursor: not-allowed;
-            box-shadow: none;
         }
 
         .lifeline-count {
@@ -298,10 +190,33 @@
             font-weight: 900;
         }
 
+        .correction-container {
+            background: rgba(13, 17, 43, 0.9);
+            border: 2px dashed var(--border-neon);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .written-input {
+            width: 85%;
+            max-width: 500px;
+            padding: 12px 20px;
+            font-size: 1.3rem;
+            border: 2px solid var(--border-neon);
+            border-radius: 4px;
+            background: #020215;
+            color: #fff;
+            text-align: center;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 240, 0.2);
+        }
+
         #status-message {
-            height: 35px;
+            min-height: 35px;
             margin-top: 10px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: var(--accent-color);
             text-align: center;
@@ -316,7 +231,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin: 10px auto 0 auto;
+            margin: 15px auto 0 auto;
             display: none;
             box-shadow: 0 0 15px rgba(0, 180, 219, 0.4);
         }
@@ -348,37 +263,18 @@
             transition: transform 0.2s;
         }
 
-        .start-game-btn:hover, .control-btn:hover {
-            transform: scale(1.03);
-        }
-
         .control-btn { font-size: 1rem; padding: 12px 25px; }
-        .control-btn.blue { background: linear-gradient(135deg, #00b4db, #0083b0); color: #fff; box-shadow: 0 0 15px rgba(0,180,219,0.4); }
+        .control-btn.blue { background: linear-gradient(135deg, #00b4db, #0083b0); color: #fff; }
 
-        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
-
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
         .history-container { text-align: left; max-height: 350px; overflow-y: auto; margin-top: 20px; }
         .history-item { background: rgba(255, 255, 255, 0.03); padding: 15px; margin-bottom: 10px; border-radius: 6px; border-left: 4px solid #fff; }
         .history-item.history-correct { border-left-color: var(--correct-color); }
         .history-item.history-wrong { border-left-color: var(--wrong-color); }
 
-        .explosion-particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 999;
-            animation: particleBlast 0.6s ease-out forwards;
-        }
-
-        @keyframes particleBlast {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
-        }
+        .heart-icon { color: #ff4b5c; font-size: 1.4rem; }
 
         @media (max-width: 600px) {
-            .options-grid { grid-template-columns: 1fr; }
             .battle-deck { grid-template-columns: 1fr; }
         }
     </style>
@@ -389,48 +285,46 @@
 
 <div id="quiz-container">
     
+    <!-- INTRO SCREEN -->
     <div id="intro-screen" class="screen active-screen">
-        <div class="header-title">Present & Past Simple Questions</div>
-        <p style="font-size: 1.2rem; color: #00fff0; text-align: center; margin: 0;">Space Quiz Invaders</p>
+        <div class="header-title">Đấu Trường Nhí</div>
+        <p style="font-size: 1.2rem; color: #00fff0; text-align: center; margin: 0;">Comparative Adjectives Challenge - Thử Thách Tính Từ So Sánh (15 Câu)</p>
         
         <div class="intro-rules">
-            <strong>🚀 HOW TO PLAY:</strong><br>
-            • Choose the correct auxiliary and verb forms for present and past simple questions.<br>
-            • You have 30 seconds for each question.<br>
-            • Use special power-ups on the right side if you need help!<br>
-            • Complete all <b>35 questions</b> to earn your space pilot score!
+            <strong>🚀 BỘ CÂU HỎI TIẾNG ANH - CẤU TRÚC SO SÁNH HƠN (15 CÂU):</strong><br>
+            • <b>Nhiệm vụ:</b> Chọn phương án đúng (A, B, C, D) hoặc gõ chữ cái / từ trả lời!<br>
+            • 📝 Kiểm tra kiến thức về tính từ ngắn, tính từ dài và các tính từ bất quy tắc.<br>
+            • 🛸 Con có <b>5 Mạng ❤️</b> và <b>Không Giới Hạn Thời Gian ♾️</b> cho mỗi câu hỏi!
         </div>
+        
         <div style="text-align: center;">
-            <button class="start-game-btn" onclick="startGame()">Start Quiz</button>
+            <button class="start-game-btn" onclick="startGame()">Bắt Đầu Bứt Phá 🚀</button>
         </div>
     </div>
 
+    <!-- GAMEPLAY SCREEN -->
     <div id="game-screen" class="screen">
         <div class="progress-info">
-            <div>Question: <span id="current-q-num">1</span> / <span id="total-q-num">35</span></div>
-            <div style="color: var(--accent-color);">Score: <span id="score-display">0</span></div>
-            <div>Time: <span id="countdown-text">30s</span></div>
+            <div>Thử thách: <span id="current-q-num">1</span> / <span id="total-q-num">15</span></div>
+            <div id="lives-display">Mạng: <span class="heart-icon">❤️❤️❤️❤️❤️</span></div>
+            <div style="color: var(--accent-color);">Điểm: <span id="score-display">0</span></div>
+            <div style="color: #00fff0;">⏳ Thời gian: <span>Không giới hạn ♾️</span></div>
         </div>
 
         <div class="question-box">
-            <div id="question-text">...</div>
+            <div id="instruction-title" style="font-size: 1rem; color: #00fff0; margin-bottom: 10px; text-transform: uppercase;">🎯 NHIỆM VỤ CƠ BẢN:</div>
+            <div id="question-prompt" style="font-weight: 600; margin-bottom: 15px;"></div>
         </div>
 
-        <div class="timer-zone-wrapper">
-            <div class="timer-container">
-                <div id="timer-bar" class="timer-bar"></div>
-            </div>
-        </div>
-
-        <div id="answers-zone" class="options-grid"></div>
-
+        <div id="correction-zone"></div>
         <div id="status-message"></div>
+
         <div style="text-align: center;">
-            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Next Question ➜</button>
+            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Câu Tiếp Theo ➜</button>
         </div>
 
         <div class="battle-deck">
-            <div class="space-arena" id="arena-box">
+            <div class="space-arena">
                 <div class="spaceship-container" id="player-ship">
                     <svg class="spaceship-svg" viewBox="0 0 60 60">
                         <path d="M30,5 L10,50 L25,42 L30,55 L35,42 L50,50 Z" fill="#00ff87" stroke="#ffffff" stroke-width="2"/>
@@ -441,112 +335,138 @@
                 </div>
             </div>
 
-            <div class="powerup-cockpit" id="lifelines-zone">
-                <div class="cockpit-label">Power-Ups</div>
-                <button id="ll-5050" class="lifeline-btn" onclick="use5050()">
-                    <span>50:50</span> <span id="count-5050" class="lifeline-count">1</span>
-                </button>
-                <button id="ll-double" class="lifeline-btn" onclick="useDoubleScore()">
-                    <span>2x Points</span> <span id="count-double" class="lifeline-count">1</span>
-                </button>
-                <button id="ll-notimer" class="lifeline-btn" onclick="useSlowTimer()">
-                    <span>Slow Time</span> <span id="count-notimer" class="lifeline-count">1</span>
+            <div class="powerup-cockpit">
+                <div class="cockpit-label">Hỗ Trợ Vũ Trụ</div>
+                <button id="ll-hint" class="lifeline-btn" onclick="useGrammarHint()">
+                    <span>Gợi Ý Hệ Thống</span> <span id="count-hint" class="lifeline-count">3</span>
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- RESULT SCREEN -->
     <div id="result-screen" class="screen" style="text-align: center;">
-        <h2>Quiz Completed!</h2>
-        <div style="font-size: 1.8rem; color: var(--accent-color); font-weight: bold; margin: 15px 0;">
-            Final Score: <span id="final-score">0</span>
-        </div>
-        <div style="font-size: 1.3rem; color: var(--correct-color); font-weight: bold; margin-bottom: 15px;" id="reward-level"></div>
+        <h2>Chúc Mừng Con Đã Hoàn Thành!</h2>
+        <div style="font-size: 1.5rem; margin: 15px 0;">Điểm số đạt được: <span id="final-score" style="color: var(--accent-color); font-weight:bold;">0</span> điểm</div>
+        <div style="font-size: 1.3rem; color: var(--correct-color); font-weight: bold; margin-bottom: 25px;" id="reward-level"></div>
         
         <div class="btn-group">
-            <button class="control-btn" onclick="restartGame()">Play Again</button>
-            <button class="control-btn blue" onclick="showHistoryScreen()">Review Answers</button>
+            <button class="control-btn" onclick="restartGame()">Chơi Lại Từ Đầu</button>
+            <button class="control-btn blue" onclick="showHistoryScreen()">Xem Chi Tiết Lịch Sử</button>
         </div>
     </div>
 
+    <!-- REVISE HISTORY SCREEN -->
     <div id="history-screen" class="screen" style="text-align: center;">
-        <h2 style="color: #00fff0;">Answer Review</h2>
+        <h2 style="color: #00fff0;">Bảng Xem Lại Kết Quả</h2>
         <div class="history-container" id="history-list"></div>
-        <button class="control-btn" style="margin-top:20px;" onclick="backToResultScreen()">Back to Score</button>
+        <button class="control-btn" style="margin-top:20px;" onclick="restartGame()">Quay Lại Từ Đầu</button>
     </div>
-
 </div>
 
 <script>
     const quizData = [
-        { q: "_____ you _____ (live) in New York?", options: ["Do / live", "Does / live", "Did / lived", "Are / live"], correct: 0 },
-        { q: "_____ she _____ (visit) her grandmother last weekend?", options: ["Does / visit", "Did / visited", "Did / visit", "Was / visit"], correct: 2 },
-        { q: "Where _____ he _____ (work) on weekdays?", options: ["does / work", "do / work", "did / worked", "is / work"], correct: 0 },
-        { q: "Why _____ they _____ (leave) the party early yesterday?", options: ["do / leave", "did / left", "did / leave", "are / leaving"], correct: 2 },
-        { q: "_____ it _____ (rain) a lot here in winter?", options: ["Do / rain", "Does / rain", "Did / rained", "Is / rains"], correct: 1 },
-        { q: "_____ you _____ (see) that new movie last night?", options: ["Did / see", "Did / saw", "Do / see", "Have / saw"], correct: 0 },
-        { q: "What time _____ the bus _____ (arrive) every morning?", options: ["do / arrive", "does / arrive", "did / arrived", "is / arrive"], correct: 1 },
-        { q: "How _____ she _____ (feel) after the exam yesterday?", options: ["does / feel", "did / felt", "did / feel", "was / feel"], correct: 2 },
-        { q: "_____ your parents _____ (speak) French?", options: ["Do / speak", "Does / speak", "Did / spoke", "Are / speak"], correct: 0 },
-        { q: "Where _____ you _____ (buy) that coat two days ago?", options: ["do / buy", "did / bought", "did / buy", "were / buy"], correct: 2 },
-        { q: "_____ Sarah _____ (play) tennis on Saturdays?", options: ["Do / play", "Does / play", "Did / played", "Is / play"], correct: 1 },
-        { q: "_____ they _____ (finish) their homework last night?", options: ["Did / finish", "Did / finished", "Do / finish", "Were / finish"], correct: 0 },
-        { q: "Why _____ you _____ (want) to learn English?", options: ["does / want", "do / want", "did / wanted", "are / want"], correct: 1 },
-        { q: "When _____ he _____ (call) you yesterday afternoon?", options: ["does / call", "did / called", "did / call", "was / call"], correct: 2 },
-        { q: "_____ your dog _____ (bark) at strangers?", options: ["Do / bark", "Does / bark", "Did / barked", "Is / bark"], correct: 1 },
-        { q: "_____ you _____ (eat) breakfast this morning?", options: ["Did / eat", "Did / ate", "Do / eat", "Have / ate"], correct: 0 },
-        { q: "How often _____ they _____ (go) to the gym?", options: ["does / go", "do / go", "did / went", "are / go"], correct: 1 },
-        { q: "What _____ she _____ (say) to you last night?", options: ["does / say", "did / said", "did / say", "was / say"], correct: 2 },
-        { q: "_____ Mark _____ (drive) to work every day?", options: ["Do / drive", "Does / drive", "Did / drove", "Is / drive"], correct: 1 },
-        { q: "Where _____ we _____ (park) the car an hour ago?", options: ["do / park", "did / parked", "did / park", "were / park"], correct: 2 },
-        { q: "_____ you _____ (know) the answer to this question?", options: ["Do / know", "Does / know", "Did / knew", "Are / know"], correct: 0 },
-        { q: "_____ it _____ (snow) here last winter?", options: ["Does / snow", "Did / snowed", "Did / snow", "Was / snow"], correct: 2 },
-        { q: "What _____ he _____ (do) on Sunday afternoons?", options: ["do / do", "does / do", "did / did", "is / do"], correct: 1 },
-        { q: "Why _____ they _____ (cancel) the meeting yesterday?", options: ["do / cancel", "did / cancelled", "did / cancel", "are / cancel"], correct: 2 },
-        { q: "_____ your sister _____ (like) chocolate cake?", options: ["Do / like", "Does / like", "Did / liked", "Is / like"], correct: 1 },
-        { q: "How much _____ that phone _____ (cost) last year?", options: ["does / cost", "did / costed", "did / cost", "was / cost"], correct: 2 },
-        { q: "_____ they _____ (understand) the lesson?", options: ["Do / understand", "Does / understand", "Did / understood", "Are / understand"], correct: 0 },
-        { q: "_____ you _____ (sleep) well last night?", options: ["Did / sleep", "Did / slept", "Do / sleep", "Were / sleep"], correct: 0 },
-        { q: "Where _____ she _____ (keep) her keys?", options: ["do / keep", "does / keep", "did / kept", "is / keep"], correct: 1 },
-        { q: "When _____ the show _____ (start) last night?", options: ["does / start", "did / started", "did / start", "was / start"], correct: 2 },
-        { q: "_____ he _____ (read) books in his free time?", options: ["Do / read", "Does / read", "Did / readed", "Is / read"], correct: 1 },
-        { q: "Why _____ you _____ (choose) this university?", options: ["do / choose", "did / chose", "did / choose", "were / choose"], correct: 2 },
-        { q: "_____ we _____ (have) class tomorrow morning?", options: ["Do / have", "Does / have", "Did / had", "Are / have"], correct: 0 },
-        { q: "_____ she _____ (drink) all the milk yesterday?", options: ["Does / drink", "Did / drank", "Did / drink", "Was / drink"], correct: 2 },
-        { q: "What time _____ you usually _____ (wake up)?", options: ["does / wake up", "do / wake up", "did / woke up", "are / wake up"], correct: 1 }
+        { 
+            q: '1. What is the comparative form of "dangerous"?<br>(Dạng so sánh hơn của "dangerous" là gì?)<br><br>A) dangerouser &nbsp;&nbsp;&nbsp;&nbsp; B) more dangerous<br>C) most dangerous &nbsp;&nbsp;&nbsp;&nbsp; D) as dangerous', 
+            a: ['b', 'more dangerous'], 
+            hint: 'Tính từ dài (3 âm tiết) -> dùng "more + tính từ": more dangerous (Đáp án B)' 
+        },
+        { 
+            q: '2. What is the comparative form of "fast"?<br>(Dạng so sánh hơn của "fast" là gì?)<br><br>A) fast &nbsp;&nbsp;&nbsp;&nbsp; B) faster<br>C) fastest &nbsp;&nbsp;&nbsp;&nbsp; D) more fast', 
+            a: ['b', 'faster'], 
+            hint: 'Tính từ ngắn (1 âm tiết) -> thêm đuôi "-er": faster (Đáp án B)' 
+        },
+        { 
+            q: '3. What is the comparative form of "good"?<br>(Dạng so sánh hơn của "good" là gì?)<br><br>A) gooder &nbsp;&nbsp;&nbsp;&nbsp; B) better<br>C) best &nbsp;&nbsp;&nbsp;&nbsp; D) more good', 
+            a: ['b', 'better'], 
+            hint: '"Good" là tính từ bất quy tắc -> chuyển thành better (Đáp án B)' 
+        },
+        { 
+            q: '4. What is the comparative form of "bad"?<br>(Dạng so sánh hơn của "bad" là gì?)<br><br>A) badder &nbsp;&nbsp;&nbsp;&nbsp; B) worse<br>C) worst &nbsp;&nbsp;&nbsp;&nbsp; D) more bad', 
+            a: ['b', 'worse'], 
+            hint: '"Bad" là tính từ bất quy tắc -> chuyển thành worse (Đáp án B)' 
+        },
+        { 
+            q: '5. What is the comparative form of "big"?<br>(Dạng so sánh hơn của "big" là gì?)<br><br>A) bigger &nbsp;&nbsp;&nbsp;&nbsp; B) biger<br>C) biggest &nbsp;&nbsp;&nbsp;&nbsp; D) more big', 
+            a: ['a', 'bigger'], 
+            hint: 'Gấp đôi phụ âm cuối trước khi thêm "-er": bigger (Đáp án A)' 
+        },
+        { 
+            q: '6. What is the comparative form of "expensive"?<br>(Dạng so sánh hơn của "expensive" là gì?)<br><br>A) expensiver &nbsp;&nbsp;&nbsp;&nbsp; B) more expensive<br>C) most expensive &nbsp;&nbsp;&nbsp;&nbsp; D) expensivest', 
+            a: ['b', 'more expensive'], 
+            hint: 'Tính từ dài -> dùng "more + tính từ": more expensive (Đáp án B)' 
+        },
+        { 
+            q: '7. What is the comparative form of "happy"?<br>(Dạng so sánh hơn của "happy" là gì?)<br><br>A) happyer &nbsp;&nbsp;&nbsp;&nbsp; B) more happy<br>C) happier &nbsp;&nbsp;&nbsp;&nbsp; D) happiest', 
+            a: ['c', 'happier'], 
+            hint: 'Tính từ kết thúc bằng "-y" -> đổi "-y" thành "-ier": happier (Đáp án C)' 
+        },
+        { 
+            q: '8. What is the comparative form of "easy"?<br>(Dạng so sánh hơn của "easy" là gì?)<br><br>A) easyer &nbsp;&nbsp;&nbsp;&nbsp; B) easier<br>C) more easy &nbsp;&nbsp;&nbsp;&nbsp; D) easiest', 
+            a: ['b', 'easier'], 
+            hint: 'Tính từ kết thúc bằng "-y" -> đổi "-y" thành "-ier": easier (Đáp án B)' 
+        },
+        { 
+            q: '9. What is the comparative form of "beautiful"?<br>(Dạng so sánh hơn của "beautiful" là gì?)<br><br>A) beautifuller &nbsp;&nbsp;&nbsp;&nbsp; B) more beautiful<br>C) most beautiful &nbsp;&nbsp;&nbsp;&nbsp; D) beautifulest', 
+            a: ['b', 'more beautiful'], 
+            hint: 'Tính từ dài -> dùng "more + tính từ": more beautiful (Đáp án B)' 
+        },
+        { 
+            q: '10. What is the comparative form of "small"?<br>(Dạng so sánh hơn của "small" là gì?)<br><br>A) smaller &nbsp;&nbsp;&nbsp;&nbsp; B) more small<br>C) smallest &nbsp;&nbsp;&nbsp;&nbsp; D) smaller', 
+            a: ['a', 'smaller'], 
+            hint: 'Tính từ ngắn -> thêm đuôi "-er": smaller (Đáp án A)' 
+        },
+        { 
+            q: '11. What is the comparative form of "far"?<br>(Dạng so sánh hơn của "far" là gì?)<br><br>A) farer &nbsp;&nbsp;&nbsp;&nbsp; B) farther / further<br>C) most far &nbsp;&nbsp;&nbsp;&nbsp; D) farerest', 
+            a: ['b', 'farther', 'further', 'farther / further'], 
+            hint: '"Far" là tính từ bất quy tắc -> chuyển thành farther hoặc further (Đáp án B)' 
+        },
+        { 
+            q: '12. What is the comparative form of "cheap"?<br>(Dạng so sánh hơn của "cheap" là gì?)<br><br>A) cheaper &nbsp;&nbsp;&nbsp;&nbsp; B) more cheap<br>C) cheapest &nbsp;&nbsp;&nbsp;&nbsp; D) cheapen', 
+            a: ['a', 'cheaper'], 
+            hint: 'Tính từ ngắn -> thêm đuôi "-er": cheaper (Đáp án A)' 
+        },
+        { 
+            q: '13. What is the comparative form of "important"?<br>(Dạng so sánh hơn của "important" là gì?)<br><br>A) importanter &nbsp;&nbsp;&nbsp;&nbsp; B) more important<br>C) most important &nbsp;&nbsp;&nbsp;&nbsp; D) as important', 
+            a: ['b', 'more important'], 
+            hint: 'Tính từ dài -> dùng "more + tính từ": more important (Đáp án B)' 
+        },
+        { 
+            q: '14. What is the comparative form of "hot"?<br>(Dạng so sánh hơn của "hot" là gì?)<br><br>A) hoter &nbsp;&nbsp;&nbsp;&nbsp; B) hotter<br>C) hottest &nbsp;&nbsp;&nbsp;&nbsp; D) more hot', 
+            a: ['b', 'hotter'], 
+            hint: 'Gấp đôi phụ âm "t" rồi thêm "-er": hotter (Đáp án B)' 
+        },
+        { 
+            q: '15. What is the comparative form of "tall"?<br>(Dạng so sánh hơn của "tall" là gì?)<br><br>A) taller &nbsp;&nbsp;&nbsp;&nbsp; B) more tall<br>C) tallest &nbsp;&nbsp;&nbsp;&nbsp; D) as tall', 
+            a: ['a', 'taller'], 
+            hint: 'Tính từ ngắn -> thêm đuôi "-er": taller (Đáp án A)' 
+        }
     ];
 
     let currentQuestionIndex = 0;
     let globalScore = 0;
-    let isAnswering = false;
-    let userAnswers = [];
-    
-    let timerInterval = null;
-    let timeLeft = 30; 
-    let timeLimitBase = 30; 
-
-    let lifelines = { fiftyFifty: 1, doubleScore: 1, slowTimer: 1 };
-    let activeDoubleScore = false;
-    let activeSlowTimer = false; 
+    let userLives = 5;
+    let currentGameState = "playing";
+    let userAnswersLog = [];
+    let grammarHintsCount = 3;
 
     const canvas = document.getElementById("laser-canvas");
     const ctx = canvas.getContext("2d");
-
-    const questionText = document.getElementById("question-text");
-    const answersZone = document.getElementById("answers-zone");
+    const questionPrompt = document.getElementById("question-prompt");
+    const correctionZone = document.getElementById("correction-zone");
     const currentQNum = document.getElementById("current-q-num");
     const totalQNum = document.getElementById("total-q-num");
     const scoreDisplay = document.getElementById("score-display");
+    const livesDisplay = document.getElementById("lives-display");
     const statusMessage = document.getElementById("status-message");
     const nextBtn = document.getElementById("next-btn");
-    const countdownText = document.getElementById("countdown-text");
-    const timerBar = document.getElementById("timer-bar");
-    
+
     const introScreen = document.getElementById("intro-screen");
     const gameScreen = document.getElementById("game-screen");
     const resultScreen = document.getElementById("result-screen");
     const historyScreen = document.getElementById("history-screen");
-    
+
+    const finalScoreDisplay = document.getElementById("final-score");
     const rewardLevel = document.getElementById("reward-level");
     const historyList = document.getElementById("history-list");
     const playerShip = document.getElementById("player-ship");
@@ -563,118 +483,108 @@
     function startGame() {
         introScreen.classList.remove("active-screen");
         gameScreen.classList.add("active-screen");
-        updateLifelineUI();
+        resultScreen.classList.remove("active-screen");
+        historyScreen.classList.remove("active-screen");
+        userLives = 5;
+        grammarHintsCount = 3;
+        currentQuestionIndex = 0;
+        globalScore = 0;
+        userAnswersLog = [];
+        scoreDisplay.innerText = globalScore;
+        document.getElementById("count-hint").innerText = grammarHintsCount;
+        updateLivesUI();
         loadQuestion();
     }
 
-    function updateLifelineUI() {
-        document.getElementById("count-5050").innerText = lifelines.fiftyFifty;
-        document.getElementById("count-double").innerText = lifelines.doubleScore;
-        document.getElementById("count-notimer").innerText = lifelines.slowTimer;
-
-        document.getElementById("ll-5050").disabled = lifelines.fiftyFifty <= 0 || isAnswering;
-        document.getElementById("ll-double").disabled = lifelines.doubleScore <= 0 || isAnswering || activeDoubleScore;
-        document.getElementById("ll-notimer").disabled = lifelines.slowTimer <= 0 || isAnswering || activeSlowTimer;
-    }
-
-    function startTimer() {
-        clearInterval(timerInterval);
-        timeLeft = timeLimitBase;
-        countdownText.innerText = timeLeft + "s";
-        countdownText.className = "";
-        document.body.classList.remove("panic-mode");
-        timerBar.style.width = "100%";
-        timerBar.style.background = "linear-gradient(to right, #00ff87, #00fff0)";
-
-        let intervalSpeed = activeSlowTimer ? 1500 : 1000;
-
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            countdownText.innerText = timeLeft + "s";
-            let percentage = (timeLeft / timeLimitBase) * 100;
-            timerBar.style.width = percentage + "%";
-
-            if (timeLeft <= 10 && timeLeft > 5) {
-                timerBar.style.background = "#ffaa00";
-                countdownText.className = "warning";
-            }
-            if (timeLeft <= 5) {
-                document.body.classList.add("panic-mode");
-                countdownText.className = "panic";
-            }
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                handleTimeOut();
-            }
-        }, intervalSpeed);
+    function updateLivesUI() {
+        let hearts = "";
+        for (let i = 0; i < userLives; i++) hearts += "❤️";
+        if (hearts === "") hearts = "❌ ĐÃ HẾT MẠNG";
+        livesDisplay.innerHTML = `Mạng: <span class="heart-icon">${hearts}</span>`;
     }
 
     function loadQuestion() {
-        isAnswering = false;
-        statusMessage.innerText = "";
+        currentGameState = "playing";
         nextBtn.style.display = "none";
-        playerShip.className = "spaceship-container";
+        statusMessage.innerHTML = "";
+        correctionZone.innerHTML = "";
+        
         playerShip.style.transform = "rotate(0deg)";
-        
-        let currentQuestion = quizData[currentQuestionIndex];
         currentQNum.innerText = currentQuestionIndex + 1;
-        scoreDisplay.innerText = globalScore;
-        
-        questionText.innerHTML = `${currentQuestionIndex + 1}. ${currentQuestion.q}`;
+        let currentQ = quizData[currentQuestionIndex];
 
-        answersZone.innerHTML = "";
-        currentQuestion.options.forEach((optionText, idx) => {
-            let btn = document.createElement("button");
-            btn.className = "option-btn";
-            btn.innerHTML = optionText;
-            btn.onclick = () => selectOption(idx, btn);
-            answersZone.appendChild(btn);
-        });
+        questionPrompt.innerHTML = currentQ.q;
 
-        updateLifelineUI();
-        startTimer();
+        correctionZone.innerHTML = `
+            <div class="correction-container">
+                <input type="text" id="correction-field" class="written-input" placeholder="Nhập A, B, C hoặc D..." autocomplete="off" onkeyup="checkEnterKey(event)">
+                <br><br>
+                <button class="control-btn blue" onclick="submitTextAnswer()">Xác Nhận Năng Lượng 🚀</button>
+            </div>
+        `;
+        setTimeout(() => {
+            let field = document.getElementById("correction-field");
+            if (field) field.focus();
+        }, 150);
+
+        document.getElementById("ll-hint").disabled = (grammarHintsCount <= 0);
     }
 
-    function use5050() {
-        if (lifelines.fiftyFifty <= 0 || isAnswering) return;
-        lifelines.fiftyFifty--;
-        updateLifelineUI();
+    function checkEnterKey(event) { if (event.key === "Enter") submitTextAnswer(); }
+
+    function submitTextAnswer() {
+        if (currentGameState !== "playing") return;
+        let inputField = document.getElementById("correction-field");
+        if (!inputField) return;
+
+        let userText = inputField.value.trim();
+        if (userText === "") return;
+
+        currentGameState = "finished";
 
         let currentQ = quizData[currentQuestionIndex];
-        let correctIdx = currentQ.correct;
-        let btns = Array.from(answersZone.children);
+        let normUser = userText.toLowerCase().replace(/’/g, "'").replace(/\s+/g, ' ').replace(/\)/g, '').replace(/\./g, '').trim();
+        let isCorrect = currentQ.a.some(ans => normUser === ans.toLowerCase().replace(/’/g, "'").replace(/\s+/g, ' ').replace(/\)/g, '').replace(/\./g, '').trim());
 
-        let wrongIndices = [0, 1, 2, 3].filter(i => i !== correctIdx);
-        wrongIndices.sort(() => Math.random() - 0.5);
-        let toRemove = wrongIndices.slice(0, 2);
+        fireArcadeLaser(inputField, isCorrect, () => {
+            inputField.disabled = true;
+            userAnswersLog.push({ qIndex: currentQuestionIndex, userText: userText, isCorrect: isCorrect });
 
-        toRemove.forEach(idx => {
-            btns[idx].style.visibility = "hidden";
-            btns[idx].disabled = true;
+            if (isCorrect) {
+                inputField.style.borderColor = "var(--correct-color)";
+                let gainedPoints = 200; 
+                globalScore += gainedPoints;
+                scoreDisplay.innerText = globalScore;
+                statusMessage.innerHTML = `<span style='color: var(--correct-color)'>THÀNH CÔNG: Câu trả lời rất chính xác! +${gainedPoints} Điểm. 🎉</span>`;
+            } else {
+                inputField.style.borderColor = "var(--wrong-color)";
+                userLives--;
+                updateLivesUI();
+                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>THẤT BẠI: Chưa đúng! Đáp án chuẩn: "${currentQ.a[0].toUpperCase()}".</span>`;
+                if (userLives <= 0) {
+                    setTimeout(() => { handleGameOverLoss(); }, 1500);
+                    return;
+                }
+            }
+            nextBtn.style.display = "inline-block";
         });
-
-        statusMessage.innerHTML = `<span style='color: var(--accent-color)'>⚡ 50:50 Activated! Two wrong options removed.</span>`;
     }
 
-    function useDoubleScore() {
-        if (lifelines.doubleScore <= 0 || isAnswering || activeDoubleScore) return;
-        lifelines.doubleScore--;
-        activeDoubleScore = true;
-        updateLifelineUI();
-        statusMessage.innerText = "🔥 2x Points active for this shot!";
+    function handleGameOverLoss() {
+        currentGameState = "finished";
+        statusMessage.innerHTML = "<span style='color:var(--wrong-color)'>Phi thuyền cạn kiệt năng lượng! Đang chuyển đến bảng tổng kết...</span>";
+        setTimeout(() => { showFinalResults(); }, 2000);
     }
 
-    function useSlowTimer() {
-        if (lifelines.slowTimer <= 0 || isAnswering || activeSlowTimer) return;
-        lifelines.slowTimer--;
-        activeSlowTimer = true;
-        updateLifelineUI();
-        statusMessage.innerText = "⏳ Time slowed down!";
-        startTimer(); 
+    function useGrammarHint() {
+        if (grammarHintsCount <= 0 || currentGameState !== "playing") return;
+        grammarHintsCount--;
+        document.getElementById("count-hint").innerText = grammarHintsCount;
+        document.getElementById("ll-hint").disabled = (grammarHintsCount <= 0);
+        statusMessage.innerHTML = `<span style='color: #ffeb3b;'>💡 GỢI Ý: ${quizData[currentQuestionIndex].hint}</span>`;
     }
 
     function fireArcadeLaser(targetElement, isCorrectResult, callback) {
-        if(!targetElement) { callback(); return; }
         const shipRect = playerShip.getBoundingClientRect();
         const targetRect = targetElement.getBoundingClientRect();
 
@@ -684,17 +594,15 @@
         const endY = targetRect.top + targetRect.height / 2;
 
         const angleRad = Math.atan2(endY - startY, endX - startX);
-        const angleDeg = angleRad * (180 / Math.PI) + 90; 
+        const angleDeg = angleRad * (180 / Math.PI) + 90;
 
         playerShip.style.transform = `rotate(${angleDeg}deg)`;
-        playerShip.classList.add("shooting");
 
         let laserProgress = 0;
-        
         function drawLaserBeam() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (laserProgress < 1) {
-                laserProgress += 0.15; 
+                laserProgress += 0.25;
                 let currentX = startX + (endX - startX) * laserProgress;
                 let currentY = startY + (endY - startY) * laserProgress;
 
@@ -704,131 +612,40 @@
                 ctx.moveTo(startX, startY);
                 ctx.lineTo(currentX, currentY);
                 ctx.stroke();
+
                 requestAnimationFrame(drawLaserBeam);
             } else {
-                playerShip.classList.remove("shooting");
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                createExplosionBurst(endX, endY, isCorrectResult ? "#00ff87" : "#ff4b5c");
-                if (!isCorrectResult) {
-                    playerShip.classList.add("exploded");
-                    createExplosionBurst(startX, startY, "#ff4b5c");
-                }
                 callback();
             }
         }
         drawLaserBeam();
     }
 
-    function createExplosionBurst(x, y, color) {
-        for (let i = 0; i < 20; i++) {
-            let p = document.createElement("div");
-            p.className = "explosion-particle";
-            p.style.backgroundColor = color;
-            p.style.left = (x - window.scrollX) + "px";
-            p.style.top = (y - window.scrollY) + "px";
-            
-            let angle = Math.random() * Math.PI * 2;
-            let speed = Math.random() * 80 + 30;
-            p.style.setProperty('--x', Math.cos(angle) * speed + "px");
-            p.style.setProperty('--y', Math.sin(angle) * speed + "px");
-
-            document.body.appendChild(p);
-            setTimeout(() => p.remove(), 600);
-        }
-    }
-
-    function selectOption(selectedIndex, btnElement) {
-        if (isAnswering) return;
-        isAnswering = true;
-        clearInterval(timerInterval);
-        document.body.classList.remove("panic-mode");
-
-        let qItem = quizData[currentQuestionIndex];
-        let isCorrect = (selectedIndex === qItem.correct);
-
-        let allBtns = answersZone.querySelectorAll(".option-btn");
-        allBtns.forEach(b => b.disabled = true);
-
-        fireArcadeLaser(btnElement, isCorrect, () => {
-            userAnswers.push({ 
-                qIndex: currentQuestionIndex, 
-                userChoice: qItem.options[selectedIndex], 
-                isCorrect: isCorrect, 
-                isTimeOut: false 
-            });
-
-            if (isCorrect) {
-                btnElement.classList.add("correct-choice");
-                let gainedPoints = 100 + (timeLeft * 10);
-                if (activeDoubleScore) gainedPoints *= 2;
-                globalScore += gainedPoints;
-                scoreDisplay.innerText = globalScore;
-                statusMessage.innerHTML = `<span style='color: var(--correct-color)'>TARGET HIT! +${gainedPoints} points! 🎉</span>`;
-            } else {
-                btnElement.classList.add("wrong-choice");
-                allBtns[qItem.correct].classList.add("correct-choice");
-                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>MISSED! Correct answer: "${qItem.options[qItem.correct]}"</span>`;
-            }
-
-            activeDoubleScore = false;
-            activeSlowTimer = false; 
-            timeLimitBase = 30;
-            nextBtn.style.display = "inline-block";
-        });
-    }
-
-    function handleTimeOut() {
-        isAnswering = true;
-        document.body.classList.remove("panic-mode");
-        
-        let currentQuestion = quizData[currentQuestionIndex];
-        userAnswers.push({ 
-            qIndex: currentQuestionIndex, 
-            userChoice: "Time Out ⏰", 
-            isCorrect: false, 
-            isTimeOut: true 
-        });
-
-        let allBtns = answersZone.querySelectorAll(".option-btn");
-        allBtns.forEach(b => b.disabled = true);
-        allBtns[currentQuestion.correct].classList.add("correct-choice");
-        
-        playerShip.classList.add("exploded");
-        const shipRect = playerShip.getBoundingClientRect();
-        createExplosionBurst(shipRect.left + shipRect.width/2, shipRect.top + shipRect.height/2, "#ff4b5c");
-
-        statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>TIME OUT! Correct answer: "${currentQuestion.options[currentQuestion.correct]}".</span>`;
-
-        activeDoubleScore = false;
-        activeSlowTimer = false; 
-        timeLimitBase = 30;
-        nextBtn.style.display = "inline-block";
-    }
-
     function nextQuestion() {
         currentQuestionIndex++;
-        if (currentQuestionIndex < quizData.length) {
+        if (currentQuestionIndex < quizData.length && userLives > 0) {
             loadQuestion();
         } else {
-            showResults();
+            showFinalResults();
         }
     }
 
-    function showResults() {
-        clearInterval(timerInterval);
-        document.body.classList.remove("panic-mode");
+    function showFinalResults() {
+        introScreen.classList.remove("active-screen");
         gameScreen.classList.remove("active-screen");
+        historyScreen.classList.remove("active-screen");
         resultScreen.classList.add("active-screen");
 
-        document.getElementById("final-score").innerText = globalScore;
+        finalScoreDisplay.innerText = globalScore;
 
-        if (globalScore >= 9500) {
-            rewardLevel.innerText = "RANK: SPACE COMMANDER! 🏆";
-        } else if (globalScore >= 6000) {
-            rewardLevel.innerText = "RANK: STAR PILOT! 🏅";
-        } else {
-            rewardLevel.innerText = "RANK: SPACE CADET! 📝";
-        }
+        let levelStr = "";
+        if (globalScore >= 2600) levelStr = "👑 ĐẠI TƯỚNG NGỮ PHÁP (Xuất Sắc!)";
+        else if (globalScore >= 2000) levelStr = "🚀 PHI HÀNH GIA NGỮ PHÁP (Rất Giỏi!)";
+        else if (globalScore >= 1400) levelStr = "⭐ CHIẾN BINH KHÔNG GIAN (Khá Tốt)";
+        else levelStr = "🔰 TÂN BINH TẬP SỰ (Hãy rèn luyện thêm con nhé!)";
+
+        rewardLevel.innerText = levelStr;
     }
 
     function showHistoryScreen() {
@@ -836,42 +653,31 @@
         historyScreen.classList.add("active-screen");
         historyList.innerHTML = "";
 
-        userAnswers.forEach((ans) => {
-            const itemData = quizData[ans.qIndex];
-            const itemDiv = document.createElement("div");
+        userAnswersLog.forEach(ans => {
+            let itemData = quizData[ans.qIndex];
+            if (!itemData) return;
+
+            let itemDiv = document.createElement("div");
             itemDiv.className = `history-item ${ans.isCorrect ? "history-correct" : "history-wrong"}`;
+            let correctAnsStr = itemData.a[0].toUpperCase();
 
             itemDiv.innerHTML = `
-                <div style="font-weight:bold; color:#fff;">Q${ans.qIndex + 1}: ${itemData.q}</div>
+                <div style="font-weight:bold; color:#fff;">Thử thách ${ans.qIndex + 1}: ${itemData.q}</div>
                 <div style="margin: 5px 0;">
-                    • Your choice: <strong style="color:${ans.isCorrect ? 'var(--correct-color)' : 'var(--wrong-color)'}">${ans.userChoice}</strong> 
-                    ${ans.isCorrect ? '✔' : `| Correct answer: <strong style="color:var(--correct-color)">${itemData.options[itemData.correct]}</strong> ✘`}
+                    • Con đã chọn/nhập: <strong style="color:${ans.isCorrect ? 'var(--correct-color)' : 'var(--wrong-color)'}">${ans.userText}</strong> 
+                    ${ans.isCorrect ? ' ✔' : ` | Đáp án đúng: <strong style="color:var(--correct-color)">${correctAnsStr}</strong> ✘`}
                 </div>
             `;
             historyList.appendChild(itemDiv);
         });
     }
 
-    function backToResultScreen() {
-        historyScreen.classList.remove("active-screen");
-        resultScreen.classList.add("active-screen");
-    }
-
     function restartGame() {
-        currentQuestionIndex = 0;
-        globalScore = 0;
-        userAnswers = [];
-        timeLimitBase = 30;
-        activeDoubleScore = false;
-        activeSlowTimer = false; 
-        lifelines = { fiftyFifty: 1, doubleScore: 1, slowTimer: 1 };
-        
         historyScreen.classList.remove("active-screen");
         resultScreen.classList.remove("active-screen");
-        gameScreen.classList.add("active-screen");
-        loadQuestion();
+        gameScreen.classList.remove("active-screen");
+        introScreen.classList.add("active-screen");
     }
 </script>
-
 </body>
 </html>
