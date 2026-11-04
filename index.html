@@ -521,6 +521,7 @@
     let currentGameState = "playing";
     let userAnswersLog = [];
     let grammarHintsCount = 3;
+    let activeCorrectIndex = 0;
 
     const canvas = document.getElementById("laser-canvas");
     const ctx = canvas.getContext("2d");
@@ -587,10 +588,28 @@
 
         questionPrompt.innerHTML = currentQ.q;
 
-        currentQ.options.forEach((optText, index) => {
+        // Strip prefix letters (A., B., C., D.) from options before shuffling
+        let rawOptions = currentQ.options.map(opt => opt.replace(/^[A-D]\.\s*/, ''));
+        
+        let optionObjs = rawOptions.map((text, idx) => ({
+            text: text,
+            isCorrect: (idx === currentQ.correct)
+        }));
+
+        // Shuffle options randomly (Fisher-Yates)
+        for (let i = optionObjs.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [optionObjs[i], optionObjs[j]] = [optionObjs[j], optionObjs[i]];
+        }
+
+        const letters = ["A", "B", "C", "D"];
+        optionObjs.forEach((obj, index) => {
+            if (obj.isCorrect) {
+                activeCorrectIndex = index;
+            }
             const btn = document.createElement("button");
             btn.className = "mcq-btn";
-            btn.innerText = optText;
+            btn.innerText = `${letters[index]}. ${obj.text}`;
             btn.onclick = () => handleOptionClick(index, btn);
             mcqOptionsContainer.appendChild(btn);
         });
@@ -603,7 +622,7 @@
         currentGameState = "finished";
 
         let currentQ = quizData[currentQuestionIndex];
-        let isCorrect = (selectedIndex === currentQ.correct);
+        let isCorrect = (selectedIndex === activeCorrectIndex);
 
         const allBtns = mcqOptionsContainer.querySelectorAll(".mcq-btn");
         allBtns.forEach(btn => btn.disabled = true);
@@ -611,7 +630,8 @@
         fireArcadeLaser(clickedBtn, isCorrect, () => {
             userAnswersLog.push({
                 qIndex: currentQuestionIndex,
-                selectedText: currentQ.options[selectedIndex],
+                selectedText: clickedBtn.innerText,
+                correctText: allBtns[activeCorrectIndex].innerText,
                 isCorrect: isCorrect
             });
 
@@ -623,10 +643,10 @@
                 statusMessage.innerHTML = `<span style='color: var(--correct-color)'>THÀNH CÔNG: Câu trả lời rất chính xác! +${gainedPoints} Điểm. 🎉</span>`;
             } else {
                 clickedBtn.classList.add("wrong-choice");
-                allBtns[currentQ.correct].classList.add("correct-choice");
+                allBtns[activeCorrectIndex].classList.add("correct-choice");
                 userLives--;
                 updateLivesUI();
-                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>THẤT BẠI: Chưa đúng! Đáp án chuẩn: "${currentQ.options[currentQ.correct]}".</span>`;
+                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>THẤT BẠI: Chưa đúng! Đáp án chuẩn: "${allBtns[activeCorrectIndex].innerText}".</span>`;
                 
                 if (userLives <= 0) {
                     setTimeout(() => { handleGameOverLoss(); }, 1500);
@@ -726,13 +746,12 @@
 
             let itemDiv = document.createElement("div");
             itemDiv.className = `history-item ${ans.isCorrect ? "history-correct" : "history-wrong"}`;
-            let correctAnsStr = itemData.options[itemData.correct];
 
             itemDiv.innerHTML = `
                 <div style="font-weight:bold; color:#fff;">Thử thách ${ans.qIndex + 1}: ${itemData.q}</div>
                 <div style="margin: 5px 0;">
                     • Con đã chọn: <strong style="color:${ans.isCorrect ? 'var(--correct-color)' : 'var(--wrong-color)'}">${ans.selectedText}</strong> 
-                    ${ans.isCorrect ? ' ✔' : ` | Đáp án đúng: <strong style="color:var(--correct-color)">${correctAnsStr}</strong> ✘`}
+                    ${ans.isCorrect ? ' ✔' : ` | Đáp án đúng: <strong style="color:var(--correct-color)">${ans.correctText}</strong> ✘`}
                 </div>
             `;
             historyList.appendChild(itemDiv);
