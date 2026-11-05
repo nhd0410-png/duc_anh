@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đấu Trường Nhí - Global Success 7: Units 1-3 Vocab & Grammar</title>
+    <title>FANBOYS & Verb Patterns Grammar Arena</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --bg-color: #020010;
-            --container-bg: rgba(6, 4, 32, 0.85);
-            --text-color: #fff;
+            --bg-color: #030014;
+            --container-bg: rgba(9, 7, 37, 0.88);
+            --text-color: #ffffff;
             --accent-color: #ffeb3b;
             --border-neon: #00fff0;
             --correct-color: #00ff87;
@@ -30,7 +31,7 @@
             justify-content: center;
             align-items: center;
             margin: 0;
-            padding: 10px;
+            padding: 12px;
             overflow-x: hidden;
         }
 
@@ -50,10 +51,10 @@
             background: var(--container-bg);
             border: 3px solid var(--border-neon);
             border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(0, 255, 240, 0.2);
+            padding: 24px;
+            box-shadow: 0 0 35px rgba(0, 255, 240, 0.25);
             position: relative;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -63,8 +64,8 @@
         .header-title {
             color: var(--accent-color);
             font-size: 2.2rem;
-            text-shadow: 0 0 12px rgba(255, 235, 59, 0.6);
-            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(255, 235, 59, 0.6);
+            margin-bottom: 6px;
             text-transform: uppercase;
             font-weight: 900;
             letter-spacing: 2px;
@@ -75,30 +76,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #00fff0;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
             font-weight: bold;
             flex-wrap: wrap;
             gap: 10px;
         }
 
         .question-box {
-            background: rgba(13, 17, 43, 0.9);
-            border: 2px solid #fff;
+            background: rgba(13, 17, 43, 0.92);
+            border: 2px solid #ffffff;
             border-radius: 12px;
             padding: 25px;
             font-size: 1.25rem;
             line-height: 1.6;
             margin-bottom: 15px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .mcq-options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
             margin-top: 15px;
         }
 
@@ -123,12 +124,12 @@
             background: #00fff0;
             color: #000;
             transform: translateY(-2px);
-            box-shadow: 0 0 12px #00fff0;
+            box-shadow: 0 0 14px #00fff0;
         }
 
         .mcq-btn:disabled {
             cursor: not-allowed;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .mcq-btn.correct-choice {
@@ -146,16 +147,16 @@
 
         .battle-deck {
             display: grid;
-            grid-template-columns: 1fr 180px;
+            grid-template-columns: 1fr 200px;
             gap: 15px;
             margin-top: 20px;
-            min-height: 140px;
+            min-height: 130px;
             align-items: stretch;
         }
 
         .space-arena {
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px dashed rgba(0, 255, 240, 0.3);
+            background: rgba(0, 0, 0, 0.45);
+            border: 2px dashed rgba(0, 255, 240, 0.35);
             border-radius: 10px;
             position: relative;
             display: flex;
@@ -175,18 +176,18 @@
         .spaceship-svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 240, 0.6));
+            filter: drop-shadow(0 0 8px rgba(0, 255, 240, 0.7));
         }
 
         .powerup-cockpit {
             border: 2px solid var(--border-neon);
             background: rgba(10, 12, 38, 0.9);
             border-radius: 10px;
-            padding: 10px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             box-shadow: inset 0 0 15px rgba(0, 255, 240, 0.2);
         }
 
@@ -196,7 +197,6 @@
             color: var(--border-neon);
             letter-spacing: 1px;
             text-align: center;
-            margin-bottom: -4px;
             font-weight: bold;
         }
 
@@ -204,8 +204,8 @@
             background: linear-gradient(135deg, #0d1b3e, #162a65);
             border: 1px solid #00fff0;
             color: white;
-            padding: 10px 5px;
-            border-radius: 4px;
+            padding: 10px 12px;
+            border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
@@ -233,8 +233,8 @@
             background: var(--accent-color);
             color: black;
             border-radius: 3px;
-            padding: 1px 5px;
-            font-size: 0.75rem;
+            padding: 1px 6px;
+            font-size: 0.8rem;
             font-weight: 900;
         }
 
@@ -250,8 +250,8 @@
         .action-btn {
             background: linear-gradient(to right, #00b4db, #0083b0);
             border: none;
-            border-radius: 4px;
-            padding: 12px 30px;
+            border-radius: 6px;
+            padding: 12px 32px;
             color: #fff;
             font-size: 1.1rem;
             font-weight: bold;
@@ -259,6 +259,11 @@
             margin: 15px auto 0 auto;
             display: none;
             box-shadow: 0 0 15px rgba(0, 180, 219, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.03);
         }
 
         .screen { display: none; }
@@ -278,7 +283,7 @@
         .start-game-btn, .control-btn {
             background: linear-gradient(135deg, #00ff87, #60efff);
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             padding: 15px 40px;
             color: #000;
             font-size: 1.2rem;
@@ -288,20 +293,25 @@
             transition: transform 0.2s;
         }
 
+        .start-game-btn:hover, .control-btn:hover {
+            transform: scale(1.04);
+        }
+
         .control-btn { font-size: 1rem; padding: 12px 25px; }
         .control-btn.blue { background: linear-gradient(135deg, #00b4db, #0083b0); color: #fff; }
 
         .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
-        .history-container { text-align: left; max-height: 350px; overflow-y: auto; margin-top: 20px; }
-        .history-item { background: rgba(255, 255, 255, 0.03); padding: 15px; margin-bottom: 10px; border-radius: 6px; border-left: 4px solid #fff; }
+        .history-container { text-align: left; max-height: 360px; overflow-y: auto; margin-top: 20px; padding-right: 5px; }
+        .history-item { background: rgba(255, 255, 255, 0.03); padding: 14px; margin-bottom: 10px; border-radius: 6px; border-left: 4px solid #fff; }
         .history-item.history-correct { border-left-color: var(--correct-color); }
         .history-item.history-wrong { border-left-color: var(--wrong-color); }
 
-        .heart-icon { color: #ff4b5c; font-size: 1.4rem; }
+        .heart-icon { color: #ff4b5c; font-size: 1.3rem; letter-spacing: 2px; }
 
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
             .mcq-options-grid { grid-template-columns: 1fr; }
             .battle-deck { grid-template-columns: 1fr; }
+            .header-title { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -313,37 +323,34 @@
     
     <!-- INTRO SCREEN -->
     <div id="intro-screen" class="screen active-screen">
-        <div class="header-title">Đấu Trường Nhí</div>
+        <div class="header-title">Grammar Arena</div>
         <p style="font-size: 1.1rem; color: #00fff0; text-align: center; margin: 0;">
-            Global Success 7: Units 1-3 Vocab & Present/Past Simple Grammar
+            FANBOYS & Verb Patterns (30 Questions Challenge)
         </p>
         
         <div class="intro-rules">
-            <strong>🚀 BỘ CÂU HỎI TOÀN DIỆN:</strong><br>
-            • <b>Phần 1:</b> Từ vựng Unit 1 (Hobby & Leisure).<br>
-            • <b>Phần 2:</b> Từ vựng Unit 2 (Healthy Living).<br>
-            • <b>Phần 3:</b> Từ vựng Unit 3 (Community Service).<br>
-            • <b>Phần 4:</b> 20 Câu trắc nghiệm Thì Hiện Tại Đơn.<br>
-            • <b>Phần 5:</b> 20 Câu trắc nghiệm Thì Quá Khứ Đơn.<br>
-            • Con có <b>5 Mạng ❤️</b> và trợ giúp Gợi Ý Hệ Thống!
+            <strong style="color: #ffeb3b;">🚀 CHALLENGE SUMMARY:</strong><br>
+            • <b>Part 1:</b> 15 Questions on FANBOYS Coordinating Conjunctions (<i>For, And, Nor, But, Or, Yet, So</i>).<br>
+            • <b>Part 2:</b> 15 Questions on Verb Patterns (<i>Verb + to-inf</i> & <i>Verb + Object + to-inf</i>).<br>
+            • You have <b>5 Lives ❤️</b> and <b>3 System Hints 💡</b>.<br>
+            • Gain +100 Points for every correct laser hit!
         </div>
         
         <div style="text-align: center;">
-            <button class="start-game-btn" onclick="startGame()">Bắt Đầu Bứt Phá 🚀</button>
+            <button class="start-game-btn" onclick="startGame()">Start Battle 🚀</button>
         </div>
     </div>
 
     <!-- GAMEPLAY SCREEN -->
     <div id="game-screen" class="screen">
         <div class="progress-info">
-            <div>Thử thách: <span id="current-q-num">1</span> / <span id="total-q-num">107</span></div>
-            <div id="lives-display">Mạng: <span class="heart-icon">❤️❤️❤️❤️❤️</span></div>
-            <div style="color: var(--accent-color);">Điểm: <span id="score-display">0</span></div>
-            <div style="color: #00fff0;">⏳ Thời gian: <span>Không giới hạn ♾️</span></div>
+            <div>Question: <span id="current-q-num">1</span> / <span id="total-q-num">30</span></div>
+            <div id="lives-display">Lives: <span class="heart-icon">❤️❤️❤️❤️❤️</span></div>
+            <div style="color: var(--accent-color);">Score: <span id="score-display">0</span></div>
         </div>
 
         <div class="question-box">
-            <div id="instruction-title" style="font-size: 0.95rem; color: #00fff0; margin-bottom: 8px; text-transform: uppercase;">🎯 CHỌN ĐÁP ÁN ĐÚNG:</div>
+            <div id="instruction-title" style="font-size: 0.9rem; color: #00fff0; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">🎯 CHOOSE THE CORRECT OPTION:</div>
             <div id="question-prompt" style="font-weight: 600; margin-bottom: 15px;"></div>
             <div id="mcq-options" class="mcq-options-grid"></div>
         </div>
@@ -351,7 +358,7 @@
         <div id="status-message"></div>
 
         <div style="text-align: center;">
-            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Câu Tiếp Theo ➜</button>
+            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Next Question ➜</button>
         </div>
 
         <div class="battle-deck">
@@ -367,9 +374,9 @@
             </div>
 
             <div class="powerup-cockpit">
-                <div class="cockpit-label">Hỗ Trợ Vũ Trụ</div>
+                <div class="cockpit-label">Space Support</div>
                 <button id="ll-hint" class="lifeline-btn" onclick="useGrammarHint()">
-                    <span>Gợi Ý Hệ Thống</span> <span id="count-hint" class="lifeline-count">3</span>
+                    <span>System Hint</span> <span id="count-hint" class="lifeline-count">3</span>
                 </button>
             </div>
         </div>
@@ -377,142 +384,59 @@
 
     <!-- RESULT SCREEN -->
     <div id="result-screen" class="screen" style="text-align: center;">
-        <h2>Chúc Mừng Con Đã Hoàn Thành!</h2>
-        <div style="font-size: 1.5rem; margin: 15px 0;">Điểm số đạt được: <span id="final-score" style="color: var(--accent-color); font-weight:bold;">0</span> điểm</div>
+        <h2 style="font-size: 2rem; font-weight: bold; color: #00fff0;">Battle Completed!</h2>
+        <div style="font-size: 1.5rem; margin: 15px 0;">Final Score: <span id="final-score" style="color: var(--accent-color); font-weight:bold;">0</span> pts</div>
         <div style="font-size: 1.3rem; color: var(--correct-color); font-weight: bold; margin-bottom: 25px;" id="reward-level"></div>
 
         <div class="btn-group">
-            <button class="control-btn" onclick="restartGame()">Chơi Lại Từ Đầu</button>
-            <button class="control-btn blue" onclick="showHistoryScreen()">Xem Chi Tiết Lịch Sử</button>
+            <button class="control-btn" onclick="restartGame()">Play Again</button>
+            <button class="control-btn blue" onclick="showHistoryScreen()">Review History</button>
         </div>
     </div>
 
     <!-- REVISE HISTORY SCREEN -->
     <div id="history-screen" class="screen" style="text-align: center;">
-        <h2 style="color: #00fff0;">Bảng Xem Lại Kết Quả</h2>
+        <h2 style="color: #00fff0; font-size: 1.8rem; font-weight: bold;">Review Log</h2>
         <div class="history-container" id="history-list"></div>
-        <button class="control-btn" style="margin-top:20px;" onclick="restartGame()">Quay Lại Từ Đầu</button>
+        <button class="control-btn" style="margin-top:20px;" onclick="restartGame()">Back to Start</button>
     </div>
 </div>
 
 <script>
     const quizData = [
-        // --- PART 1: Unit 1 Vocabulary (All Textbook Terms) ---
-        { q: "1. This pen does not belong to me; it is my friend's. What does 'belong to (v)' mean?", options: ["A. thuộc về", "B. mua cho", "C. mượn từ", "D. tìm thấy"], correct: 0, hint: "Belong to = thuộc quyền sở hữu của ai đó." },
-        { q: "2. Doing regular exercise has a great _____ for our health.", options: ["A. benefit (n)", "B. bug (n)", "C. glue (n)", "D. stress (n)"], correct: 0, hint: "Benefit = lợi ích." },
-        { q: "3. Be careful! There is a small green _____ crawling on the leaf.", options: ["A. bug (n)", "B. dollhouse (n)", "C. yoga (n)", "D. cardboard (n)"], correct: 0, hint: "Bug = con bọ." },
-        { q: "4. We can use old _____ boxes to make nice toy houses.", options: ["A. cardboard (n)", "B. insect (n)", "C. jogging (n)", "D. horse riding (n)"], correct: 0, hint: "Cardboard = bìa các tông." },
-        { q: "5. Little girls love playing with a pretty wooden _____ .", options: ["A. dollhouse (n)", "B. bug (n)", "C. glue (n)", "D. stress (n)"], correct: 0, hint: "Dollhouse = nhà búp bê." },
-        { q: "6. My grandmother spends her free time _____ flowers and vegetables in the garden.", options: ["A. gardening (v)", "B. jogging (n)", "C. horse riding (n)", "D. making models (n)"], correct: 0, hint: "Gardening = làm vườn." },
-        { q: "7. Use some _____ to stick these pieces of paper together.", options: ["A. glue (n)", "B. cardboard (n)", "C. bug (n)", "D. insect (n)"], correct: 0, hint: "Glue = keo dán / hồ." },
-        { q: "8. My sister loves animals, so she takes lessons in _____ every weekend.", options: ["A. horse riding (n)", "B. jogging (n)", "C. gardening (v)", "D. yoga (n)"], correct: 0, hint: "Horse riding = cưỡi ngựa." },
-        { q: "9. Bees and butterflies are common types of _____ flying in the garden.", options: ["A. insect (n)", "B. cardboard (n)", "C. dollhouse (n)", "D. glue (n)"], correct: 0, hint: "Insect = côn trùng." },
-        { q: "10. My father goes _____ around the park every morning to stay fit.", options: ["A. jogging (n)", "B. horse riding (n)", "C. gardening (v)", "D. yoga (n)"], correct: 0, hint: "Jogging = đi/chạy bộ thư giãn." },
-        { q: "11. Tom likes building and _____ of cars and airplanes.", options: ["A. making models (n)", "B. horse riding (n)", "C. jogging (n)", "D. gardening (v)"], correct: 0, hint: "Making models = làm mô hình." },
-        { q: "12. As children grow up, they reach a stage of _____ and learn to be independent.", options: ["A. maturity (n)", "B. stress (n)", "C. glue (n)", "D. bug (n)"], correct: 0, hint: "Maturity = sự trưởng thành." },
-        { q: "13. You need to be _____ and wait calmly when things take time.", options: ["A. patient (adj)", "B. unusual (adj)", "C. popular (adj)", "D. valuable (adj)"], correct: 0, hint: "Patient = kiên nhẫn." },
-        { q: "14. Football is a very _____ sport that many teenagers enjoy playing.", options: ["A. popular (adj)", "B. unusual (adj)", "C. patient (adj)", "D. valuable (adj)"], correct: 0, hint: "Popular = được nhiều người ưa thích." },
-        { q: "15. Doing housework helps children learn about family _____ .", options: ["A. responsibility (n)", "B. stress (n)", "C. benefit (n)", "D. maturity (n)"], correct: 0, hint: "Responsibility = sự chịu trách nhiệm." },
-        { q: "16. In the evening, we can watch the sun _____ behind the mountains.", options: ["A. set (v)", "B. belong (v)", "C. develop (v)", "D. donate (v)"], correct: 0, hint: "Set = (mặt trời) lặn." },
-        { q: "17. Studying too hard for exams can sometimes cause a lot of _____ .", options: ["A. stress (n)", "B. benefit (n)", "C. maturity (n)", "D. responsibility (n)"], correct: 0, hint: "Stress = sự căng thẳng." },
-        { q: "18. Are you ready to _____ a new task in the school club?", options: ["A. take on", "B. belong to", "C. set up", "D. clean up"], correct: 0, hint: "Take on = nhận thêm." },
-        { q: "19. Wearing winter clothes in the hot summer looks very _____ .", options: ["A. unusual (adj)", "B. popular (adj)", "C. patient (adj)", "D. valuable (adj)"], correct: 0, hint: "Unusual = khác thường." },
-        { q: "20. Old family photos are a _____ treasure that we should keep safe.", options: ["A. valuable (adj)", "B. unusual (adj)", "C. popular (adj)", "D. patient (adj)"], correct: 0, hint: "Valuable = quý giá." },
-        { q: "21. Doing _____ helps people relax their bodies and clear their minds.", options: ["A. yoga (n)", "B. jogging (n)", "C. horse riding (n)", "D. gardening (v)"], correct: 0, hint: "Yoga = yoga." },
+        // --- PART 1: FANBOYS (15 Questions) ---
+        { q: "1. She wanted to buy a new book, _____ she didn't have enough money.", options: ["A. for", "B. but", "C. so", "D. and"], correct: 1, hint: "'but' shows contrast between wanting a book and having no money." },
+        { q: "2. He loves playing football, _____ he often goes to the stadium on Sundays.", options: ["A. for", "B. nor", "C. so", "D. yet"], correct: 2, hint: "'so' introduces a result of loving football." },
+        { q: "3. You can stay here, _____ you can go home with us.", options: ["A. or", "B. but", "C. and", "D. so"], correct: 0, hint: "'or' presents a choice/option." },
+        { q: "4. Ann doesn't like eating fast food, _____ does she drink carbonated soft drinks.", options: ["A. nor", "B. or", "C. but", "D. for"], correct: 0, hint: "'nor' is used after a negative statement with subject-verb inversion." },
+        { q: "5. The weather was cold and rainy, _____ they still went camping in the forest.", options: ["A. yet", "B. so", "C. for", "D. and"], correct: 0, hint: "'yet' means 'despite that' to show contrast." },
+        { q: "6. He studied hard for the final exam, _____ he passed with flying colors.", options: ["A. so", "B. but", "C. for", "D. nor"], correct: 0, hint: "'so' indicates the result/consequence." },
+        { q: "7. She stayed home from school yesterday _____ she had a high fever.", options: ["A. for", "B. but", "C. so", "D. or"], correct: 0, hint: "'for' acts as 'because/since' to explain the reason." },
+        { q: "8. My brother likes reading science books, _____ I prefer watching historical documentaries.", options: ["A. but", "B. so", "C. for", "D. nor"], correct: 0, hint: "'but' contrasts two different preferences." },
+        { q: "9. We need to finish our project quickly, _____ our teacher will collect it tomorrow.", options: ["A. for", "B. nor", "C. but", "D. so"], correct: 0, hint: "'for' gives the reason why it must be finished." },
+        { q: "10. Mark didn't study for the test, _____ he still got a surprisingly good grade.", options: ["A. yet", "B. and", "C. so", "D. for"], correct: 0, hint: "'yet' introduces an unexpected contrast." },
+        { q: "11. You must wear a helmet when riding a bike, _____ you might get hurt in an accident.", options: ["A. or", "B. and", "C. but", "D. so"], correct: 0, hint: "'or' warns of an alternative consequence." },
+        { q: "12. Linda cooked dinner, _____ her husband washed the dishes.", options: ["A. and", "B. but", "C. so", "D. for"], correct: 0, hint: "'and' connects two addition actions." },
+        { q: "13. He has a lot of homework tonight, _____ he cannot go out with his friends.", options: ["A. so", "B. for", "C. yet", "D. nor"], correct: 0, hint: "'so' introduces a direct result." },
+        { q: "14. She is allergic to seafood, _____ she never eats shrimp or fish.", options: ["A. so", "B. but", "C. for", "D. or"], correct: 0, hint: "'so' shows the consequence of being allergic." },
+        { q: "15. The little boy was tired, _____ he kept playing games until late at night.", options: ["A. yet", "B. so", "C. for", "D. nor"], correct: 0, hint: "'yet' shows surprising contrast to being tired." },
 
-        // --- PART 2: Unit 2 Vocabulary (All Textbook Terms) ---
-        { q: "22. Eating too much junk food can cause red spots or _____ on your face.", options: ["A. acne (n)", "B. vitamin (n)", "C. soybean (n)", "D. tofu (n)"], correct: 0, hint: "Acne = mụn trứng cá." },
-        { q: "23. Bad weather can _____ our outdoor plans for the weekend.", options: ["A. affect (v)", "B. avoid (v)", "C. pop (v)", "D. provide (v)"], correct: 0, hint: "Affect = tác động, ảnh hưởng đến." },
-        { q: "24. We should wash our hands often to _____ getting sick.", options: ["A. avoid (v)", "B. affect (v)", "C. pop (v)", "D. donate (v)"], correct: 0, hint: "Avoid = tránh." },
-        { q: "25. Cold winter wind can make your lips dry and _____ .", options: ["A. chapped (adj)", "B. dim (adj)", "C. fit (adj)", "D. healthy (adj)"], correct: 0, hint: "Chapped = bị nứt nẻ." },
-        { q: "26. Reading books in a dark room with _____ light can hurt your eyes.", options: ["A. dim (adj)", "B. chapped (adj)", "C. healthy (adj)", "D. flooded (adj)"], correct: 0, hint: "Dim = lờ mờ, không đủ sáng." },
-        { q: "27. Flu is a common infectious _____ that makes people cough and feel weak.", options: ["A. disease (n)", "B. virus (n)", "C. protein (n)", "D. fat (n)"], correct: 0, hint: "Disease = bệnh." },
-        { q: "28. If your eyes feel dry, you can use special _____ to make them feel better.", options: ["A. eyedrops (n)", "B. lip balm (n)", "C. vitamins (n)", "D. tofu (n)"], correct: 0, hint: "Eyedrops = thuốc nhỏ mắt." },
-        { q: "29. Eating too much food with high _____ can make you put on weight.", options: ["A. fat (n)", "B. protein (n)", "C. vitamin (n)", "D. virus (n)"], correct: 0, hint: "Fat = mỡ." },
-        { q: "30. Doing morning exercise every day helps you stay strong and _____ .", options: ["A. fit (adj)", "B. dim (adj)", "C. chapped (adj)", "D. mountainous (adj)"], correct: 0, hint: "Fit = gọn gàng, cân đối." },
-        { q: "31. Eating good food and sleeping well are important for your general _____ .", options: ["A. health (n)", "B. disease (n)", "C. acne (n)", "D. stress (n)"], correct: 0, hint: "Health = sức khoẻ." },
-        { q: "32. Eating fresh fruits and vegetables helps you stay _____ .", options: ["A. healthy (adj)", "B. chapped (adj)", "C. dim (adj)", "D. flooded (adj)"], correct: 0, hint: "Healthy = khoẻ mạnh, lành mạnh." },
-        { q: "33. Playing video games in an _____ room is better than sitting in the hot sun.", options: ["A. indoor (adj)", "B. rural (adj)", "C. mountainous (adj)", "D. homeless (adj)"], correct: 0, hint: "Indoor = trong nhà." },
-        { q: "34. When your lips get dry and cracked in winter, you should use _____ .", options: ["A. lip balm (n)", "B. eyedrops (n)", "C. virus (n)", "D. acne (n)"], correct: 0, hint: "Lip balm = kem bôi môi." },
-        { q: "35. A small red _____ on your skin will usually go away in a few days.", options: ["A. pimple (n)", "B. virus (n)", "C. soybean (n)", "D. protein (n)"], correct: 0, hint: "Pimple = mụn." },
-        { q: "36. You should never try to _____ a pimple on your face because it can leave a mark.", options: ["A. pop (v)", "B. avoid (v)", "C. affect (v)", "D. collect (v)"], correct: 0, hint: "Pop = nặn (mụn)." },
-        { q: "37. Meat, fish, and eggs are foods that contain a lot of _____ .", options: ["A. protein (n)", "B. fat (n)", "C. vitamin (n)", "D. virus (n)"], correct: 0, hint: "Protein = chất đạm." },
-        { q: "38. Eating healthy food can help improve a bad _____ on your face.", options: ["A. skin condition", "B. clean-up activity", "C. nursing home", "D. board game"], correct: 0, hint: "Skin condition = tình trạng da." },
-        { q: "39. Milk made from _____ is very good for your body and health.", options: ["A. soybean (n)", "B. tofu (n)", "C. virus (n)", "D. protein (n)"], correct: 0, hint: "Soybean = đậu nành." },
-        { q: "40. If you stay under the hot sun too long without a hat, you can get a _____ .", options: ["A. sunburn (n)", "B. disease (n)", "C. acne (n)", "D. virus (n)"], correct: 0, hint: "Sunburn = sự cháy nắng." },
-        { q: "41. _____ is a healthy food made from soybeans that many people like to eat.", options: ["A. Tofu (n)", "B. Fat (n)", "C. Pimple (n)", "D. Eyedrops (n)"], correct: 0, hint: "Tofu = đậu phụ." },
-        { q: "42. A tiny _____ can make you catch a cold or flu.", options: ["A. virus (n)", "B. protein (n)", "C. fat (n)", "D. soybean (n)"], correct: 0, hint: "Virus = (con) vi rút." },
-        { q: "43. Oranges and lemons give your body a lot of vitamin C. What does 'vitamin (n)' mean?", options: ["A. vitamin", "B. con vi rút", "C. mụn trứng cá", "D. chất béo"], correct: 0, hint: "Vitamin = vitamin." },
-
-        // --- PART 3: Unit 3 Vocabulary (All Textbook Terms) ---
-        { q: "44. Playing a _____ with your friends is a fun indoor activity.", options: ["A. board game (n)", "B. clean-up activity", "C. community service", "D. nursing home"], correct: 0, hint: "Board game = trò chơi trên bàn cờ." },
-        { q: "45. Picking up trash in the park is a useful _____ .", options: ["A. clean-up activity", "B. board game (n)", "C. nursing home", "D. rural area"], correct: 0, hint: "Clean-up activity = hoạt động dọn rửa." },
-        { q: "46. Students like to _____ stamps and old coins as a hobby.", options: ["A. collect (v)", "B. donate (v)", "C. protect (v)", "D. provide (v)"], correct: 0, hint: "Collect = thu thập, sưu tầm." },
-        { q: "47. Everyone in our _____ works together to keep the neighborhood clean.", options: ["A. community (n)", "B. orphanage (n)", "C. nursing home", "D. soybean"], correct: 0, hint: "Community = cộng đồng." },
-        { q: "48. Doing _____ like helping poor children is a great way to spend free time.", options: ["A. community service", "B. clean-up activity", "C. board game", "D. skin condition"], correct: 0, hint: "Community service = dịch vụ cộng đồng." },
-        { q: "49. Planting trees helps to _____ our local town and make it green.", options: ["A. develop (v)", "B. donate (v)", "C. exchange (v)", "D. tutor (v)"], correct: 0, hint: "Develop = phát triển." },
-        { q: "50. People often _____ old clothes and books to help poor families.", options: ["A. donate (v)", "B. collect (v)", "C. protect (v)", "D. plant (v)"], correct: 0, hint: "Donate = cho, tặng." },
-        { q: "51. We should always respect and help _____ people in our town.", options: ["A. elderly (adj)", "B. homeless (adj)", "C. flooded (adj)", "D. mountainous (adj)"], correct: 0, hint: "Elderly = lớn tuổi, cao tuổi." },
-        { q: "52. Students like to _____ old books with each other at school.", options: ["A. exchange (v)", "B. donate (v)", "C. develop (v)", "D. collect (v)"], correct: 0, hint: "Exchange = trao đổi." },
-        { q: "53. Heavy rain last week made the village completely _____ .", options: ["A. flooded (adj)", "B. mountainous (adj)", "C. elderly (adj)", "D. indoor (adj)"], correct: 0, hint: "Flooded = bị lũ lụt." },
-        { q: "54. Volunteers bring food and warm clothes to help _____ people live on the street.", options: ["A. homeless (adj)", "B. elderly (adj)", "C. healthy (adj)", "D. fit (adj)"], correct: 0, hint: "Homeless = vô gia cư, không có gia đình." },
-        { q: "55. Living in a _____ area means there are high hills and big mountains around.", options: ["A. mountainous (adj)", "B. rural (adj)", "C. indoor (adj)", "D. flooded (adj)"], correct: 0, hint: "Mountainous = vùng núi." },
-        { q: "56. Working as a _____ means looking after people who are sick or old.", options: ["A. nursing (n)", "B. community (n)", "C. skill (n)", "D. teenager (n)"], correct: 0, hint: "Nursing = chăm sóc, điều dưỡng." },
-        { q: "57. A _____ is a place where old people live and get care.", options: ["A. nursing home", "B. orphanage (n)", "C. rural area", "D. board game"], correct: 0, hint: "Nursing home = viện dưỡng lão." },
-        { q: "58. An _____ is a home for children who do not have parents.", options: ["A. orphanage (n)", "B. nursing home", "C. community center", "D. school"], correct: 0, hint: "Orphanage = trại trẻ mồ côi." },
-        { q: "59. We want to _____ flowers and trees in the school yard.", options: ["A. plant (v)", "B. donate (v)", "C. collect (v)", "D. exchange (v)"], correct: 0, hint: "Plant = trồng cây." },
-        { q: "60. We must work hard to _____ the environment from pollution.", options: ["A. protect (v)", "B. develop (v)", "C. donate (v)", "D. provide (v)"], correct: 0, hint: "Protect = bảo vệ." },
-        { q: "61. Parents are always _____ of their children when they do good things.", options: ["A. proud (adj)", "B. elderly (adj)", "C. homeless (adj)", "D. flooded (adj)"], correct: 0, hint: "Proud = tự hào." },
-        { q: "62. The local charity groups _____ free meals for poor people.", options: ["A. provide (v)", "B. collect (v)", "C. plant (v)", "D. exchange (v)"], correct: 0, hint: "Provide = cung cấp." },
-        { q: "63. Life in a _____ is quiet, with many green fields and farm animals.", options: ["A. rural area", "B. nursing home", "C. orphanage", "D. board game"], correct: 0, hint: "Rural area = vùng nông thôn." },
-        { q: "64. Learning life _____ helps students take care of themselves.", options: ["A. skill (n)", "B. disease (n)", "C. virus (n)", "D. acne (n)"], correct: 0, hint: "Skill = kĩ năng." },
-        { q: "65. A _____ is a young person between 13 and 19 years old.", options: ["A. teenager (n)", "B. elderly (n)", "C. volunteer (n)", "D. patient (n)"], correct: 0, hint: "Teenager = thanh thiếu niên." },
-        { q: "66. Older students often _____ younger kids with their math homework after class.", options: ["A. tutor (v)", "B. donate (v)", "C. collect (v)", "D. exchange (v)"], correct: 0, hint: "Tutor = phụ đạo, dạy học." },
-        { q: "67. A _____ is a person who helps others without getting paid money.", options: ["A. volunteer (n)", "B. teenager (n)", "C. patient (n)", "D. doctor (n)"], correct: 0, hint: "Volunteer = tình nguyện, người tình nguyện." },
-
-        // --- PART 4: Present Simple (20 Questions) ---
-        { q: "68. (+) My mother _____ food to poor families every month.", options: ["A. gives", "B. give", "C. gave", "D. is giving"], correct: 0, hint: "Hiện tại đơn (+), chủ ngữ 'My mother' -> gives." },
-        { q: "69. (+) Active volunteers _____ the streets clean every weekend.", options: ["A. keep", "B. keeps", "C. kept", "D. keeping"], correct: 0, hint: "Hiện tại đơn (+), chủ ngữ số nhiều 'volunteers' -> keep." },
-        { q: "70. (+) Lan _____ young children at the local community center on Saturdays.", options: ["A. helps", "B. help", "C. helped", "D. helping"], correct: 0, hint: "Hiện tại đơn (+), chủ ngữ 'Lan' -> helps." },
-        { q: "71. (+) They usually _____ old clothes for charity.", options: ["A. collect", "B. collects", "C. collected", "D. collecting"], correct: 0, hint: "Hiện tại đơn (+), chủ ngữ 'They' -> collect." },
-        { q: "72. (+) The school _____ warm clothes to kids in winter.", options: ["A. sends", "B. send", "C. sent", "D. sending"], correct: 0, hint: "Hiện tại đơn (+), chủ ngữ số ít 'The school' -> sends." },
-        { q: "73. (+) Water _____ at 100 degrees Celsius.", options: ["A. boils", "B. boil", "C. boiled", "D. boiling"], correct: 0, hint: "Sự thật hiển nhiên -> Hiện tại đơn: boils." },
-        { q: "74. (-) Mark _____ take money from charity funds.", options: ["A. doesn't", "B. don't", "C. didn't", "D. isn't"], correct: 0, hint: "Hiện tại đơn (-), chủ ngữ 'Mark' -> doesn't." },
-        { q: "75. (-) We _____ leave trash on the street.", options: ["A. don't", "B. doesn't", "C. didn't", "D. aren't"], correct: 0, hint: "Hiện tại đơn (-), chủ ngữ 'We' -> don't." },
-        { q: "76. (-) They _____ give free food to bad people.", options: ["A. don't", "B. doesn't", "C. didn't", "D. aren't"], correct: 0, hint: "Hiện tại đơn (-), chủ ngữ 'They' -> don't." },
-        { q: "77. (-) She _____ take part in the club because she is busy.", options: ["A. doesn't", "B. don't", "C. didn't", "D. isn't"], correct: 0, hint: "Hiện tại đơn (-), chủ ngữ 'She' -> doesn't." },
-        { q: "78. (-) I _____ throw away old paper; I keep it.", options: ["A. don't", "B. doesn't", "C. didn't", "D. am not"], correct: 0, hint: "Hiện tại đơn (-), chủ ngữ 'I' -> don't." },
-        { q: "79. (-) The shop _____ open late on Sundays.", options: ["A. doesn't", "B. don't", "C. isn't", "D. aren't"], correct: 0, hint: "Hiện tại đơn (-), động từ thường số ít -> doesn't." },
-        { q: "80. (?) _____ you help people every summer?", options: ["A. Do", "B. Does", "C. Did", "D. Are"], correct: 0, hint: "Hiện tại đơn (?), chủ ngữ 'you' -> Do." },
-        { q: "81. (?) _____ your brother give books to the library?", options: ["A. Does", "B. Do", "C. Did", "D. Is"], correct: 0, hint: "Hiện tại đơn (?), chủ ngữ 'your brother' -> Does." },
-        { q: "82. (?) _____ they cook meals for poor people?", options: ["A. Do", "B. Does", "C. Did", "D. Are"], correct: 0, hint: "Hiện tại đơn (?), chủ ngữ 'they' -> Do." },
-        { q: "83. (?) How often _____ she visit the old people?", options: ["A. does", "B. do", "C. did", "D. is"], correct: 0, hint: "Hiện tại đơn câu hỏi Wh-, chủ ngữ 'she' -> does." },
-        { q: "84. (?) _____ students in your school plant trees?", options: ["A. Do", "B. Does", "C. Did", "D. Are"], correct: 0, hint: "Hiện tại đơn (?), chủ ngữ số nhiều 'students' -> Do." },
-        { q: "85. (?) Where _____ he collect old books?", options: ["A. does", "B. do", "C. did", "D. is"], correct: 0, hint: "Hiện tại đơn câu hỏi Wh-, chủ ngữ 'he' -> does." },
-        { q: "86. (+) My friends _____ like eating fast food.", options: ["A. don't", "B. doesn't", "C. aren't", "D. isn't"], correct: 0, hint: "Hiện tại đơn (-), chủ ngữ số nhiều -> don't." },
-        { q: "87. (?) What time _____ the community club open?", options: ["A. does", "B. do", "C. is", "D. did"], correct: 0, hint: "Hiện tại đơn (?), chủ ngữ số ít -> does." },
-
-        // --- PART 5: Past Simple (20 Questions) ---
-        { q: "88. (+) Last Sunday, our team _____ the beach.", options: ["A. cleaned", "B. clean", "C. cleans", "D. cleaning"], correct: 0, hint: "Quá khứ đơn (+) với 'Last Sunday' -> cleaned." },
-        { q: "89. (+) Yesterday, Mai _____ books to poor children.", options: ["A. gave", "B. give", "C. gives", "D. giving"], correct: 0, hint: "Quá khứ đơn (+) với 'Yesterday' (give -> gave)." },
-        { q: "90. (+) They _____ a new youth club two years ago.", options: ["A. built", "B. build", "C. builds", "D. building"], correct: 0, hint: "Quá khứ đơn (+) với 'two years ago' (build -> built)." },
-        { q: "91. (+) We _____ a show to raise money last month.", options: ["A. made", "B. make", "C. makes", "D. making"], correct: 0, hint: "Quá khứ đơn (+) với 'last month' (make -> made)." },
-        { q: "92. (+) He _____ good advice to us last week.", options: ["A. gave", "B. give", "C. gives", "D. giving"], correct: 0, hint: "Quá khứ đơn (+) với 'last week' (give -> gave)." },
-        { q: "93. (+) My family _____ a food bank in 2023.", options: ["A. visited", "B. visit", "C. visits", "D. visiting"], correct: 0, hint: "Quá khứ đơn (+) với mốc năm cũ '2023' -> visited." },
-        { q: "94. (-) They _____ finish the project last week.", options: ["A. didn't", "B. don't", "C. doesn't", "D. aren't"], correct: 0, hint: "Quá khứ đơn (-) -> didn't + V(bare)." },
-        { q: "95. (-) She _____ use plastic bags yesterday.", options: ["A. didn't", "B. doesn't", "C. don't", "D. isn't"], correct: 0, hint: "Quá khứ đơn (-) -> didn't." },
-        { q: "96. (-) We _____ have enough money last year.", options: ["A. didn't", "B. don't", "C. doesn't", "D. aren't"], correct: 0, hint: "Quá khứ đơn (-) với 'last year' -> didn't." },
-        { q: "97. (-) Tom _____ go to the meeting yesterday.", options: ["A. didn't", "B. doesn't", "C. don't", "D. isn't"], correct: 0, hint: "Quá khứ đơn (-) -> didn't." },
-        { q: "98. (-) The kids _____ play outside because it rained.", options: ["A. didn't", "B. don't", "C. doesn't", "D. aren't"], correct: 0, hint: "Quá khứ đơn (-) -> didn't." },
-        { q: "99. (-) I _____ throw away my old books yesterday.", options: ["A. didn't", "B. don't", "C. doesn't", "D. isn't"], correct: 0, hint: "Quá khứ đơn (-) -> didn't." },
-        { q: "100. (?) _____ you take part in the project last weekend?", options: ["A. Did", "B. Do", "C. Does", "D. Were"], correct: 0, hint: "Quá khứ đơn (?) -> Did." },
-        { q: "101. (?) _____ she give old clothes away yesterday?", options: ["A. Did", "B. Does", "C. Do", "D. Was"], correct: 0, hint: "Quá khứ đơn (?) -> Did." },
-        { q: "102. (?) _____ they send books to kids last month?", options: ["A. Did", "B. Do", "C. Does", "D. Were"], correct: 0, hint: "Quá khứ đơn (?) -> Did." },
-        { q: "103. (?) What time _____ you finish work yesterday?", options: ["A. did", "B. do", "C. does", "D. were"], correct: 0, hint: "Quá khứ đơn câu hỏi Wh- -> did." },
-        { q: "104. (?) Where _____ your class plant trees last spring?", options: ["A. did", "B. do", "C. does", "D. were"], correct: 0, hint: "Quá khứ đơn câu hỏi Wh- -> did." },
-        { q: "105. (?) _____ Lan help the old woman yesterday?", options: ["A. Did", "B. Does", "C. Do", "D. Was"], correct: 0, hint: "Quá khứ đơn (?) -> Did." },
-        { q: "106. (+) Our team _____ a lot of money for charity last year.", options: ["A. raised", "B. raise", "C. raises", "D. raising"], correct: 0, hint: "Quá khứ đơn (+) -> raised." },
-        { q: "107. (?) Why _____ you leave the party early last night?", options: ["A. did", "B. do", "C. does", "D. were"], correct: 0, hint: "Quá khứ đơn câu hỏi Wh- -> did." }
+        // --- PART 2: Verb + to-inf & Verb + Object + to-inf (15 Questions) ---
+        { q: "16. She hopes _____ a scholarship to study abroad next year.", options: ["A. to get", "B. getting", "C. get", "D. gets"], correct: 0, hint: "Pattern: hope + to-V" },
+        { q: "17. My teacher advised me _____ harder for the upcoming examination.", options: ["A. to study", "B. studying", "C. study", "D. studied"], correct: 0, hint: "Pattern: advise + Object + to-V" },
+        { q: "18. They decided _____ a new computer for their online classes.", options: ["A. to buy", "B. buying", "C. buy", "D. bought"], correct: 0, hint: "Pattern: decide + to-V" },
+        { q: "19. The police officer told the driver _____ his speed.", options: ["A. to reduce", "B. reducing", "C. reduce", "D. reduced"], correct: 0, hint: "Pattern: tell + Object + to-V" },
+        { q: "20. Do you want _____ to the cinema with us this weekend?", options: ["A. to go", "B. going", "C. go", "D. went"], correct: 0, hint: "Pattern: want + to-V" },
+        { q: "21. My mother expects me _____ my bedroom every Saturday morning.", options: ["A. to clean", "B. cleaning", "C. clean", "D. cleaned"], correct: 0, hint: "Pattern: expect + Object + to-V" },
+        { q: "22. He agreed _____ me with my English homework after school.", options: ["A. to help", "B. helping", "C. help", "D. helped"], correct: 0, hint: "Pattern: agree + to-V" },
+        { q: "23. The manager allowed the staff _____ home early yesterday.", options: ["A. to go", "B. going", "C. go", "D. went"], correct: 0, hint: "Pattern: allow + Object + to-V" },
+        { q: "24. We plan _____ a charity event to help homeless children in our town.", options: ["A. to organize", "B. organizing", "C. organize", "D. organized"], correct: 0, hint: "Pattern: plan + to-V" },
+        { q: "25. She invited her best friend _____ her birthday party.", options: ["A. to attend", "B. attending", "C. attend", "D. attended"], correct: 0, hint: "Pattern: invite + Object + to-V" },
+        { q: "26. I would love _____ how to play the guitar in the future.", options: ["A. to learn", "B. learning", "C. learn", "D. learned"], correct: 0, hint: "Pattern: would love + to-V" },
+        { q: "27. The teacher reminded the students _____ their homework on time.", options: ["A. to submit", "B. submitting", "C. submit", "D. submitted"], correct: 0, hint: "Pattern: remind + Object + to-V" },
+        { q: "28. Tom refused _____ the rules of the science club.", options: ["A. to break", "B. breaking", "C. break", "D. broke"], correct: 0, hint: "Pattern: refuse + to-V" },
+        { q: "29. My parents encourage me _____ part in outdoor sports activities.", options: ["A. to take", "B. taking", "C. take", "D. took"], correct: 0, hint: "Pattern: encourage + Object + to-V" },
+        { q: "30. She managed _____ all her tasks before the deadline.", options: ["A. to finish", "B. finishing", "C. finish", "D. finished"], correct: 0, hint: "Pattern: manage + to-V" }
     ];
 
     let currentQuestionIndex = 0;
@@ -572,8 +496,8 @@
     function updateLivesUI() {
         let hearts = "";
         for (let i = 0; i < userLives; i++) hearts += "❤️";
-        if (hearts === "") hearts = "❌ ĐÃ HẾT MẠNG";
-        livesDisplay.innerHTML = `Mạng: <span class="heart-icon">${hearts}</span>`;
+        if (hearts === "") hearts = "❌ NO LIVES LEFT";
+        livesDisplay.innerHTML = `Lives: <span class="heart-icon">${hearts}</span>`;
     }
 
     function loadQuestion() {
@@ -588,7 +512,7 @@
 
         questionPrompt.innerHTML = currentQ.q;
 
-        // Strip prefix letters (A., B., C., D.) from options before shuffling
+        // Strip option prefixes (A., B., C., D.) before shuffling
         let rawOptions = currentQ.options.map(opt => opt.replace(/^[A-D]\.\s*/, ''));
         
         let optionObjs = rawOptions.map((text, idx) => ({
@@ -596,7 +520,7 @@
             isCorrect: (idx === currentQ.correct)
         }));
 
-        // Shuffle options randomly (Fisher-Yates)
+        // Shuffle options dynamically for every round
         for (let i = optionObjs.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [optionObjs[i], optionObjs[j]] = [optionObjs[j], optionObjs[i]];
@@ -621,9 +545,7 @@
         if (currentGameState !== "playing") return;
         currentGameState = "finished";
 
-        let currentQ = quizData[currentQuestionIndex];
         let isCorrect = (selectedIndex === activeCorrectIndex);
-
         const allBtns = mcqOptionsContainer.querySelectorAll(".mcq-btn");
         allBtns.forEach(btn => btn.disabled = true);
 
@@ -640,13 +562,13 @@
                 let gainedPoints = 100;
                 globalScore += gainedPoints;
                 scoreDisplay.innerText = globalScore;
-                statusMessage.innerHTML = `<span style='color: var(--correct-color)'>THÀNH CÔNG: Câu trả lời rất chính xác! +${gainedPoints} Điểm. 🎉</span>`;
+                statusMessage.innerHTML = `<span style='color: var(--correct-color)'>EXCELLENT! Correct answer. +${gainedPoints} pts 🎉</span>`;
             } else {
                 clickedBtn.classList.add("wrong-choice");
                 allBtns[activeCorrectIndex].classList.add("correct-choice");
                 userLives--;
                 updateLivesUI();
-                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>THẤT BẠI: Chưa đúng! Đáp án chuẩn: "${allBtns[activeCorrectIndex].innerText}".</span>`;
+                statusMessage.innerHTML = `<span style='color: var(--wrong-color)'>INCORRECT! Correct answer: "${allBtns[activeCorrectIndex].innerText}".</span>`;
                 
                 if (userLives <= 0) {
                     setTimeout(() => { handleGameOverLoss(); }, 1500);
@@ -659,8 +581,8 @@
 
     function handleGameOverLoss() {
         currentGameState = "finished";
-        statusMessage.innerHTML = "<span style='color:var(--wrong-color)'>Phi thuyền cạn kiệt năng lượng! Đang chuyển đến bảng tổng kết...</span>";
-        setTimeout(() => { showFinalResults(); }, 2000);
+        statusMessage.innerHTML = "<span style='color:var(--wrong-color)'>Ship out of energy! Transferring to results...</span>";
+        setTimeout(() => { showFinalResults(); }, 1800);
     }
 
     function useGrammarHint() {
@@ -668,7 +590,7 @@
         grammarHintsCount--;
         document.getElementById("count-hint").innerText = grammarHintsCount;
         document.getElementById("ll-hint").disabled = (grammarHintsCount <= 0);
-        statusMessage.innerHTML = `<span style='color: #ffeb3b;'>💡 GỢI Ý: ${quizData[currentQuestionIndex].hint}</span>`;
+        statusMessage.innerHTML = `<span style='color: #ffeb3b;'>💡 HINT: ${quizData[currentQuestionIndex].hint}</span>`;
     }
 
     function fireArcadeLaser(targetElement, isCorrectResult, callback) {
@@ -727,10 +649,10 @@
         finalScoreDisplay.innerText = globalScore;
 
         let levelStr = "";
-        if (globalScore >= 9000) levelStr = "👑 ĐẠI TƯỚNG NGỮ PHÁP (Xuất Sắc!)";
-        else if (globalScore >= 7000) levelStr = "🚀 PHI HÀNH GIA NGỮ PHÁP (Rất Giỏi!)";
-        else if (globalScore >= 4000) levelStr = "⭐ CHIẾN BINH KHÔNG GIAN (Khá Tốt)";
-        else levelStr = "🔰 TÂN BINH TẬP SỰ (Hãy rèn luyện thêm con nhé!)";
+        if (globalScore >= 2700) levelStr = "👑 GRAMMAR SUPREME COMMANDER (Mastery!)";
+        else if (globalScore >= 2100) levelStr = "🚀 GRAMMAR PILOT (Great Job!)";
+        else if (globalScore >= 1400) levelStr = "⭐ SPACE CADET (Good Effort!)";
+        else levelStr = "🔰 RECRUIT TRAINEE (Keep Practicing!)";
 
         rewardLevel.innerText = levelStr;
     }
@@ -748,10 +670,10 @@
             itemDiv.className = `history-item ${ans.isCorrect ? "history-correct" : "history-wrong"}`;
 
             itemDiv.innerHTML = `
-                <div style="font-weight:bold; color:#fff;">Thử thách ${ans.qIndex + 1}: ${itemData.q}</div>
+                <div style="font-weight:bold; color:#fff;">Q${ans.qIndex + 1}: ${itemData.q}</div>
                 <div style="margin: 5px 0;">
-                    • Con đã chọn: <strong style="color:${ans.isCorrect ? 'var(--correct-color)' : 'var(--wrong-color)'}">${ans.selectedText}</strong> 
-                    ${ans.isCorrect ? ' ✔' : ` | Đáp án đúng: <strong style="color:var(--correct-color)">${ans.correctText}</strong> ✘`}
+                    • Selected: <strong style="color:${ans.isCorrect ? 'var(--correct-color)' : 'var(--wrong-color)'}">${ans.selectedText}</strong> 
+                    ${ans.isCorrect ? ' ✔' : ` | Correct: <strong style="color:var(--correct-color)">${ans.correctText}</strong> ✘`}
                 </div>
             `;
             historyList.appendChild(itemDiv);
